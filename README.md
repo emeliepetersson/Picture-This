@@ -1,6 +1,6 @@
 # Picture-This
 <img src="https://media.giphy.com/media/2tSodgDfwCjIMCBY8h/giphy.gif" width="100%">
->You're going to create a Instagram clone we call Picture This.
+> You're going to create a Instagram clone we call Picture This.
 
 ## Assignment instructions
 The assignment is to create an Instagram clone with CSS, HTML, Javascript and PHP.
