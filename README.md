@@ -1,6 +1,8 @@
 # Picture-This
 <img src="https://media.giphy.com/media/2tSodgDfwCjIMCBY8h/giphy.gif" width="100%">
-> You're going to create a Instagram clone we call Picture This.
+You're going to create a Instagram clone we call Picture This.
+
+> Instagram allows users to upload photos and videos to the service, which can be edited with various filters, and organized with tags and location information. Users can browse other users' content by tags and view trending content. Users can "like" photos, and follow other users to add their content to a feed  - [Wikipedia](https://en.m.wikipedia.org/wiki/Instagram)
 
 ## Assignment instructions
 The assignment is to create an Instagram clone with CSS, HTML, Javascript and PHP.
