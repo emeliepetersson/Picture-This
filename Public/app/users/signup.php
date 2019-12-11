@@ -6,12 +6,17 @@ require __DIR__ . '/../autoload.php';
 
 //In this file we sign up users.
 
-if (isset($_POST['email'], $_POST['first-name'], $_POST['last-name'], $_POST['password'])) {
+if (isset($_POST['email'], $_POST['first-name'], $_POST['last-name'], $_POST['password'], $_POST['confirm-password'])) {
     $email = trim(filter_var($_POST['email'], FILTER_SANITIZE_EMAIL));
     $firstName = trim(filter_var($_POST['first-name'], FILTER_SANITIZE_STRING));
     $lastName = trim(filter_var($_POST['last-name'], FILTER_SANITIZE_STRING));
     $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
+    $confirmPassword = password_hash($_POST['confirm-password'], PASSWORD_BCRYPT);
     $errors = [];
+
+    if ($password !== $confirmPassword) {
+        $errors[] = "Your passwords do not match!";
+    }
 
     $statement = $pdo->prepare('SELECT email FROM users WHERE email = :email');
     $statement->bindParam(':email', $email, PDO::PARAM_STR);
