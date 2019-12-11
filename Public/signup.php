@@ -37,6 +37,12 @@
             <small class="form-text text-muted">Please provide your password.</small>
         </div><!-- /form-group -->
 
+        <div class="form-group">
+            <label for="password">Confirm password</label>
+            <input class="form-control" type="password" name="confirm-password" required>
+            <small class="form-text text-muted">Please confirm your password.</small>
+        </div><!-- /form-group -->
+
         <button type="submit" class="btn btn-primary">Create account</button>
     </form>
 </article>
