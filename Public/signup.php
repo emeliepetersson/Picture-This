@@ -3,7 +3,16 @@
 <article>
     <h1>Create account</h1>
 
-    <form action="app/users/login.php" method="post">
+    <?php if (isset($error)) : ?>
+        <p><?php echo $error ?></p>
+    <?php endif; ?>
+
+    <form action="app/users/signup.php" method="post">
+        <?php foreach ($errors as $error) : ?>
+            <div class="alert alert-danger">
+                <?php echo $error; ?>
+            </div><!-- /alert -->
+        <?php endforeach; ?>
         <div class="form-group">
             <label for="email">Email</label>
             <input class="form-control" type="email" name="email" placeholder="example@email.com" required>
@@ -26,6 +35,12 @@
             <label for="password">Password</label>
             <input class="form-control" type="password" name="password" required>
             <small class="form-text text-muted">Please provide your password.</small>
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label for="password">Confirm password</label>
+            <input class="form-control" type="password" name="confirm-password" required>
+            <small class="form-text text-muted">Please confirm your password.</small>
         </div><!-- /form-group -->
 
         <button type="submit" class="btn btn-primary">Create account</button>
