@@ -4,6 +4,11 @@
     <h1>Login</h1>
 
     <form action="app/users/login.php" method="post">
+        <?php foreach ($errors as $error) : ?>
+            <div class="alert alert-danger">
+                <?php echo $error; ?>
+            </div><!-- /alert -->
+        <?php endforeach; ?>
         <div class="form-group">
             <label for="email">Email</label>
             <input class="form-control" type="email" name="email" placeholder="francis@darjeeling.com" required>

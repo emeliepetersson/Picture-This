@@ -17,8 +17,14 @@ if (isset($_POST['email'], $_POST['password'])) {
     $user = $statement->fetch(PDO::FETCH_ASSOC);
 
     // If the user isn't found in the database, redirect back to the login page.
-    if (!$user) {
+    if (!$user || !password_verify($_POST['password'], $user['password'])) {
+        $errors[] = "The email or password doesn't match!";
+    }
+
+    if (count($errors) > 0) {
+        $_SESSION['errors'] = $errors;
         redirect('/login.php');
+        exit;
     }
 
     // If the user is found in the database, compare the given password from the
