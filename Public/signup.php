@@ -3,10 +3,6 @@
 <article>
     <h1>Create account</h1>
 
-    <?php if (isset($error)) : ?>
-        <p><?php echo $error ?></p>
-    <?php endif; ?>
-
     <form action="app/users/signup.php" method="post">
         <?php foreach ($errors as $error) : ?>
             <div class="alert alert-danger">

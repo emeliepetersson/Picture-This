@@ -14,7 +14,7 @@ if (isset($_POST['email'], $_POST['first-name'], $_POST['last-name'], $_POST['pa
     $confirmPassword = password_hash($_POST['confirm-password'], PASSWORD_BCRYPT);
     $errors = [];
 
-    if ($password !== $confirmPassword) {
+    if ($password === $confirmPassword) {
         $errors[] = "Your passwords do not match!";
     }
 
