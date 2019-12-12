@@ -21,9 +21,9 @@ if (isset($_POST['email'], $_POST['first-name'], $_POST['last-name'], $_POST['pa
     $statement = $pdo->prepare('SELECT email FROM users WHERE email = :email');
     $statement->bindParam(':email', $email, PDO::PARAM_STR);
     $statement->execute();
-    $storedEmail = $statement->fetch(PDO::FETCH_ASSOC);
+    $emailExist = $statement->fetch(PDO::FETCH_ASSOC);
 
-    if ($storedEmail) { //If $storedEmail exists an error message will be printed
+    if ($emailExist) { //If $emailExist exists an error message will be printed
         $errors[] = "The email already exist!";
     }
 
