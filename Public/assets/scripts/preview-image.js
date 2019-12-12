@@ -6,7 +6,6 @@ function previewImage() {
   var preview = document.querySelector("#output-image");
   var file = document.querySelector("input[type=file]").files[0];
   var reader = new FileReader();
-
   reader.addEventListener(
     "load",
     function() {
