@@ -13,6 +13,11 @@ if (!isset($_SESSION['user'])) { // Make this into a function!!!
                 <?php echo $error; ?>
             </div><!-- /alert -->
         <?php endforeach; ?>
+        <?php foreach ($messages as $message) : ?>
+            <div class="alert alert-success">
+                <?php echo $message; ?>
+            </div><!-- /alert -->
+        <?php endforeach; ?>
         <label for="image">Choose an image to upload</label>
         <input type="file" name="image" id="image" class="choose-file" required>
 
