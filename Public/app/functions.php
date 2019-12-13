@@ -22,14 +22,14 @@ if (!function_exists('redirect')) {
  * return an array with data from a given table.
  *
  * @param PDO $pdo
+ * @param string $columns
  * @param string $table
  * @param string $column
  * @param string $value
- * @return array
  */
-function getDataFromTable(PDO $pdo, string $table, string $column, string $value): array
+function getDataFromTable(PDO $pdo, string $columns, string $table, string $column, string $value)
 {
-    $statement = $pdo->prepare("SELECT * FROM $table WHERE $column = :$column");
+    $statement = $pdo->prepare("SELECT $columns FROM $table WHERE $column = :$column");
     $statement->bindParam(":$column", $value, PDO::PARAM_STR);
     $statement->execute();
 

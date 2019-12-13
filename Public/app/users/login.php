@@ -10,7 +10,7 @@ if (isset($_POST['email'], $_POST['password'])) {
     $email = trim(filter_var($_POST['email'], FILTER_SANITIZE_EMAIL));
     $password = $_POST['password'];
 
-    $user = getDataFromTable($pdo, 'users', 'email', $email);
+    $user = getDataFromTable($pdo, '*', 'users', 'email', $email);
 
     // If the user isn't found in the database, redirect back to the login page.
     if (!$user || !password_verify($_POST['password'], $user['password'])) {
