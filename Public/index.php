@@ -8,6 +8,8 @@
         <?php require __DIR__ . '/views/bottom-bar.php'; ?>
 
 
+
+
         <!-- The view if the user is not logged in -->
     <?php else : ?>
         <h1><img src="<?php echo $config['logo']; ?>" alt="Picture this logo"></h1>
