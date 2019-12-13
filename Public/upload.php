@@ -1,4 +1,9 @@
-<?php require __DIR__ . '/views/header.php'; ?>
+<?php
+require __DIR__ . '/views/header.php';
+if (!isset($_SESSION['user'])) { // Make this into a function!!!
+    redirect('/');
+}
+?>
 
 <div class="upload-post">
     <h1>Upload post</h1>
