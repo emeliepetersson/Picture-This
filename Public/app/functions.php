@@ -19,20 +19,26 @@ if (!function_exists('redirect')) {
 }
 
 /**
- * return an array with data from a given table.
+ * return an array with data from a given table, or null if the data isn't found.
  *
  * @param PDO $pdo
  * @param string $columns
  * @param string $table
  * @param string $column
  * @param string $value
+ * @return array|null
  */
-function getDataFromTable(PDO $pdo, string $columns, string $table, string $column, string $value)
+function getDataFromTable(PDO $pdo, string $columns, string $table, string $column, string $value): ?array
 {
     $statement = $pdo->prepare("SELECT $columns FROM $table WHERE $column = :$column");
     $statement->bindParam(":$column", $value, PDO::PARAM_STR);
     $statement->execute();
 
-    $array = $statement->fetch(PDO::FETCH_ASSOC);
+    $array = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    if ($array === false) {
+        return null;
+    }
+
     return $array;
 }
