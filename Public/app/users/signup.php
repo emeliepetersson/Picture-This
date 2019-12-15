@@ -10,20 +10,19 @@ if (isset($_POST['email'], $_POST['first-name'], $_POST['last-name'], $_POST['pa
     $email = trim(filter_var($_POST['email'], FILTER_SANITIZE_EMAIL));
     $firstName = trim(filter_var($_POST['first-name'], FILTER_SANITIZE_STRING));
     $lastName = trim(filter_var($_POST['last-name'], FILTER_SANITIZE_STRING));
-    $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
-    $confirmPassword = password_hash($_POST['confirm-password'], PASSWORD_BCRYPT);
+    $password = $_POST['password'];
+    $confirmPassword = $_POST['confirm-password'];
     $errors = [];
 
     if ($password !== $confirmPassword) {
         $errors[] = "Your passwords do not match!";
+    } else {
+        $password = password_hash($password, PASSWORD_BCRYPT);
     }
 
-    $statement = $pdo->prepare('SELECT email FROM users WHERE email = :email');
-    $statement->bindParam(':email', $email, PDO::PARAM_STR);
-    $statement->execute();
-    $storedEmail = $statement->fetch(PDO::FETCH_ASSOC);
+    $emailExist = getDataFromTable($pdo, 'email', 'users', 'email', $email);
 
-    if ($storedEmail) { //If $storedEmail exists an error message will be printed
+    if ($emailExist) { //If $emailExist exists an error message will be printed
         $errors[] = "The email already exist!";
     }
 
