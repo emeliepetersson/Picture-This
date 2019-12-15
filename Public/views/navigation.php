@@ -13,7 +13,7 @@
                 <a class="nav-link" href="#">Settings</a>
             </li><!-- /nav-item -->
             <li class="nav-item">
-                <a class="nav-link" href="#">Upload post</a>
+                <a class="nav-link" href="/upload.php">Upload post</a>
             </li><!-- /nav-item -->
             <li class="nav-item">
                 <a class="nav-link" href="/app/users/logout.php">Logout</a>
