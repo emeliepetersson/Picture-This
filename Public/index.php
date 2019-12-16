@@ -1,6 +1,6 @@
 <?php require __DIR__ . '/views/header.php'; ?>
 
-<article>
+<div class="wrapper">
     <!-- The view if the user is logged in -->
     <?php if (isset($_SESSION['user'])) : ?>
 
@@ -33,6 +33,6 @@
         <a href="login.php">Login</a>
         <a href="signup.php">Sign up</a>
     <?php endif; ?>
-</article>
+</div>
 
 <?php require __DIR__ . '/views/footer.php'; ?>
