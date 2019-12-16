@@ -7,7 +7,7 @@
 
         <?php if (isset($_SESSION['user'])) : ?>
             <li class="nav-item">
-                <a class="nav-link" href="#">Profile</a>
+                <a class="nav-link" href="/profile.php">Profile</a>
             </li><!-- /nav-item -->
             <li class="nav-item">
                 <a class="nav-link" href="#">Settings</a>
