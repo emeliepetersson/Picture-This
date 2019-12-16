@@ -10,7 +10,7 @@
                 <a class="nav-link" href="/profile.php">Profile</a>
             </li><!-- /nav-item -->
             <li class="nav-item">
-                <a class="nav-link" href="#">Settings</a>
+                <a class="nav-link" href="/settings.php">Settings</a>
             </li><!-- /nav-item -->
             <li class="nav-item">
                 <a class="nav-link" href="/upload.php">Upload post</a>
