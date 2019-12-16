@@ -6,7 +6,7 @@
 
         <?php require __DIR__ . '/app/display-posts.php'; ?>
         <h1>Photos feed</h1>
-        <?php if ($posts === null) : ?>
+        <?php if (!$posts) : ?>
             <p>There is no photos...</p>
         <?php else : ?>
             <?php foreach ($posts as $post) : ?>
