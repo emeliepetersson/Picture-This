@@ -10,6 +10,8 @@ require __DIR__ . '/../autoload.php';
 
 //CHANGE FORM VALUES WHEN DATA IS UPDATED
 
+
+//Change email, first name and last name
 if (isset($_POST['email'], $_POST['first-name'], $_POST['last-name'])) {
     $email = $_POST['email'];
     $firstName = $_POST['first-name'];
@@ -42,6 +44,8 @@ if (isset($_POST['email'], $_POST['first-name'], $_POST['last-name'])) {
     $_SESSION['messages'] = $messages;
 }
 
+
+//Change password
 if (isset($_POST['password'], $_POST['confirm-password'])) {
     $password = $_POST['password'];
     $confirmPassword = $_POST['confirm-password'];
@@ -53,6 +57,11 @@ if (isset($_POST['password'], $_POST['confirm-password'])) {
         $password = password_hash($password, PASSWORD_BCRYPT);
     }
 
+    if (count($errors) > 0) {
+        $_SESSION['errors'] = $errors;
+        redirect('/settings.php');
+        exit;
+    }
 
     $statement = $pdo->prepare('UPDATE users
     SET password = :password
@@ -69,6 +78,11 @@ if (isset($_POST['password'], $_POST['confirm-password'])) {
     $messages[] = "Your password has been updated!";
 
     $_SESSION['messages'] = $messages;
+}
+
+//Change profile picture and biography
+if (isset($_POST['description'], $_FILES['image'])) {
+    //insert $newFileName = uploadFiles($_FILES['image'], '/settings.php');
 }
 
 redirect('/settings.php');
