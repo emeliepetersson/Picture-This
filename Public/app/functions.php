@@ -46,3 +46,33 @@ function getDataFromTable(PDO $pdo, string $columns, string $table, string $colu
 
     return $array;
 }
+
+function countErrors(string $location, array $errors): void
+{
+    if (count($errors) > 0) {
+        $_SESSION['errors'] = $errors;
+        redirect($location);
+        exit;
+    }
+}
+
+function uploadFiles(array $uploadedFile, string $location): string
+{
+    $file = $uploadedFile;
+    $errors = [];
+
+    if ($file['type'] !== 'image/gif' && $file['type'] !== 'image/jpeg' && $file['type'] !== 'image/png') {
+        $errors[] = 'The ' . $file['name'] . ' image file type is not allowed.';
+    }
+    if ($file['size'] >= 3000000) {
+        $errors[] = 'The uploaded file ' . $file['name'] . ' exceeded the filesize limit.';
+    }
+
+    countErrors($location, $errors);
+
+    $newFileName = uniqid() . $file['name'];
+    $destination = __DIR__ . '/../uploads/' .  $newFileName;
+    move_uploaded_file($file['tmp_name'], $destination);
+
+    return $newFileName;
+}

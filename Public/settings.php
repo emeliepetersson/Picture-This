@@ -38,7 +38,10 @@ if (!isset($_SESSION['user'])) { // Make this into a function!!!
             <input class="form-control" type="name" name="last-name" value="<?php echo $_SESSION['user']['last_name'] ?>">
             <small class="form-text text-muted">Please provide your last name.</small>
         </div><!-- /form-group -->
+        <button type="submit" class="btn btn-primary">Update info</button>
+    </form>
 
+    <form action="app/users/edit-settings.php" method="post">
         <div class="form-group">
             <label for="password">Password</label>
             <input class="form-control" type="password" name="password">
@@ -50,7 +53,10 @@ if (!isset($_SESSION['user'])) { // Make this into a function!!!
             <input class="form-control" type="password" name="confirm-password">
             <small class="form-text text-muted">Please confirm your new password.</small>
         </div><!-- /form-group -->
+        <button type="submit" class="btn btn-primary">Update password</button>
+    </form>
 
+    <form action="app/users/edit-settings.php" method="post">
         <label for="image">Choose a profile image to upload</label>
         <input type="file" name="image" id="image" class="choose-file">
 
@@ -63,7 +69,7 @@ if (!isset($_SESSION['user'])) { // Make this into a function!!!
             <small class="form-text text-muted">Write your biography.</small>
             <textarea name="description" form="post" maxlength="255"></textarea>
         </div>
-        <button type="submit" class="btn btn-primary">Update Settings</button>
+        <button type="submit" class="btn btn-primary">Update biography</button>
     </form>
 </article>
 
