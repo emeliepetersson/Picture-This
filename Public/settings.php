@@ -16,6 +16,11 @@ if (!isset($_SESSION['user'])) { // Make this into a function!!!
                 <?php echo $error; ?>
             </div><!-- /alert -->
         <?php endforeach; ?>
+        <?php foreach ($messages as $message) : ?>
+            <div class="alert alert-success">
+                <?php echo $message; ?>
+            </div><!-- /alert -->
+        <?php endforeach; ?>
         <div class="form-group">
             <label for="email">Email</label>
             <input class="form-control" type="email" name="email" value="<?php echo $_SESSION['user']['email'] ?>">
@@ -31,7 +36,7 @@ if (!isset($_SESSION['user'])) { // Make this into a function!!!
         <div class="form-group">
             <label for="last-name">Last name</label>
             <input class="form-control" type="name" name="last-name" value="<?php echo $_SESSION['user']['last_name'] ?>">
-            <small class="form-text text-muted">Please provide the your last name.</small>
+            <small class="form-text text-muted">Please provide your last name.</small>
         </div><!-- /form-group -->
 
         <div class="form-group">
