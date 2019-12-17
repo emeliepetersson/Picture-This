@@ -31,6 +31,10 @@ if (!function_exists('redirect')) {
 function getDataFromTable(PDO $pdo, string $columns, string $table, string $column, string $value): ?array
 {
     $statement = $pdo->prepare("SELECT $columns FROM $table WHERE $column = :$column");
+    if (!$statement) {
+        return die(var_dump($pdo->errorInfo()));
+    }
+
     $statement->bindParam(":$column", $value, PDO::PARAM_STR);
     $statement->execute();
 
