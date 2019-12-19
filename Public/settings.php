@@ -19,20 +19,16 @@ if (!isset($_SESSION['user'])) { // Make this into a function!!!
             <?php echo $message; ?>
         </div><!-- /alert -->
     <?php endforeach; ?>
-    <form action="app/users/edit-settings.php" method="post">
-        <label for="image">Choose a profile image to upload</label>
-        <input type="file" name="image" id="image" class="choose-file">
+
+    <form action="app/users/edit-settings.php" method="post" enctype="multipart/form-data" id="post">
+        <label for="image">Choose an image to upload</label>
+        <input type="file" name="profile-image" id="image" class="choose-file" required>
 
         <!--Preview image -->
-        <div class="form-group">
-            <img id="output-image" alt="image preview" />
-        </div>
+        <img id="output-image" alt="image preview" />
 
-        <div class="form-group">
-            <small class="form-text text-muted">Write your biography.</small>
-            <textarea name="description" form="post" maxlength="255"></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary">Update biography</button>
+        <textarea name="biography" form="post" maxlength="255"></textarea>
+        <button type="submit">Upload</button>
     </form>
 
     <form action="app/users/edit-settings.php" method="post">

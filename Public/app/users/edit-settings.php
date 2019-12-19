@@ -4,11 +4,60 @@ declare(strict_types=1);
 
 require __DIR__ . '/../autoload.php';
 
+$errors = [];
+$messages = [];
+
 //In this file we edit the users information.
 
 // if isset UPDATE the new variables to the table columns where user id = $_SESSION['user']['id'].
 
 //CHANGE FORM VALUES WHEN DATA IS UPDATED
+
+//Make default values to profile image and biography, if they already exists.
+
+//Change profile picture and biography
+if (isset($_FILES['profile-image'], $_POST['biography'])) {
+    $biography = filter_var($_POST['biography'], FILTER_SANITIZE_STRING);
+    $userId = (string) $_SESSION['user']['id']; //convert user id into string to be able to use it in the function below
+
+    $messages = [];
+
+    $newFileName = uploadFiles($_FILES['profile-image'], '/settings.php');
+
+    $profileExist = getOneColumnFromTable($pdo, '*', 'user_profiles', 'user_id', $userId);
+
+    if ($profileExist) {
+        //Update filname and biography in user_profiles where user_id is the same as the logged in user's id
+        $statement = $pdo->prepare('UPDATE user_profiles SET biography = :biography, profile_image = :profile_image WHERE user_id = :user_id');
+
+        if (!$statement) {
+            die(var_dump($pdo->errorInfo()));
+        }
+
+        $statement->bindParam(':user_id', $userId, PDO::PARAM_INT);
+        $statement->bindParam(':biography', $biography, PDO::PARAM_STR);
+        $statement->bindParam(':profile_image', $newFileName, PDO::PARAM_STR);
+        $statement->execute();
+    } else {
+        //Insert filname and biography into user_profiles with user ID
+        $query = 'INSERT INTO user_profiles (user_id, biography, profile_image) VALUES (:user_id, :biography, :profile_image)';
+
+        $statement = $pdo->prepare($query);
+
+        if (!$statement) {
+            die(var_dump($pdo->errorInfo()));
+        }
+
+        $statement->bindParam(':user_id', $_SESSION['user']['id'], PDO::PARAM_INT);
+        $statement->bindParam(':biography', $biography, PDO::PARAM_STR);
+        $statement->bindParam(':profile_image', $newFileName, PDO::PARAM_STR);
+        $statement->execute();
+    }
+
+    $messages[] = "Your profile have been updated!";
+
+    $_SESSION['messages'] = $messages;
+}
 
 
 //Change email, first name and last name
@@ -16,7 +65,6 @@ if (isset($_POST['email'], $_POST['first-name'], $_POST['last-name'])) {
     $email = $_POST['email'];
     $firstName = $_POST['first-name'];
     $lastName = $_POST['last-name'];
-    $errors = [];
 
     $emailExist = getOneColumnFromTable($pdo, 'email', 'users', 'email', $email);
 
@@ -60,7 +108,6 @@ if (isset($_POST['current-password'], $_POST['password'], $_POST['confirm-passwo
     $currentPassword = $_POST['current-password'];
     $password = $_POST['password'];
     $confirmPassword = $_POST['confirm-password'];
-    $errors = [];
 
     $user = getOneColumnFromTable($pdo, '*', 'users', 'email', $_SESSION['user']['email']);
 
@@ -94,10 +141,6 @@ if (isset($_POST['current-password'], $_POST['password'], $_POST['confirm-passwo
     }
 }
 
-//Change profile picture and biography
-if (isset($_POST['description'], $_FILES['image'])) {
-    //insert $newFileName = uploadFiles($_FILES['image'], '/settings.php');
-}
 
 redirect('/settings.php');
 
