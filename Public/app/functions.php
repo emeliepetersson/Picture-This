@@ -28,7 +28,7 @@ if (!function_exists('redirect')) {
  * @param string $value
  * @return array|null
  */
-function getDataFromTable(PDO $pdo, string $columns, string $table, string $column, string $value): ?array
+function getDataAsArrayFromTable(PDO $pdo, string $columns, string $table, string $column, string $value): ?array
 {
     $statement = $pdo->prepare("SELECT $columns FROM $table WHERE $column = :$column");
     if (!$statement) {
@@ -47,6 +47,42 @@ function getDataFromTable(PDO $pdo, string $columns, string $table, string $colu
     return $array;
 }
 
+/**
+ * return an array with data from one given column in table, or null if the data isn't found.
+ *
+ * @param PDO $pdo
+ * @param string $columns
+ * @param string $table
+ * @param string $column
+ * @param string $value
+ * @return array|null
+ */
+function getOneColumnFromTable(PDO $pdo, string $columns, string $table, string $column, string $value): ?array
+{
+    $statement = $pdo->prepare("SELECT $columns FROM $table WHERE $column = :$column");
+    if (!$statement) {
+        return die(var_dump($pdo->errorInfo()));
+    }
+
+    $statement->bindParam(":$column", $value, PDO::PARAM_STR);
+    $statement->execute();
+
+    $column = $statement->fetch(PDO::FETCH_ASSOC);
+
+    if ($column === false) {
+        return null;
+    }
+
+    return $column;
+}
+
+/**
+ * Set $_SESSION['errors'] and redirect to given location if there is any errors
+ *
+ * @param string $location
+ * @param array $errors
+ * @return void
+ */
 function countErrors(string $location, array $errors): void
 {
     if (count($errors) > 0) {
@@ -56,6 +92,13 @@ function countErrors(string $location, array $errors): void
     }
 }
 
+/**
+ * move uploaded file into Uploads directory, and return the new file name
+ *
+ * @param array $uploadedFile
+ * @param string $location
+ * @return string
+ */
 function uploadFiles(array $uploadedFile, string $location): string
 {
     $file = $uploadedFile;
