@@ -20,7 +20,7 @@ if (isset($_POST['email'], $_POST['first-name'], $_POST['last-name'], $_POST['pa
         $password = password_hash($password, PASSWORD_BCRYPT);
     }
 
-    $emailExist = getDataFromTable($pdo, 'email', 'users', 'email', $email);
+    $emailExist = getDataAsArrayFromTable($pdo, 'email', 'users', 'email', $email);
 
     if ($emailExist) { //If $emailExist exists an error message will be printed
         $errors[] = "The email already exist!";

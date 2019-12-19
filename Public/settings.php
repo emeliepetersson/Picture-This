@@ -9,18 +9,33 @@ if (!isset($_SESSION['user'])) { // Make this into a function!!!
 
 <article>
     <h1>Settings</h1>
+    <?php foreach ($errors as $error) : ?>
+        <div class="alert alert-danger">
+            <?php echo $error; ?>
+        </div><!-- /alert -->
+    <?php endforeach; ?>
+    <?php foreach ($messages as $message) : ?>
+        <div class="alert alert-success">
+            <?php echo $message; ?>
+        </div><!-- /alert -->
+    <?php endforeach; ?>
+    <form action="app/users/edit-settings.php" method="post">
+        <label for="image">Choose a profile image to upload</label>
+        <input type="file" name="image" id="image" class="choose-file">
+
+        <!--Preview image -->
+        <div class="form-group">
+            <img id="output-image" alt="image preview" />
+        </div>
+
+        <div class="form-group">
+            <small class="form-text text-muted">Write your biography.</small>
+            <textarea name="description" form="post" maxlength="255"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Update biography</button>
+    </form>
 
     <form action="app/users/edit-settings.php" method="post">
-        <?php foreach ($errors as $error) : ?>
-            <div class="alert alert-danger">
-                <?php echo $error; ?>
-            </div><!-- /alert -->
-        <?php endforeach; ?>
-        <?php foreach ($messages as $message) : ?>
-            <div class="alert alert-success">
-                <?php echo $message; ?>
-            </div><!-- /alert -->
-        <?php endforeach; ?>
         <div class="form-group">
             <label for="email">Email</label>
             <input class="form-control" type="email" name="email" value="<?php echo $_SESSION['user']['email'] ?>">
@@ -43,33 +58,23 @@ if (!isset($_SESSION['user'])) { // Make this into a function!!!
 
     <form action="app/users/edit-settings.php" method="post">
         <div class="form-group">
-            <label for="password">Password</label>
+            <label for="password">Current password</label>
+            <input class="form-control" type="password" name="current-password" required>
+            <small class="form-text text-muted">Please provide your current password to be able to change to a new one.</small>
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label for="password">New password</label>
             <input class="form-control" type="password" name="password">
             <small class="form-text text-muted">Please provide your new password.</small>
         </div><!-- /form-group -->
 
         <div class="form-group">
-            <label for="password">Confirm password</label>
+            <label for="password">Confirm new password</label>
             <input class="form-control" type="password" name="confirm-password">
             <small class="form-text text-muted">Please confirm your new password.</small>
         </div><!-- /form-group -->
         <button type="submit" class="btn btn-primary">Update password</button>
-    </form>
-
-    <form action="app/users/edit-settings.php" method="post">
-        <label for="image">Choose a profile image to upload</label>
-        <input type="file" name="image" id="image" class="choose-file">
-
-        <!--Preview image -->
-        <div class="form-group">
-            <img id="output-image" alt="image preview" />
-        </div>
-
-        <div class="form-group">
-            <small class="form-text text-muted">Write your biography.</small>
-            <textarea name="description" form="post" maxlength="255"></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary">Update biography</button>
     </form>
 </article>
 
