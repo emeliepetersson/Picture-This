@@ -7,6 +7,7 @@ if (!isset($_SESSION['user'])) { // Make this into a function!!!
 
 <div class="upload-post">
     <h1>Upload post</h1>
+    <!-- Is ID needed in form?? -->
     <form action="app/users/upload.php" method="post" enctype="multipart/form-data" id="post">
         <?php foreach ($errors as $error) : ?>
             <div class="alert alert-danger">
