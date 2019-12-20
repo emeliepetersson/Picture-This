@@ -141,7 +141,7 @@ function getUserProfile(PDO $pdo, string $userId): ?array
  */
 function displayPostsFromUser(PDO $pdo): array
 {
-    $query = "SELECT image, description, date, first_name, last_name FROM posts INNER JOIN users ON posts.user_id = users.id WHERE users.id = :id";
+    $query = "SELECT posts.id, image, description, date, first_name, last_name FROM posts INNER JOIN users ON posts.user_id = users.id WHERE users.id = :id";
 
     // Get all posts from logged in user
     $statement = $pdo->prepare($query);
