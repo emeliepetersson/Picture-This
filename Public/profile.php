@@ -26,9 +26,13 @@ $userProfile = getUserProfile($pdo, $userId);
                     <?php echo $post['first_name'] . " " . $post['last_name']; ?>
                 </h2>
                 <footer><?php echo $post['date'] ?></footer>
-                <header>
-                    <img src="/uploads/<?php echo $post['image'] ?>" alt="">
-                    <p><?php echo $post['description'] ?></p>
+                <form action='/app/posts/delete.php' method="post">
+                    <input type="hidden" name="delete-post" value="<?php echo $post['id'] ?>">
+                    <button type="submit" class="btn btn-primary">Delete</button>
+                </form>
+            </header>
+            <img src="/uploads/<?php echo $post['image'] ?>" alt="">
+            <p><?php echo $post['description'] ?></p>
         </article>
     <?php endforeach; ?>
 <?php endif; ?>
