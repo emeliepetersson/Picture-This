@@ -6,11 +6,15 @@ if (!isset($_SESSION['user'])) { // Make this into a function!!!
 }
 
 $userPosts = displayPostsFromUser($pdo);
-
+$userId = (string) $_SESSION['user']['id']; //convert user id into string to be able to use it in the function to get data from table
+$userProfile = getUserProfile($pdo, $userId);
 ?>
 
 <header>
     <h1><?php echo $_SESSION['user']['first_name'] . " " . $_SESSION['user']['last_name']; ?></h1>
+    <img src="/uploads/<?php echo $userProfile['profile_image'] ?>" alt="profile image" width="100px">
+    <p><?php echo $userProfile['biography'] ?></p>
+    <a href="/settings.php"><button class="btn btn-primary">Edit profile</button></a>
 </header>
 <?php if (!$userPosts) : ?>
     <p>There is no photos...</p>
