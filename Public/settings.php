@@ -5,6 +5,9 @@ if (!isset($_SESSION['user'])) { // Make this into a function!!!
     redirect('/');
 }
 
+$userId = (string) $_SESSION['user']['id']; //convert user id into string to be able to use it in the function to get data from table
+$userProfile = getUserProfile($pdo, $userId);
+
 ?>
 
 <article>
@@ -22,12 +25,12 @@ if (!isset($_SESSION['user'])) { // Make this into a function!!!
 
     <form action="app/users/edit-settings.php" method="post" enctype="multipart/form-data" id="post">
         <label for="image">Choose an image to upload</label>
-        <input type="file" name="profile-image" id="image" class="choose-file" required>
+        <input type="file" name="profile-image" id="image" class="choose-file">
 
-        <!--Preview image -->
-        <img id="output-image" alt="image preview" />
+        <!--Preview profile image -->
+        <img src="/uploads/<?php echo $userProfile['profile_image']; ?>" id="output-image" alt="image preview" />
 
-        <textarea name="biography" form="post" maxlength="255"></textarea>
+        <textarea name="biography" form="post" maxlength="255"><?php echo ($userProfile !== null) ? $userProfile['biography'] : '' ?></textarea>
         <button type="submit">Upload</button>
     </form>
 

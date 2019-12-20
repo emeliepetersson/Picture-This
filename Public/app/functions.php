@@ -119,3 +119,16 @@ function uploadFiles(array $uploadedFile, string $location): string
 
     return $newFileName;
 }
+
+/**
+ * Return array with biography and profile image of given user
+ *
+ * @param PDO $pdo
+ * @param string $userId
+ * @return array|null
+ */
+function getUserProfile(PDO $pdo, string $userId): ?array
+{
+    $profile = getOneColumnFromTable($pdo, 'biography, profile_image', 'user_profiles', 'user_id', $userId);
+    return $profile;
+}
