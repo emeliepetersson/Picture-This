@@ -21,39 +21,66 @@ $messages = [];
 if (isset($_FILES['profile-image'], $_POST['biography'])) {
     $biography = filter_var($_POST['biography'], FILTER_SANITIZE_STRING);
     $userId = (string) $_SESSION['user']['id']; //convert user id into string to be able to use it in the functions to get data from table
-
     $messages = [];
-
-    $newFileName = uploadFiles($_FILES['profile-image'], '/settings.php');
 
     $profileExist = getOneColumnFromTable($pdo, '*', 'user_profiles', 'user_id', $userId);
 
-    if ($profileExist) {
-        //Update filname and biography in user_profiles where user_id is the same as the logged in user's id
-        $statement = $pdo->prepare('UPDATE user_profiles SET biography = :biography, profile_image = :profile_image WHERE user_id = :user_id');
+    //If no new profile image is set, only add the biography to the database
+    if ($_FILES['profile-image']['name'] === "") {
+        if ($profileExist) {
+            //Update biography in user_profiles where user_id is the same as the logged in user's id
+            $statement = $pdo->prepare('UPDATE user_profiles SET biography = :biography WHERE user_id = :user_id');
 
-        if (!$statement) {
-            die(var_dump($pdo->errorInfo()));
+            if (!$statement) {
+                die(var_dump($pdo->errorInfo()));
+            }
+
+            $statement->bindParam(':user_id', $userId, PDO::PARAM_INT);
+            $statement->bindParam(':biography', $biography, PDO::PARAM_STR);
+            $statement->execute();
+        } else {
+            //Insert biography into user_profiles with user ID
+            $query = 'INSERT INTO user_profiles (user_id, biography) VALUES (:user_id, :biography)';
+
+            $statement = $pdo->prepare($query);
+
+            if (!$statement) {
+                die(var_dump($pdo->errorInfo()));
+            }
+
+            $statement->bindParam(':user_id', $_SESSION['user']['id'], PDO::PARAM_INT);
+            $statement->bindParam(':profile_image', $newFileName, PDO::PARAM_STR);
+            $statement->execute();
         }
-
-        $statement->bindParam(':user_id', $userId, PDO::PARAM_INT);
-        $statement->bindParam(':biography', $biography, PDO::PARAM_STR);
-        $statement->bindParam(':profile_image', $newFileName, PDO::PARAM_STR);
-        $statement->execute();
     } else {
-        //Insert filname and biography into user_profiles with user ID
-        $query = 'INSERT INTO user_profiles (user_id, biography, profile_image) VALUES (:user_id, :biography, :profile_image)';
+        $newFileName = uploadFiles($_FILES['profile-image'], '/settings.php');
+        if ($profileExist) {
+            //Update filname and biography in user_profiles where user_id is the same as the logged in user's id
+            $statement = $pdo->prepare('UPDATE user_profiles SET biography = :biography, profile_image = :profile_image WHERE user_id = :user_id');
 
-        $statement = $pdo->prepare($query);
+            if (!$statement) {
+                die(var_dump($pdo->errorInfo()));
+            }
 
-        if (!$statement) {
-            die(var_dump($pdo->errorInfo()));
+            $statement->bindParam(':user_id', $userId, PDO::PARAM_INT);
+            $statement->bindParam(':biography', $biography, PDO::PARAM_STR);
+            $statement->bindParam(':profile_image', $newFileName, PDO::PARAM_STR);
+            $statement->execute();
+        } else {
+            //Insert filname and biography into user_profiles with user ID
+            $query = 'INSERT INTO user_profiles (user_id, biography, profile_image) VALUES (:user_id, :biography, :profile_image)';
+
+            $statement = $pdo->prepare($query);
+
+            if (!$statement) {
+                die(var_dump($pdo->errorInfo()));
+            }
+
+            $statement->bindParam(':user_id', $_SESSION['user']['id'], PDO::PARAM_INT);
+            $statement->bindParam(':biography', $biography, PDO::PARAM_STR);
+            $statement->bindParam(':profile_image', $newFileName, PDO::PARAM_STR);
+            $statement->execute();
         }
-
-        $statement->bindParam(':user_id', $_SESSION['user']['id'], PDO::PARAM_INT);
-        $statement->bindParam(':biography', $biography, PDO::PARAM_STR);
-        $statement->bindParam(':profile_image', $newFileName, PDO::PARAM_STR);
-        $statement->execute();
     }
 
     $messages[] = "Your profile have been updated!";
