@@ -14,11 +14,13 @@ $messages = [];
 //CHANGE FORM VALUES WHEN DATA IS UPDATED
 
 //Make default values to profile image and biography, if they already exists.
+// set profile as $_SESSION['profile'] to be able to reach it in different pages
+
 
 //Change profile picture and biography
 if (isset($_FILES['profile-image'], $_POST['biography'])) {
     $biography = filter_var($_POST['biography'], FILTER_SANITIZE_STRING);
-    $userId = (string) $_SESSION['user']['id']; //convert user id into string to be able to use it in the function below
+    $userId = (string) $_SESSION['user']['id']; //convert user id into string to be able to use it in the functions to get data from table
 
     $messages = [];
 
