@@ -31,7 +31,7 @@ $userProfile = getUserProfile($pdo, $userId);
         <img src="/uploads/<?php echo $userProfile['profile_image']; ?>" id="output-image" alt="image preview" />
 
         <textarea name="biography" form="post" maxlength="255"><?php echo ($userProfile !== null) ? $userProfile['biography'] : '' ?></textarea>
-        <button type="submit">Upload</button>
+        <button type="submit" class="btn btn-primary">Upload</button>
     </form>
 
     <form action="app/users/edit-settings.php" method="post">
