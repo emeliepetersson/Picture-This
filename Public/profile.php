@@ -5,12 +5,13 @@ if (!isset($_SESSION['user'])) { // Make this into a function!!!
     redirect('/');
 }
 
+$userPosts = displayPostsFromUser($pdo);
+
 ?>
 
 <header>
     <h1><?php echo $_SESSION['user']['first_name'] . " " . $_SESSION['user']['last_name']; ?></h1>
 </header>
-<?php require __DIR__ . '/app/display-posts.php'; ?>
 <?php if (!$userPosts) : ?>
     <p>There is no photos...</p>
 <?php else : ?>

@@ -132,3 +132,44 @@ function getUserProfile(PDO $pdo, string $userId): ?array
     $profile = getOneColumnFromTable($pdo, 'biography, profile_image', 'user_profiles', 'user_id', $userId);
     return $profile;
 }
+
+/**
+ * Return all posts from posts table
+ *
+ * @param PDO $pdo
+ * @return array
+ */
+function displayPostsFromUser(PDO $pdo): array
+{
+    $query = "SELECT image, description, date, first_name, last_name FROM posts INNER JOIN users ON posts.user_id = users.id WHERE users.id = :id";
+
+    // Get all posts from logged in user
+    $statement = $pdo->prepare($query);
+    if (!$statement) {
+        die(var_dump($pdo->errorInfo()));
+    }
+    $statement->bindParam(':id', $_SESSION['user']['id'], PDO::PARAM_INT);
+    $statement->execute();
+    $userPosts = $statement->fetchAll(PDO::FETCH_ASSOC);
+    return $userPosts;
+}
+
+/**
+ * Return all posts from logged in user
+ *
+ * @param PDO $pdo
+ * @return array
+ */
+function displayAllPosts(PDO $pdo): array
+{
+    $query = "SELECT image, description, date, first_name, last_name FROM posts INNER JOIN users ON posts.user_id = users.id";
+
+    // Get all posts from all users
+    $statement = $pdo->query($query);
+
+    if (!$statement) {
+        die(var_dump($pdo->errorInfo()));
+    }
+    $allPosts = $statement->fetchAll(PDO::FETCH_ASSOC);
+    return $allPosts;
+}
