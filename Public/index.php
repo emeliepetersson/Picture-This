@@ -1,9 +1,11 @@
-<?php require __DIR__ . '/views/header.php'; ?>
+<?php
+require __DIR__ . '/views/header.php';
+$allPosts = displayAllPosts($pdo);
+?>
 
 <!-- The view if the user is logged in -->
 <?php if (isset($_SESSION['user'])) : ?>
 
-    <?php require __DIR__ . '/app/display-posts.php'; ?>
     <h1>Photos feed</h1>
     <?php if (!$allPosts) : ?>
         <p>There is no photos...</p>
