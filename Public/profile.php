@@ -30,7 +30,7 @@ $userProfile = getUserProfile($pdo, $userId);
                     <input type="hidden" name="delete-post" value="<?php echo $post['id'] ?>">
                     <button type="submit" class="btn btn-primary">Delete</button>
                 </form>
-                <button type="submit" class="edit-button btn btn-primary">Edit</button>
+                <a class="post-id-link" href="profile.php?post-id=<?php echo $post['id'] ?>"><button type="submit" class="edit-button btn btn-primary">Edit</button></a>
             </header>
             <img class="post-image" src="/uploads/<?php echo $post['image'] ?>" alt="">
             <p class="description"><?php echo $post['description'] ?></p>
