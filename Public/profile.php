@@ -20,7 +20,7 @@ $userProfile = getUserProfile($pdo, $userId);
     <p>There is no photos...</p>
 <?php else : ?>
     <?php foreach ($userPosts as $post) : ?>
-        <article>
+        <article class="post">
             <header>
                 <h2>
                     <?php echo $post['first_name'] . " " . $post['last_name']; ?>
@@ -30,10 +30,10 @@ $userProfile = getUserProfile($pdo, $userId);
                     <input type="hidden" name="delete-post" value="<?php echo $post['id'] ?>">
                     <button type="submit" class="btn btn-primary">Delete</button>
                 </form>
-                <a href="/edit-post.php/?id=<?php echo $post['id'] ?>"><button type="submit" class="btn btn-primary">Edit</button></a>
+                <button type="submit" class="edit-button btn btn-primary">Edit</button>
             </header>
-            <img src="/uploads/<?php echo $post['image'] ?>" alt="">
-            <p><?php echo $post['description'] ?></p>
+            <img class="post-image" src="/uploads/<?php echo $post['image'] ?>" alt="">
+            <p class="description"><?php echo $post['description'] ?></p>
         </article>
     <?php endforeach; ?>
 <?php endif; ?>
