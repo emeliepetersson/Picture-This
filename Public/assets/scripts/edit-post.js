@@ -1,17 +1,20 @@
 "use strict";
 
-const postIdLink = document.querySelector(".post-id-link");
-const editButton = document.querySelector(".edit-button");
-const post = document.querySelector(".post");
+const postIdLinks = document.querySelectorAll(".post-id-link");
+const editButtons = document.querySelectorAll(".edit-button");
 
 //prevent page reload when clicking on link, the link is only there to get the post-id in the url.
-postIdLink.addEventListener("click", function(event) {
-  event.preventDefault();
+postIdLinks.forEach(postIdLink => {
+  postIdLink.addEventListener("click", function(event) {
+    event.preventDefault();
+  });
 });
 
 //Add form with textarea and submit button to change the description of the post
-function editMode() {
-  const description = document.querySelector(".description");
+function editMode(event) {
+  event.currentTarget.classList.add("hide");
+  const description = event.currentTarget.parentNode.nextElementSibling;
+  const descriptionWrapper = event.currentTarget.parentElement;
   description.classList.add("hide");
 
   const editForm = document.createElement("form");
@@ -27,7 +30,9 @@ function editMode() {
 
   editForm.appendChild(editTextarea);
   editForm.appendChild(editButton);
-  post.appendChild(editForm);
+  descriptionWrapper.appendChild(editForm);
 }
 
-editButton.addEventListener("click", editMode);
+editButtons.forEach(editButton => {
+  editButton.addEventListener("click", editMode);
+});
