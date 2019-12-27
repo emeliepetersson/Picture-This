@@ -6,4 +6,8 @@ require __DIR__ . '/../autoload.php';
 
 // In this file we delete posts in the database.
 
+if (isset($_GET['post-id'])) {
+    //DELETE from where post-id AND user-id! Otherwise error message
+}
+
 redirect('/');

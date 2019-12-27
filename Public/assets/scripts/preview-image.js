@@ -3,9 +3,9 @@
 const chooseFile = document.querySelector(".choose-file");
 
 function previewImage() {
-  var preview = document.querySelector("#output-image");
-  var file = document.querySelector("input[type=file]").files[0];
-  var reader = new FileReader();
+  const preview = document.querySelector("#output-image");
+  const file = document.querySelector("input[type=file]").files[0];
+  const reader = new FileReader();
   reader.addEventListener(
     "load",
     function() {
