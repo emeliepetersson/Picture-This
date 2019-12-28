@@ -19,6 +19,11 @@ $userProfile = getUserProfile($pdo, $userId);
 <?php if (!$userPosts) : ?>
     <p>There is no photos...</p>
 <?php else : ?>
+    <?php foreach ($messages as $message) : ?>
+        <div class="alert alert-success">
+            <?php echo $message; ?>
+        </div><!-- /alert -->
+    <?php endforeach; ?>
     <?php foreach ($userPosts as $post) : ?>
         <article class="post">
             <header>
@@ -34,8 +39,8 @@ $userProfile = getUserProfile($pdo, $userId);
                     <input type="hidden" name="delete-post" value="<?php echo $post['id'] ?>">
                     <button type="submit" class="btn btn-primary">Delete</button>
                 </form>
-                <form action='/app/posts/edit.php' method="post" id="edit-post">
-                    <input type="hidden" name="delete-post" value="<?php echo $post['id'] ?>">
+                <form action='/app/posts/edit.php' method="post">
+                    <input type="hidden" name="post-id" value="<?php echo $post['id'] ?>">
                     <button type="button" class="edit-button btn btn-primary">Edit</button>
                 </form>
                 <p class="description"><?php echo $post['description'] ?></p>
