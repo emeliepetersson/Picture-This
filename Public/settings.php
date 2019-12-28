@@ -23,14 +23,14 @@ $userProfile = getUserProfile($pdo, $userId);
         </div><!-- /alert -->
     <?php endforeach; ?>
 
-    <form action="app/users/edit-settings.php" method="post" enctype="multipart/form-data" id="post">
+    <form action="app/users/edit-settings.php" method="post" enctype="multipart/form-data" id="profile">
         <label for="image">Choose an image to upload</label>
         <input type="file" name="profile-image" id="image" class="choose-file">
 
         <!--Preview profile image -->
         <img src="/uploads/<?php echo $userProfile['profile_image']; ?>" id="output-image" alt="image preview" />
 
-        <textarea name="biography" form="post" maxlength="255"><?php echo ($userProfile !== null) ? $userProfile['biography'] : '' ?></textarea>
+        <textarea name="biography" form="profile" maxlength="255"><?php echo ($userProfile !== null) ? $userProfile['biography'] : '' ?></textarea>
         <button type="submit" class="btn btn-primary">Upload</button>
     </form>
 
