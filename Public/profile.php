@@ -34,7 +34,10 @@ $userProfile = getUserProfile($pdo, $userId);
                     <input type="hidden" name="delete-post" value="<?php echo $post['id'] ?>">
                     <button type="submit" class="btn btn-primary">Delete</button>
                 </form>
-                <a class="post-id-link" href="profile.php?post-id=<?php echo $post['id'] ?>"><button type="submit" class="edit-button btn btn-primary">Edit</button></a>
+                <form action='/app/posts/edit.php' method="post" id="edit-post">
+                    <input type="hidden" name="delete-post" value="<?php echo $post['id'] ?>">
+                    <button type="button" class="edit-button btn btn-primary">Edit</button>
+                </form>
                 <p class="description"><?php echo $post['description'] ?></p>
             </div>
         </article>
