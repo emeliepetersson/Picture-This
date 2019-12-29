@@ -1,7 +1,9 @@
 .hide {
   display: none;
 }
-
+.show {
+  display: initial;
+}
 .post-image {
   width: 30em;
 }
