@@ -1,0 +1,7 @@
+.like:hover,
+.dislike:hover {
+  cursor: pointer;
+}
+.dislike {
+  display: none;
+}
