@@ -43,6 +43,9 @@ $userProfile = getUserProfile($pdo, $userId);
                     <input type="hidden" name="post-id" value="<?php echo $post['id'] ?>">
                     <button type="button" class="edit-button btn btn-primary">Edit</button>
                 </form>
+                <img class="like" src="/images/like.svg" alt="like button">
+                <img class="dislike" src="/images/dislike.svg" alt="dislike button">
+                <p class="like-counter">0</p>
                 <p class="description"><?php echo $post['description'] ?></p>
             </div>
         </article>

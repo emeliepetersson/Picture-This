@@ -19,6 +19,9 @@ $allPosts = displayAllPosts($pdo);
                     <footer><?php echo $post['date'] ?></footer>
                     <header>
                         <img src="/uploads/<?php echo $post['image'] ?>" alt="">
+                        <img class="like" src="/images/like.svg" alt="like button">
+                        <img class="dislike" src="/images/dislike.svg" alt="dislike button">
+                        <p class="like-counter">0</p>
                         <p><?php echo $post['description'] ?></p>
             </article>
         <?php endforeach; ?>

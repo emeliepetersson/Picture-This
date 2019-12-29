@@ -17,6 +17,7 @@ require __DIR__ . '/../app/messages.php';
     <link rel="stylesheet" href="/assets/styles/main.css">
     <link rel="stylesheet" href="/assets/styles/bottom-bar.css">
     <link rel="stylesheet" href="/assets/styles/upload-post.css">
+    <link rel="stylesheet" href="/assets/styles/like-button.css">
 </head>
 
 <body>
