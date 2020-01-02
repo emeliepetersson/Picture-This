@@ -12,19 +12,25 @@ $allPosts = displayAllPosts($pdo);
     <?php else : ?>
         <?php foreach ($allPosts as $post) : ?>
             <article>
+
                 <header>
                     <h2>
                         <?php echo $post['first_name'] . " " . $post['last_name']; ?>
                     </h2>
                     <footer><?php echo $post['date'] ?></footer>
-                    <header>
-                        <img src="/uploads/<?php echo $post['image'] ?>" alt="">
-                        <form action="/app/posts/like.php" method="post" class="like-form">
-                            <button class="like" type="submit"><img src="/images/like.svg" alt="like button"></button>
-                            <button class="dislike" type="submit"><img src="/images/dislike.svg" alt="dislike button"></button>
-                        </form>
-                        <p class="like-counter">0</p>
-                        <p><?php echo $post['description'] ?></p>
+                </header>
+
+                <img src="/uploads/<?php echo $post['image'] ?>" alt="">
+
+                <div class="description-wrapper">
+                    <?php if(getLikes($pdo, "post_id, user_id", "likes", "post_id", "user_id", (int) $post['id'], $_SESSION['user']['id']) === null ): ?>
+                    <a class="like" href="/app/posts/like.php?id=<?php echo $post['id'] ?>"><img src="/images/like.svg" alt="heart shaped like button"></a>
+                    <?php else: ?>
+                    <a class="dislike" href="/app/posts/dislike.php?id=<?php echo  $post['id'] ?>"> <img src="/images/dislike.svg" alt="heart shaped dislike button"></a>
+                    <?php endif; ?>
+                    <p class="like-counter">0</p>
+                    <p class="description"><?php echo $post['description'] ?></p>
+                </div>
             </article>
         <?php endforeach; ?>
     <?php endif; ?>

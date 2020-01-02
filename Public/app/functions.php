@@ -134,6 +134,38 @@ function getUserProfile(PDO $pdo, string $userId): ?array
 }
 
 /**
+ * return array with all likes or null if given post doesn't have any likes
+ *
+ * @param PDO $pdo
+ * @param string $columns
+ * @param string $table
+ * @param string $conditionOne
+ * @param string $conditionTwo
+ * @param integer $valueOne
+ * @param integer $valueTwo
+ * @return array|null
+ */
+function getLikes(PDO $pdo, string $columns, string $table, string $conditionOne, string $conditionTwo, int $valueOne, int $valueTwo): ?array
+{
+    $statement = $pdo->prepare("SELECT $columns FROM $table WHERE $conditionOne = :$conditionOne AND $conditionTwo = :$conditionTwo");
+
+    if (!$statement) {
+        die(var_dump($pdo->errorInfo()));
+    }
+    $statement->bindParam(":$conditionOne", $valueOne, PDO::PARAM_INT);
+    $statement->bindParam(":$conditionTwo", $valueTwo, PDO::PARAM_INT);
+    $statement->execute();
+
+    $likes = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    if ($likes === false) {
+        return null;
+    }
+
+    return $likes;
+}
+
+/**
  * Return all posts from posts table
  *
  * @param PDO $pdo
@@ -162,7 +194,7 @@ function displayPostsFromUser(PDO $pdo): array
  */
 function displayAllPosts(PDO $pdo): array
 {
-    $query = "SELECT image, description, date, first_name, last_name FROM posts INNER JOIN users ON posts.user_id = users.id";
+    $query = "SELECT posts.id, image, description, date, first_name, last_name FROM posts INNER JOIN users ON posts.user_id = users.id";
 
     // Get all posts from all users
     $statement = $pdo->query($query);
