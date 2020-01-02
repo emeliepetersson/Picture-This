@@ -1,7 +1,16 @@
+.like-form button {
+  border: none;
+}
+.like-form button:focus {
+  outline: 0;
+}
 .like:hover,
 .dislike:hover {
   cursor: pointer;
 }
 .dislike {
   display: none;
+}
+.dislike:active {
+  transition: 1s ease-in-out;
 }
