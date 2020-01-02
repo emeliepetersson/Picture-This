@@ -26,14 +26,16 @@ $userProfile = getUserProfile($pdo, $userId);
     <?php endforeach; ?>
     <?php foreach ($userPosts as $post) : ?>
         <article class="post">
+
             <header>
                 <h2>
                     <?php echo $post['first_name'] . " " . $post['last_name']; ?>
                 </h2>
                 <footer><?php echo $post['date'] ?></footer>
-
             </header>
+
             <img class="post-image" src="/uploads/<?php echo $post['image'] ?>" alt="">
+
             <div class="description-wrapper">
                 <form action='/app/posts/delete.php' method="post">
                     <input type="hidden" name="delete-post" value="<?php echo $post['id'] ?>">
@@ -43,10 +45,8 @@ $userProfile = getUserProfile($pdo, $userId);
                     <input type="hidden" name="post-id" value="<?php echo $post['id'] ?>">
                     <button type="button" class="edit-button btn btn-primary">Edit</button>
                 </form>
-                <form action="/app/posts/like.php" method="post" class="like-form">
-                    <button class="like" type="submit"><img src="/images/like.svg" alt="like button"></button>
-                    <button class="dislike" type="submit"><img src="/images/dislike.svg" alt="dislike button"></button>
-                </form>
+                <a class="like" href="/app/posts/like.php?id=<?php echo  $post['id'] ?>"> <img src="/images/like.svg" alt="heart shaped like button"></a>
+                <a class="dislike" href="/app/posts/dislike.php?id=<?php echo  $post['id'] ?>"> <img src="/images/dislike.svg" alt="heart shaped dislike button"></a>
                 <p class="like-counter">0</p>
                 <p class="description"><?php echo $post['description'] ?></p>
             </div>
