@@ -19,8 +19,10 @@ $allPosts = displayAllPosts($pdo);
                     <footer><?php echo $post['date'] ?></footer>
                     <header>
                         <img src="/uploads/<?php echo $post['image'] ?>" alt="">
-                        <img class="like" src="/images/like.svg" alt="like button">
-                        <img class="dislike" src="/images/dislike.svg" alt="dislike button">
+                        <form action="/app/posts/like.php" method="post" class="like-form">
+                            <button class="like" type="submit"><img src="/images/like.svg" alt="like button"></button>
+                            <button class="dislike" type="submit"><img src="/images/dislike.svg" alt="dislike button"></button>
+                        </form>
                         <p class="like-counter">0</p>
                         <p><?php echo $post['description'] ?></p>
             </article>
