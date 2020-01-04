@@ -44,9 +44,12 @@ $userProfile = getUserProfile($pdo, $userId);
                 <form action='/app/posts/edit.php' method="post">
                     <input type="hidden" name="post-id" value="<?php echo $post['id'] ?>">
                     <button type="button" class="edit-button btn btn-primary">Edit</button>
-                </form>
-                <a class="like" href="/app/posts/like.php?id=<?php echo  $post['id'] ?>"> <img src="/images/like.svg" alt="heart shaped like button"></a>
-                <a class="dislike" href="/app/posts/dislike.php?id=<?php echo  $post['id'] ?>"> <img src="/images/dislike.svg" alt="heart shaped dislike button"></a>
+                </form><?php $postIsliked = getLikes($pdo, "post_id, user_id", "likes", "post_id", "user_id", (int) $post['id'], $_SESSION['user']['id']); ?>
+                <?php if (!$postIsliked) : ?>
+                    <a class="like" href="/app/posts/like.php?id=<?php echo $post['id'] ?>"><img src="/images/like.svg" alt="heart shaped like button"></a>
+                <?php else : ?>
+                    <a class="dislike" href="/app/posts/dislike.php?id=<?php echo  $post['id'] ?>"> <img src="/images/dislike.svg" alt="heart shaped dislike button"></a>
+                <?php endif; ?>
                 <p class="like-counter">0</p>
                 <p class="description"><?php echo $post['description'] ?></p>
             </div>
