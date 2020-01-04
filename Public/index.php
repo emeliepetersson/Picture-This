@@ -23,13 +23,16 @@ $allPosts = displayAllPosts($pdo);
                 <img src="/uploads/<?php echo $post['image'] ?>" alt="">
 
                 <div class="description-wrapper">
-                    <?php $postIsliked = getLikes($pdo, "post_id, user_id", "likes", "post_id", "user_id", (int) $post['id'], $_SESSION['user']['id']); ?>
+                    <?php
+                    $postIsliked = getLikes($pdo, "post_id, user_id", "likes", "post_id", "user_id", (int) $post['id'], $_SESSION['user']['id']);
+                    $amountOfLikes = count(getDataAsArrayFromTable($pdo, "post_id", "likes", "post_id", $post['id']));
+                    ?>
                     <?php if (!$postIsliked) : ?>
-                        <a class="like" href="/app/posts/like.php?id=<?php echo $post['id'] ?>"><img src="/images/like.svg" alt="heart shaped like button"></a>
+                        <a class="like" href="/app/posts/like.php?location=index.php&id=<?php echo $post['id'] ?>"><img src="/images/like.svg" alt="heart shaped like button"></a>
                     <?php else : ?>
-                        <a class="dislike" href="/app/posts/dislike.php?id=<?php echo  $post['id'] ?>"> <img src="/images/dislike.svg" alt="heart shaped dislike button"></a>
+                        <a class="dislike" href="/app/posts/dislike.php?location=index.php&id=<?php echo  $post['id'] ?>"> <img src="/images/dislike.svg" alt="heart shaped dislike button"></a>
                     <?php endif; ?>
-                    <p class="like-counter">0</p>
+                    <p class="like-counter"><?php echo $amountOfLikes ?></p>
                     <p class="description"><?php echo $post['description'] ?></p>
                 </div>
             </article>

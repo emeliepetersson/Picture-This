@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 require __DIR__ . '/../autoload.php';
 
+
 // In this file we remove likes from posts in the database.
+
 
 if (isset($_GET['id'])) {
     $postId = trim(filter_var($_GET['id'], FILTER_SANITIZE_NUMBER_INT));
@@ -29,5 +31,4 @@ if (isset($_GET['id'])) {
         $statement->execute();
     }
 }
-
-redirect('/profile.php');
+redirect('/' . $_GET['location']);
