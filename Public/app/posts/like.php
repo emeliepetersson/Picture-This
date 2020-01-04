@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 require __DIR__ . '/../autoload.php';
 
+
 // In this file we add likes to posts in the database.
 
 
@@ -32,4 +33,4 @@ if (isset($_GET['id'])) {
     }
 }
 
-redirect('/profile.php');
+redirect('/' . $_GET['location']);
