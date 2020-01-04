@@ -12,7 +12,7 @@ $userProfile = getUserProfile($pdo, $userId);
 
 <header>
     <h1><?php echo $_SESSION['user']['first_name'] . " " . $_SESSION['user']['last_name']; ?></h1>
-    <img src="/uploads/<?php echo $userProfile['profile_image'] ?>" alt="profile image" width="100px">
+    <img src="/<?php echo $userProfile['profile_image'] ? 'uploads/' . $userProfile['profile_image'] : 'images/profile-picture.png' ?>" alt="profile image" width="100px">
     <p><?php echo $userProfile['biography'] ?></p>
     <a href="/settings.php"><button class="btn btn-primary">Edit profile</button></a>
 </header>
