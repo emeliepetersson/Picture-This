@@ -9,11 +9,11 @@ require __DIR__ . '/../autoload.php';
 
 
 if (isset($_GET['id'])) {
-    $postId = trim(filter_var($_GET['id'], FILTER_SANITIZE_NUMBER_INT));
-    $userId = $_SESSION['user']['id'];
+    $postId = (int) trim(filter_var($_GET['id'], FILTER_SANITIZE_NUMBER_INT));
+    $userId = (int) $_SESSION['user']['id'];
 
     //Check if the user already has liked the photo
-    $alreadyliked = getLikes($pdo, "post_id, user_id", "likes", "post_id", "user_id", (int) $postId, $userId);
+    $alreadyliked = getLikes($pdo, "post_id, user_id", "likes", "post_id", "user_id", $postId, $userId);
 
     //Check if the post exists
     $postExists = getDataAsArrayFromTable($pdo, 'id', 'posts', 'id', (string) $postId);
