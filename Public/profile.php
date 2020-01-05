@@ -37,14 +37,6 @@ $userProfile = getUserProfile($pdo, $userId);
             <img class="post-image" src="/uploads/<?php echo $post['image'] ?>" alt="">
 
             <div class="description-wrapper">
-                <form action='/app/posts/delete.php' method="post">
-                    <input type="hidden" name="delete-post" value="<?php echo $post['id'] ?>">
-                    <button type="submit" class="btn btn-primary">Delete</button>
-                </form>
-                <form action='/app/posts/edit.php' method="post">
-                    <input type="hidden" name="post-id" value="<?php echo $post['id'] ?>">
-                    <button type="button" class="edit-button btn btn-primary">Edit</button>
-                </form>
                 <?php
                 $postIsliked = getLikes($pdo, "post_id, user_id", "likes", "post_id", "user_id", (int) $post['id'], $_SESSION['user']['id']);
                 $amountOfLikes = count(getDataAsArrayFromTable($pdo, "post_id", "likes", "post_id", $post['id']));
@@ -55,6 +47,14 @@ $userProfile = getUserProfile($pdo, $userId);
                     <a class="dislike" href="/app/posts/dislike.php?location=profile.php&id=<?php echo  $post['id'] ?>"> <img src="/images/dislike.svg" alt="heart shaped dislike button"></a>
                 <?php endif; ?>
                 <p class="like-counter"><?php echo $amountOfLikes ?></p>
+                <form action='/app/posts/delete.php' method="post">
+                    <input type="hidden" name="delete-post" value="<?php echo $post['id'] ?>">
+                    <button type="submit" class="btn btn-primary">Delete</button>
+                </form>
+                <form action='/app/posts/edit.php' method="post">
+                    <input type="hidden" name="post-id" value="<?php echo $post['id'] ?>">
+                    <button type="button" class="edit-button btn btn-primary">Edit</button>
+                </form>
                 <p class="description"><?php echo $post['description'] ?></p>
             </div>
         </article>
