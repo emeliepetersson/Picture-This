@@ -53,6 +53,7 @@ $userProfile = getUserProfile($pdo, $userId);
                 </form>
                 <form action='/app/posts/edit.php' method="post">
                     <input type="hidden" name="post-id" value="<?php echo $post['id'] ?>">
+                    <!-- <button type="button" class="cancel-button btn btn-primary">Cancel</button> -->
                     <button type="button" class="edit-button btn btn-primary">Edit</button>
                 </form>
                 <p class="description"><?php echo $post['description'] ?></p>
