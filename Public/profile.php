@@ -6,6 +6,11 @@ if (!isset($_SESSION['user'])) { // Make this into a function!!!
 }
 
 $userPosts = displayPostsFromUser($pdo);
+
+//Sort all posts by id to get the latest uploaded posts on top of the page
+$postId = array_column($userPosts, 'id');
+array_multisort($postId, SORT_DESC, $userPosts);
+
 $userId = (string) $_SESSION['user']['id']; //convert user id into string to be able to use it in the function to get data from table
 $userProfile = getUserProfile($pdo, $userId);
 ?>
@@ -34,7 +39,7 @@ $userProfile = getUserProfile($pdo, $userId);
                 <footer><?php echo $post['date'] ?></footer>
             </header>
 
-            <img class="post-image" src="/uploads/<?php echo $post['image'] ?>" alt="">
+            <img class="post-image" src="/uploads/<?php echo $post['image'] ?>" alt="uploaded post">
 
             <div class="description-wrapper">
                 <?php
@@ -48,7 +53,8 @@ $userProfile = getUserProfile($pdo, $userId);
                 <?php endif; ?>
                 <p class="like-counter"><?php echo $amountOfLikes ?></p>
                 <form action='/app/posts/delete.php' method="post">
-                    <input type="hidden" name="delete-post" value="<?php echo $post['id'] ?>">
+                    <input type="hidden" name="post-id" value="<?php echo $post['id'] ?>">
+                    <input type="hidden" name="post-name" value="<?php echo $post['image'] ?>">
                     <button type="submit" class="btn btn-primary">Delete</button>
                 </form>
                 <form action='/app/posts/edit.php' method="post">

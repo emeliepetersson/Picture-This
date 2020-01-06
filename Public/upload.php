@@ -23,8 +23,9 @@ if (!isset($_SESSION['user'])) { // Make this into a function!!!
         <input type="file" name="image" id="image" class="choose-file" required>
 
         <!--Preview image -->
-        <img id="output-image" alt="image preview" />
+        <img src="/images/placeholder.png" id="output-image" alt="image preview" />
 
+        <label for="description">Write a caption</label>
         <textarea name="description" form="post" maxlength="255"></textarea>
         <button type="submit">Upload</button>
     </form>
