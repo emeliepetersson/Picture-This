@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#"><img src="<?php echo $config['logo']; ?>" alt="Picture this logo" width="40%"></a>
+    <a href="/index.php"><img src="<?php echo $config['logo']; ?>" alt="Picture this logo" width="40%"></a>
 
     <ul class="navbar-nav">
 

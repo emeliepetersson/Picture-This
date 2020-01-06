@@ -1,6 +1,11 @@
 <?php
 require __DIR__ . '/views/header.php';
 $allPosts = displayAllPosts($pdo);
+
+//Sort all posts by id to get the latest uploaded posts on top of the page
+$postId = array_column($allPosts, 'id');
+array_multisort($postId, SORT_DESC, $allPosts);
+
 ?>
 
 <!-- The view if the user is logged in -->
