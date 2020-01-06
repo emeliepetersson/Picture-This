@@ -1,38 +1,44 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a href="/index.php"><img src="<?php echo $config['logo']; ?>" alt="Picture this logo" width="40%"></a>
+<nav class="main-navbar">
+    <a href="/index.php"><img class="logo" src="<?php echo $config['logo']; ?>" alt="Picture this logo"></a>
 
-    <ul class="navbar-nav">
+    <!-- Hamburger menu icon -->
+    <div class="hamburger-icon">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+    </div>
 
-
-
-        <?php if (isset($_SESSION['user'])) : ?>
-            <li class="nav-item">
-                <a class="nav-link" href="/profile.php">Profile</a>
-            </li><!-- /nav-item -->
-            <li class="nav-item">
-                <a class="nav-link" href="/settings.php">Settings</a>
-            </li><!-- /nav-item -->
-            <li class="nav-item">
-                <a class="nav-link" href="/upload.php">Upload post</a>
-            </li><!-- /nav-item -->
-            <li class="nav-item">
-                <a class="nav-link" href="/app/users/logout.php">Logout</a>
-            </li><!-- /nav-item -->
-        <?php else : ?>
-            <li class="nav-item">
-                <a class="nav-link" href="/index.php">Home</a>
-            </li><!-- /nav-item -->
-            <li class="nav-item">
-                <a class="nav-link" href="/about.php">About</a>
-            </li><!-- /nav-item -->
-            <li class="nav-item">
-                <a class="nav-link <?php echo $_SERVER['SCRIPT_NAME'] === '/login.php' ? 'active' : ''; ?>" href="login.php">Login</a>
-            </li><!-- /nav-item -->
-            <li class="nav-item">
-                <a class="nav-link" href="/signup.php">Sign up</a>
-            </li><!-- /nav-item -->
-        <?php endif; ?>
-
+    <div class="menu">
+        <div class="menu-items">
+            <ul class="navbar-nav">
+                <?php if (isset($_SESSION['user'])) : ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/profile.php">Profile</a>
+                    </li><!-- /nav-item -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="/settings.php">Settings</a>
+                    </li><!-- /nav-item -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="/upload.php">Upload post</a>
+                    </li><!-- /nav-item -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="/app/users/logout.php">Logout</a>
+                    </li><!-- /nav-item -->
+                <?php else : ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/index.php">Home</a>
+                    </li><!-- /nav-item -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="/about.php">About</a>
+                    </li><!-- /nav-item -->
+                    <li class="nav-item">
+                        <a class="nav-link <?php echo $_SERVER['SCRIPT_NAME'] === '/login.php' ? 'active' : ''; ?>" href="login.php">Login</a>
+                    </li><!-- /nav-item -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="/signup.php">Sign up</a>
+                    </li><!-- /nav-item -->
+                <?php endif; ?>
+        </div>
+    </div>
 
 
     </ul><!-- /navbar-nav -->
