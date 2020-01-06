@@ -1,0 +1,110 @@
+.main-navbar {
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  height: 4em;
+  width: 100vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1em;
+  background: linear-gradient(180deg, #9b7575 10%, rgba(255, 255, 255, 0) 100%);
+}
+
+.menu-items {
+  display: none;
+}
+
+.logo {
+  height: 2.5em;
+}
+
+/* Hamburger icon */
+.hamburgerIcon {
+  width: 2em;
+  z-index: 2;
+  position: absolute;
+  right: 1.2em;
+}
+.bar1,
+.bar2 {
+  width: 2.2em;
+  border-radius: 1em;
+  height: 0.2em;
+  background-color: #ffffff;
+  transition: 0.3s;
+}
+.bar2 {
+  margin-top: 0.6em;
+}
+
+/* Class "change" turns hamburgerIcon to a cross when clicked */
+.change .bar1 {
+  -webkit-transform: rotate(-45deg) translate(-1em, 0.5em);
+  transform: rotate(-45deg) translate(-0.5em, 0.1em);
+}
+.change .bar2 {
+  -webkit-transform: rotate(45deg) translate(-1em, -0.5em);
+  transform: rotate(45deg) translate(-0.5em, -0.1em);
+}
+
+/* Class "showMenu" makes menu items visible when hamburgerIcon is clicked */
+.showMenu {
+  display: block;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 50vw;
+}
+
+/* change the menu's background when hamburgerIcon is clicked */
+.changeBackground {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1em 1em 0 0;
+  background-color: #252525;
+  width: 50vw;
+  height: 50vh;
+  position: fixed;
+  z-index: -1;
+  top: 0;
+  right: 0;
+  animation: drop-down 1s forwards;
+  -webkit-animation: drop-down 1s forwards;
+}
+
+/* Animations on mobile menu */
+@keyframes drop-down {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}
+@-webkit-keyframes drop-down {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}
+
+/* Nav menu in desktop */
+@media only screen and (min-width: 900px) {
+  .menu-items {
+    display: block;
+  }
+  .menu-items ul li {
+    display: inline-block;
+  }
+
+  .logo {
+    height: 3.5em;
+  }
+
+  .hamburger-icon {
+    display: none;
+  }
+}
