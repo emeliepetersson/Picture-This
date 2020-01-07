@@ -1,22 +1,89 @@
+* {
+  box-sizing: border-box;
+}
 body {
   background-color: #fcfaf9;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
+.big-logo {
+  width: 7em;
+  margin-bottom: 1.5em;
+}
+
+/* Links */
+a {
+  color: #000;
+  text-decoration: none;
+}
+a:hover {
+  color: #3e779d;
+}
+
+/* Buttons */
+.button {
+  border-top: 1px solid #96d1f8;
+  background: #65a9d7;
+  background: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    from(#3e779d),
+    to(#65a9d7)
+  );
+  background: -webkit-linear-gradient(top, #3e779d, #65a9d7);
+  background: -moz-linear-gradient(top, #3e779d, #65a9d7);
+  background: -ms-linear-gradient(top, #3e779d, #65a9d7);
+  background: -o-linear-gradient(top, #3e779d, #65a9d7);
+  padding: 10px 20px;
+  -webkit-border-radius: 13px;
+  -moz-border-radius: 13px;
+  border-radius: 13px;
+  -webkit-box-shadow: rgba(0, 0, 0, 1) 0 1px 0;
+  -moz-box-shadow: rgba(0, 0, 0, 1) 0 1px 0;
+  box-shadow: rgba(0, 0, 0, 1) 0 1px 0;
+  text-shadow: rgba(0, 0, 0, 0.4) 0 1px 0;
+  color: white;
+  font-size: 20px;
+}
+.button:hover {
+  border-top-color: #407599;
+  background: #407599;
+  color: #fafafa;
+}
+.button:active {
+  border-top-color: #1b435e;
+  background: #1b435e;
+}
+
+/* Show and hide is used in javascript to show and hide elements on click */
 .hide {
   display: none;
 }
 .show {
   display: initial;
 }
-.post-image {
-  width: 30em;
+
+/* Errors and messages */
+.error {
+  background-color: rgb(250, 201, 201);
+  border: 1px solid rgb(241, 179, 179);
+  color: #5e2f2f;
+  border-radius: 1em;
+  padding: 0.3em;
 }
-.container {
-  width: 100%;
-  padding: 3em;
-  margin: 8em auto;
+.message {
+  background-color: rgb(201, 250, 207);
+  border: 1px solid rgb(179, 241, 182);
+  color: #315e2f;
+  border-radius: 1em;
+  padding: 0.3em;
 }
-a {
-  color: #000;
-  text-decoration: none;
+
+@media only screen and (min-width: 900px) {
+  .big-logo {
+    width: 12em;
+  }
+  article h1 {
+    font-size: 2.6em;
+  }
 }

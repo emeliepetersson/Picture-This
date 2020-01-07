@@ -1,45 +1,40 @@
 <?php require __DIR__ . '/views/header.php'; ?>
 
-<article>
+<article class="create-account">
     <h1>Create account</h1>
 
     <form action="app/users/signup.php" method="post">
         <?php foreach ($errors as $error) : ?>
-            <div class="alert alert-danger">
+            <div class="error">
                 <?php echo $error; ?>
             </div><!-- /alert -->
         <?php endforeach; ?>
         <div class="form-group">
             <label for="email">Email</label>
-            <input class="form-control" type="email" name="email" placeholder="example@email.com" required>
-            <small class="form-text text-muted">Please provide the your email address.</small>
+            <input type="email" name="email" placeholder="example@email.com" required>
         </div><!-- /form-group -->
 
         <div class="form-group">
             <label for="first-name">First name</label>
-            <input class="form-control" type="name" name="first-name" placeholder="First name" required>
-            <small class="form-text text-muted">Please provide the your first name.</small>
+            <input type="name" name="first-name" placeholder="First name" required>
         </div><!-- /form-group -->
 
         <div class="form-group">
             <label for="last-name">Last name</label>
-            <input class="form-control" type="name" name="last-name" placeholder="Last name" required>
-            <small class="form-text text-muted">Please provide the your last name.</small>
+            <input type="name" name="last-name" placeholder="Last name" required>
         </div><!-- /form-group -->
 
         <div class="form-group">
             <label for="password">Password</label>
-            <input class="form-control" type="password" name="password" required>
-            <small class="form-text text-muted">Please provide your password.</small>
+            <input type="password" name="password" required>
         </div><!-- /form-group -->
 
         <div class="form-group">
             <label for="confirm-password">Confirm password</label>
-            <input class="form-control" type="password" name="confirm-password" required>
-            <small class="form-text text-muted">Please confirm your password.</small>
+            <input type="password" name="confirm-password" required>
         </div><!-- /form-group -->
 
-        <button type="submit" class="btn btn-primary">Create account</button>
+        <button type="submit" class="button">Create account</button>
     </form>
 </article>
 

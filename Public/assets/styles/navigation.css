@@ -15,12 +15,16 @@
 .menu-items {
   display: none;
 }
+.menu-items ul {
+  margin-top: 1.5em;
+}
 .menu-items ul li {
   margin: 1em;
+  font-size: 1.1em;
 }
 
 .logo {
-  height: 2.5em;
+  height: 1.2em;
 }
 
 /* Hamburger icon */
@@ -101,13 +105,19 @@
 @media only screen and (min-width: 900px) {
   .menu-items {
     display: block;
+    position: absolute;
+    top: 0;
+    right: 0.5em;
   }
   .menu-items ul li {
     display: inline-block;
   }
+  .menu-items ul {
+    margin: 0;
+  }
 
   .logo {
-    height: 3.5em;
+    height: 1.4em;
   }
 
   .hamburger-icon {
