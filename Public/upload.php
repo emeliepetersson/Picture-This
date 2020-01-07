@@ -28,8 +28,8 @@ if (!isset($_SESSION['user'])) { // Make this into a function!!!
         </div>
 
         <label for="description">Write a caption</label>
-        <textarea name="description" form="post" maxlength="255"></textarea>
-        <button type="submit">Upload</button>
+        <textarea class="post-caption" name="description" form="post" maxlength="255"></textarea>
+        <button class="button" type="submit">Upload</button>
     </form>
 </div>
 
