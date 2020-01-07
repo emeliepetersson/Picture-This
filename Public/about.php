@@ -2,7 +2,7 @@
 
 <article>
     <h1>About</h1>
-    <p>This is the about page.</p>
+    <p>Picture this allows users to upload photos with captions and to watch and like other users photos.</p>
 </article>
 
 <?php require __DIR__ . '/views/footer.php'; ?>

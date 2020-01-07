@@ -5,14 +5,18 @@
   height: 4em;
   width: 100vw;
   display: flex;
-  justify-content: space-between;
   align-items: center;
   padding: 1em;
-  background: linear-gradient(180deg, #9b7575 10%, rgba(255, 255, 255, 0) 100%);
+  background-color: #fff;
+  border-bottom: 0.1px solid #ccc;
+  justify-content: space-between;
 }
 
 .menu-items {
   display: none;
+}
+.menu-items ul li {
+  margin: 1em;
 }
 
 .logo {
@@ -20,7 +24,7 @@
 }
 
 /* Hamburger icon */
-.hamburgerIcon {
+.hamburger-icon {
   width: 2em;
   z-index: 2;
   position: absolute;
@@ -31,7 +35,7 @@
   width: 2.2em;
   border-radius: 1em;
   height: 0.2em;
-  background-color: #ffffff;
+  background-color: #000;
   transition: 0.3s;
 }
 .bar2 {
@@ -48,8 +52,8 @@
   transform: rotate(45deg) translate(-0.5em, -0.1em);
 }
 
-/* Class "showMenu" makes menu items visible when hamburgerIcon is clicked */
-.showMenu {
+/* Class "show-menu" makes menu items visible when hamburger-icon is clicked */
+.show-menu {
   display: block;
   position: absolute;
   right: 0;
@@ -57,14 +61,16 @@
   width: 50vw;
 }
 
-/* change the menu's background when hamburgerIcon is clicked */
-.changeBackground {
+/* change the menu's background when hamburger-icon is clicked */
+.change-background {
   display: flex;
   justify-content: flex-end;
   padding: 1em 1em 0 0;
-  background-color: #252525;
+  background-color: #fff;
+  border-left: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
   width: 50vw;
-  height: 50vh;
+  height: 30vh;
   position: fixed;
   z-index: -1;
   top: 0;
