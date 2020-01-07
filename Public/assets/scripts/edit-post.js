@@ -8,16 +8,18 @@ function editMode(event) {
   event.currentTarget.textContent = "Cancel";
   editButtons.forEach(editButton => {
     editButton.removeEventListener("click", editMode);
-    editButton.addEventListener("click", quitEditMode);
     editButton.classList.add("cancel");
   });
+  event.currentTarget.addEventListener("click", quitEditMode);
 
   // Get the description paragraph nearest the current target and hide it when in edit mode
-  const description = event.currentTarget.parentNode.nextElementSibling;
+  const description =
+    event.currentTarget.parentNode.parentNode.nextElementSibling;
   description.classList.toggle("hide");
 
   //Get the form element that the current target is child of and add textarea and save button
   const form = event.currentTarget.parentElement;
+  form.classList.add("edit-mode");
   const textarea = document.createElement("textarea");
   textarea.classList.add("description-textarea");
   textarea.name = "description";
@@ -27,6 +29,8 @@ function editMode(event) {
 
   const submitButton = document.createElement("button");
   submitButton.classList.add("save");
+  submitButton.classList.add("button");
+  submitButton.classList.add("smaller-button");
   submitButton.type = "submit";
   submitButton.textContent = "Save";
   form.appendChild(submitButton);
@@ -42,8 +46,13 @@ function quitEditMode(event) {
     editButton.classList.remove("cancel");
   });
 
+  //Remove edit-mode class from form
+  const form = event.currentTarget.parentElement;
+  form.classList.remove("edit-mode");
+
   // Show the description paragraph again and remove textarea and save button from the form
-  const description = event.currentTarget.parentNode.nextElementSibling;
+  const description =
+    event.currentTarget.parentNode.parentNode.nextElementSibling;
   description.classList.toggle("hide");
   const submitButton = document.querySelector(".save");
   submitButton.parentNode.removeChild(submitButton);

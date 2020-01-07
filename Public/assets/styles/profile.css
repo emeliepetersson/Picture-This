@@ -5,6 +5,7 @@
 }
 .biography {
   display: inline-block;
+  margin: 0 1em;
 }
 .biography > * {
   margin: 0;
@@ -17,5 +18,42 @@
   width: 7em;
   font-size: 14px;
   padding: 5px;
+  margin: 1em 0;
   display: block;
+}
+.smaller-button {
+  width: 5em;
+  font-size: 14px;
+  padding: 5px;
+  display: block;
+}
+.description-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.description {
+  display: block;
+  width: 100%;
+}
+.hide {
+  display: none;
+}
+
+/* delete and edit form */
+.description-container form {
+  display: inline-block;
+  width: 5em;
+  margin: 0.5em 0;
+}
+.description-container .edit-mode {
+  display: block;
+  width: 70vw;
+}
+.description-textarea {
+  width: 100%;
+  margin-top: 1em;
+  border: 0.5px solid #cccccc;
+  background-color: #fdfcfc;
+  font-size: 1em;
 }
