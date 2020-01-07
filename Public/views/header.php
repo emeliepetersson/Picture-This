@@ -23,6 +23,7 @@ require __DIR__ . '/../app/messages.php';
     <link rel="stylesheet" href="/assets/styles/form.css">
     <link rel="stylesheet" href="/assets/styles/post.css">
     <link rel="stylesheet" href="/assets/styles/profile.css">
+    <link rel="stylesheet" href="/assets/styles/settings.css">
     <link href="https://fonts.googleapis.com/css?family=Chilanka|Gayathri|Raleway|Roboto&display=swap" rel="stylesheet">
 </head>
 
