@@ -37,6 +37,7 @@ $userProfile = getOneColumnFromTable($pdo, 'biography, profile_image', 'user_pro
         <article class="post">
 
             <header>
+                <img class="profile-image" src="/uploads/<?php echo $post['profile_image'] ?>" alt="profile image">
                 <h2>
                     <?php echo $post['first_name'] . " " . $post['last_name']; ?>
                 </h2>
@@ -48,7 +49,7 @@ $userProfile = getOneColumnFromTable($pdo, 'biography, profile_image', 'user_pro
             </div>
 
 
-            <div class="description-wrapper">
+            <div class="description-container">
                 <?php
                 $postIsliked = getLikes($pdo, "post_id, user_id", "likes", "post_id", "user_id", (int) $post['id'], $_SESSION['user']['id']);
                 $amountOfLikes = count(getDataAsArrayFromTable($pdo, "post_id", "likes", "post_id", $post['id']));
@@ -61,16 +62,17 @@ $userProfile = getOneColumnFromTable($pdo, 'biography, profile_image', 'user_pro
                     <?php endif; ?>
                     <p class="like-counter"><?php echo $amountOfLikes ?></p>
                 </div>
-                <form action='/app/posts/delete.php' method="post">
-                    <input type="hidden" name="post-id" value="<?php echo $post['id'] ?>">
-                    <input type="hidden" name="post-name" value="<?php echo $post['image'] ?>">
-                    <button type="submit" class="btn btn-primary">Delete</button>
-                </form>
-                <form action='/app/posts/edit.php' method="post">
-                    <input type="hidden" name="post-id" value="<?php echo $post['id'] ?>">
-                    <!-- <button type="button" class="cancel-button btn btn-primary">Cancel</button> -->
-                    <button type="button" class="edit-button btn btn-primary">Edit</button>
-                </form>
+                <div class="forms">
+                    <form class="delete" action='/app/posts/delete.php' method="post">
+                        <input type="hidden" name="post-id" value="<?php echo $post['id'] ?>">
+                        <input type="hidden" name="post-name" value="<?php echo $post['image'] ?>">
+                        <button type="submit" class="button smaller-button">Delete</button>
+                    </form>
+                    <form class="edit" action='/app/posts/edit.php' method="post">
+                        <input type="hidden" name="post-id" value="<?php echo $post['id'] ?>">
+                        <button type="button" class="edit-button button smaller-button">Edit</button>
+                    </form>
+                </div>
                 <p class="description"><?php echo $post['description'] ?></p>
             </div>
         </article>

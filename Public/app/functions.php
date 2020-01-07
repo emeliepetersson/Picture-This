@@ -160,7 +160,11 @@ function getLikes(PDO $pdo, string $columns, string $table, string $conditionOne
  */
 function displayPostsFromUser(PDO $pdo): array
 {
-    $query = "SELECT posts.id, image, description, date, first_name, last_name FROM posts INNER JOIN users ON posts.user_id = users.id WHERE users.id = :id";
+    $query = "SELECT posts.id, image, description, date, first_name, last_name, user_profiles.profile_image
+    FROM posts
+    INNER JOIN users ON posts.user_id = users.id
+    INNER JOIN user_profiles ON users.id = user_profiles.user_id
+    WHERE users.id = :id";
 
     // Get all posts from logged in user
     $statement = $pdo->prepare($query);
