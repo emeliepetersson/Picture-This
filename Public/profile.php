@@ -15,17 +15,21 @@ $userId = (string) $_SESSION['user']['id']; //convert user id into string to be 
 $userProfile = getOneColumnFromTable($pdo, 'biography, profile_image', 'user_profiles', 'user_id', $userId);
 ?>
 
-<header>
-    <h1><?php echo $_SESSION['user']['first_name'] . " " . $_SESSION['user']['last_name']; ?></h1>
-    <img src="/<?php echo $userProfile['profile_image'] ? 'uploads/' . $userProfile['profile_image'] : 'images/profile-picture.png' ?>" alt="profile image" width="100px">
-    <p><?php echo $userProfile['biography'] ?></p>
-    <a href="/settings.php"><button class="btn btn-primary">Edit profile</button></a>
+<header class="profile">
+    <img class="profile-image" src="/<?php echo $userProfile['profile_image'] ? 'uploads/' . $userProfile['profile_image'] : 'images/profile-picture.png' ?>" alt="profile image" width="100px">
+    <div class="biography">
+        <h2>
+            <?php echo $_SESSION['user']['first_name'] . " " . $_SESSION['user']['last_name']; ?>
+        </h2>
+        <p><?php echo $userProfile['biography'] ?></p>
+    </div>
+    <a class="button small-button" href="/settings.php">Edit profile</a>
 </header>
 <?php if (!$userPosts) : ?>
     <p>There is no photos...</p>
 <?php else : ?>
     <?php foreach ($messages as $message) : ?>
-        <div class="alert alert-success">
+        <div class="message">
             <?php echo $message; ?>
         </div><!-- /alert -->
     <?php endforeach; ?>

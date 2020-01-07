@@ -22,9 +22,8 @@ array_multisort($postId, SORT_DESC, $allPosts);
                     <h2>
                         <?php echo $post['first_name'] . " " . $post['last_name']; ?>
                     </h2>
-                    <footer><?php echo $post['date'] ?></footer>
+                    <p><?php echo $post['date'] ?></p>
                 </header>
-
                 <div class="post-image">
                     <img src="/uploads/<?php echo $post['image'] ?>" alt="uploaded post">
                 </div>
@@ -50,12 +49,9 @@ array_multisort($postId, SORT_DESC, $allPosts);
     <?php endif; ?>
     <?php require __DIR__ . '/views/bottom-bar.php'; ?>
 
-
-
-
     <!-- The view if the user is not logged in -->
 <?php else : ?>
-    <h1><img class="big-logo" src="<?php echo $config['logo']; ?>" alt="Picture this logo"></h1>
+    <img class="big-logo" src="<?php echo $config['logo']; ?>" alt="Picture this logo">
     <a class="button" href="login.php">Login</a>
     <p class="instruction">or create an account</p>
     <a class="button" href="signup.php">Sign up</a>

@@ -5,9 +5,19 @@ body {
   background-color: #fcfaf9;
   font-family: "Roboto", sans-serif;
 }
+.container {
+  width: 100vw;
+  padding: 1em;
+  margin: 4em auto;
+  text-align: center;
+}
+.instruction {
+  font-style: italic;
+}
 .big-logo {
-  width: 7em;
-  margin-bottom: 1.5em;
+  display: block;
+  width: 12em;
+  margin: 6em auto 4em;
 }
 
 /* Links */
@@ -70,6 +80,7 @@ a:hover {
   color: #5e2f2f;
   border-radius: 1em;
   padding: 0.3em;
+  margin: 1em;
 }
 .message {
   background-color: rgb(201, 250, 207);
@@ -77,13 +88,15 @@ a:hover {
   color: #315e2f;
   border-radius: 1em;
   padding: 0.3em;
+  margin: 1em;
 }
 
 @media only screen and (min-width: 900px) {
   .big-logo {
-    width: 12em;
+    width: 20em;
+    margin-top: 10em;
   }
   article h1 {
-    font-size: 2.6em;
+    font-size: 2.3em;
   }
 }

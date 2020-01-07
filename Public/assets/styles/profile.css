@@ -1,0 +1,21 @@
+.profile {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.biography {
+  display: inline-block;
+}
+.biography > * {
+  margin: 0;
+}
+.profile img {
+  width: 6em;
+  height: 6em;
+}
+.small-button {
+  width: 7em;
+  font-size: 14px;
+  padding: 5px;
+  display: block;
+}
