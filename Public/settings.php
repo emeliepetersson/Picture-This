@@ -6,7 +6,7 @@ if (!isset($_SESSION['user'])) { // Make this into a function!!!
 }
 
 $userId = (string) $_SESSION['user']['id']; //convert user id into string to be able to use it in the function to get data from table
-$userProfile = getUserProfile($pdo, $userId);
+$userProfile = getOneColumnFromTable($pdo, 'biography, profile_image', 'user_profiles', 'user_id', $userId);
 
 ?>
 

@@ -121,19 +121,6 @@ function uploadFiles(array $uploadedFile, string $location): string
 }
 
 /**
- * Return array with biography and profile image of given user
- *
- * @param PDO $pdo
- * @param string $userId
- * @return array|null
- */
-function getUserProfile(PDO $pdo, string $userId): ?array
-{
-    $profile = getOneColumnFromTable($pdo, 'biography, profile_image', 'user_profiles', 'user_id', $userId);
-    return $profile;
-}
-
-/**
  * return array with all likes or null if given post doesn't have any likes
  *
  * @param PDO $pdo
@@ -194,7 +181,10 @@ function displayPostsFromUser(PDO $pdo): array
  */
 function displayAllPosts(PDO $pdo): array
 {
-    $query = "SELECT posts.id, image, description, date, first_name, last_name FROM posts INNER JOIN users ON posts.user_id = users.id";
+    $query = "SELECT posts.id, image, description, date, first_name, last_name, user_profiles.profile_image
+    FROM posts
+    INNER JOIN users ON posts.user_id = users.id
+    INNER JOIN user_profiles ON users.id = user_profiles.user_id";
 
     // Get all posts from all users
     $statement = $pdo->query($query);

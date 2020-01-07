@@ -12,7 +12,7 @@ $postId = array_column($userPosts, 'id');
 array_multisort($postId, SORT_DESC, $userPosts);
 
 $userId = (string) $_SESSION['user']['id']; //convert user id into string to be able to use it in the function to get data from table
-$userProfile = getUserProfile($pdo, $userId);
+$userProfile = getOneColumnFromTable($pdo, 'biography, profile_image', 'user_profiles', 'user_id', $userId);
 ?>
 
 <header>
@@ -39,19 +39,24 @@ $userProfile = getUserProfile($pdo, $userId);
                 <footer><?php echo $post['date'] ?></footer>
             </header>
 
-            <img class="post-image" src="/uploads/<?php echo $post['image'] ?>" alt="uploaded post">
+            <div class="post-image">
+                <img src="/uploads/<?php echo $post['image'] ?>" alt="uploaded post">
+            </div>
+
 
             <div class="description-wrapper">
                 <?php
                 $postIsliked = getLikes($pdo, "post_id, user_id", "likes", "post_id", "user_id", (int) $post['id'], $_SESSION['user']['id']);
                 $amountOfLikes = count(getDataAsArrayFromTable($pdo, "post_id", "likes", "post_id", $post['id']));
                 ?>
-                <?php if (!$postIsliked) : ?>
-                    <a class="like" href="/app/posts/like.php?location=profile.php&id=<?php echo $post['id'] ?>"><img src="/images/like.svg" alt="heart shaped like button"></a>
-                <?php else : ?>
-                    <a class="dislike" href="/app/posts/dislike.php?location=profile.php&id=<?php echo  $post['id'] ?>"> <img src="/images/dislike.svg" alt="heart shaped dislike button"></a>
-                <?php endif; ?>
-                <p class="like-counter"><?php echo $amountOfLikes ?></p>
+                <div class="likes-container">
+                    <?php if (!$postIsliked) : ?>
+                        <a class="like" href="/app/posts/like.php?location=profile.php&id=<?php echo $post['id'] ?>"><img src="/images/like.svg" alt="heart shaped like button"></a>
+                    <?php else : ?>
+                        <a class="dislike" href="/app/posts/dislike.php?location=profile.php&id=<?php echo  $post['id'] ?>"> <img src="/images/dislike.svg" alt="heart shaped dislike button"></a>
+                    <?php endif; ?>
+                    <p class="like-counter"><?php echo $amountOfLikes ?></p>
+                </div>
                 <form action='/app/posts/delete.php' method="post">
                     <input type="hidden" name="post-id" value="<?php echo $post['id'] ?>">
                     <input type="hidden" name="post-name" value="<?php echo $post['image'] ?>">
