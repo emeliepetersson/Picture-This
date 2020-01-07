@@ -1,0 +1,17 @@
+.preview-profile-image {
+  display: block;
+  margin: 1.5em auto;
+  border-radius: 50%;
+  width: 10em;
+  height: 10em;
+}
+.bio-textarea {
+  font-size: 1em;
+  width: 100%;
+  border: 0.5px solid #cccccc;
+  padding: 0.5em;
+  margin-bottom: 1em;
+}
+.settings form {
+  margin: 3em 1em 4em;
+}

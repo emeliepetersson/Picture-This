@@ -10,15 +10,15 @@ $userProfile = getOneColumnFromTable($pdo, 'biography, profile_image', 'user_pro
 
 ?>
 
-<article>
+<article class="settings">
     <h1>Settings</h1>
     <?php foreach ($errors as $error) : ?>
-        <div class="alert alert-danger">
+        <div class="error">
             <?php echo $error; ?>
         </div><!-- /alert -->
     <?php endforeach; ?>
     <?php foreach ($messages as $message) : ?>
-        <div class="alert alert-success">
+        <div class="message">
             <?php echo $message; ?>
         </div><!-- /alert -->
     <?php endforeach; ?>
@@ -28,52 +28,48 @@ $userProfile = getOneColumnFromTable($pdo, 'biography, profile_image', 'user_pro
         <input type="file" name="profile-image" id="image" class="choose-file">
 
         <!--Preview profile image -->
-        <img src="/uploads/<?php echo $userProfile['profile_image']; ?>" id="output-image" alt="image preview" />
+        <img class="preview-profile-image" src="/uploads/<?php echo $userProfile['profile_image']; ?>" id="output-image" alt="image preview" />
 
-        <textarea name="biography" form="profile" maxlength="255"><?php echo ($userProfile !== null) ? $userProfile['biography'] : '' ?></textarea>
-        <button type="submit" class="btn btn-primary">Upload</button>
+        <small>Write your biography.</small>
+        <textarea class="bio-textarea" name="biography" form="profile" maxlength="255"><?php echo ($userProfile !== null) ? $userProfile['biography'] : '' ?></textarea>
+        <button type="submit" class="button">Upload</button>
     </form>
 
     <form action="app/users/edit-settings.php" method="post">
         <div class="form-group">
             <label for="email">Email</label>
-            <input class="form-control" type="email" name="email" value="<?php echo $_SESSION['user']['email'] ?>">
-            <small class="form-text text-muted">Please provide your email address.</small>
+            <input type="email" name="email" value="<?php echo $_SESSION['user']['email'] ?>">
         </div><!-- /form-group -->
 
         <div class="form-group">
             <label for="first-name">First name</label>
-            <input class="form-control" type="name" name="first-name" value="<?php echo $_SESSION['user']['first_name'] ?>">
-            <small class="form-text text-muted">Please provide your first name.</small>
+            <input type="name" name="first-name" value="<?php echo $_SESSION['user']['first_name'] ?>">
         </div><!-- /form-group -->
 
         <div class="form-group">
             <label for="last-name">Last name</label>
-            <input class="form-control" type="name" name="last-name" value="<?php echo $_SESSION['user']['last_name'] ?>">
-            <small class="form-text text-muted">Please provide your last name.</small>
+            <input type="name" name="last-name" value="<?php echo $_SESSION['user']['last_name'] ?>">
         </div><!-- /form-group -->
-        <button type="submit" class="btn btn-primary">Update info</button>
+        <button type="submit" class="button">Update info</button>
     </form>
 
     <form action="app/users/edit-settings.php" method="post">
         <div class="form-group">
             <label for="password">Current password</label>
-            <input class="form-control" type="password" name="current-password" required>
-            <small class="form-text text-muted">Please provide your current password to be able to change to a new one.</small>
+            <input type="password" name="current-password" required>
+            <small>Please provide your current password to be able to change to a new one.</small>
         </div><!-- /form-group -->
 
         <div class="form-group">
             <label for="password">New password</label>
-            <input class="form-control" type="password" name="password">
-            <small class="form-text text-muted">Please provide your new password.</small>
+            <input type="password" name="password">
         </div><!-- /form-group -->
 
         <div class="form-group">
             <label for="password">Confirm new password</label>
-            <input class="form-control" type="password" name="confirm-password">
-            <small class="form-text text-muted">Please confirm your new password.</small>
+            <input type="password" name="confirm-password">
         </div><!-- /form-group -->
-        <button type="submit" class="btn btn-primary">Update password</button>
+        <button type="submit" class="button">Update password</button>
     </form>
 </article>
 
