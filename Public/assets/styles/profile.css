@@ -52,9 +52,6 @@
   width: 70vw;
 }
 .description-textarea {
-  width: 100%;
   margin-top: 1em;
-  border: 0.5px solid #cccccc;
   background-color: #fdfcfc;
-  font-size: 1em;
 }

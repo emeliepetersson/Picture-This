@@ -20,6 +20,14 @@ input {
 small {
   font-style: italic;
 }
+textarea {
+  width: 30em;
+  height: 10em;
+  font-size: 1em;
+  width: 100%;
+  border: 0.5px solid #cccccc;
+  padding: 0.5em;
+}
 
 @media only screen and (min-width: 900px) {
   form {
