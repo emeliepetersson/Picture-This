@@ -6,8 +6,8 @@ const menuContainer = document.querySelector(".menu");
 
 // Function toggles between class names to show/hide menu items and change styling to menu and icon.
 hamburgerIcon.addEventListener("click", () => {
-  menuItems.classList.toggle("showMenu");
-  menuContainer.classList.toggle("changeBackground");
+  menuItems.classList.toggle("show-menu");
+  menuContainer.classList.toggle("change-background");
   hamburgerIcon.classList.toggle("change");
 });
 
@@ -15,10 +15,10 @@ hamburgerIcon.addEventListener("click", () => {
 window.addEventListener("resize", function() {
   if (
     window.innerWidth > 400 &&
-    menuContainer.classList.contains("changeBackground")
+    menuContainer.classList.contains("change-background")
   ) {
-    menuContainer.classList.remove("changeBackground");
-    menuItems.classList.remove("showMenu");
+    menuContainer.classList.remove("change-background");
+    menuItems.classList.remove("show-menu");
     hamburgerIcon.classList.remove("change");
   }
 });
