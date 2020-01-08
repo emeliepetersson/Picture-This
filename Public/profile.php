@@ -63,9 +63,13 @@ $userProfile = getOneColumnFromTable($pdo, 'biography, profile_image', 'user_pro
                     <p class="like-counter"><?php echo $amountOfLikes ?></p>
                 </div>
                 <div class="forms">
+                    <div class="background-for-delete-form"></div>
+                    <button class="delete-button button smaller-button">Delete</button>
                     <form class="delete" action='/app/posts/delete.php' method="post">
                         <input type="hidden" name="post-id" value="<?php echo $post['id'] ?>">
                         <input type="hidden" name="post-name" value="<?php echo $post['image'] ?>">
+                        <p>Are you sure you want to delete?</p>
+                        <button type="button" class="button smaller-button">Cancel</button>
                         <button type="submit" class="button smaller-button">Delete</button>
                     </form>
                     <form class="edit" action='/app/posts/edit.php' method="post">
