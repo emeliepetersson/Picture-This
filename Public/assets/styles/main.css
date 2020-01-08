@@ -4,6 +4,7 @@
 body {
   background-color: #fcfaf9;
   font-family: "Roboto", sans-serif;
+  width: 100vw;
 }
 .container {
   width: 100vw;
