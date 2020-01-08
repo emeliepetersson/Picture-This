@@ -19,11 +19,19 @@ array_multisort($postId, SORT_DESC, $allPosts);
 
                 <header>
                     <img class="profile-image" src="/uploads/<?php echo $post['profile_image'] ?>" alt="profile image" loading="lazy">
-                    <a href="/user-profiles.php?user-id=<?php echo $post['user_id'] ?>">
-                        <h2>
-                            <?php echo $post['first_name'] . " " . $post['last_name']; ?>
-                        </h2>
-                    </a>
+                    <?php if ((int) $post['user_id'] === $_SESSION['user']['id']) : ?>
+                        <a href="/profile.php">
+                            <h2>
+                                <?php echo $post['first_name'] . " " . $post['last_name']; ?>
+                            </h2>
+                        </a>
+                    <?php else : ?>
+                        <a href="/user-profiles.php?user-id=<?php echo $post['user_id'] ?>">
+                            <h2>
+                                <?php echo $post['first_name'] . " " . $post['last_name']; ?>
+                            </h2>
+                        </a>
+                    <?php endif; ?>
                     <p><?php echo $post['date'] ?></p>
                 </header>
                 <div class="post-image">

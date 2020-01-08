@@ -25,6 +25,16 @@ if (isset($_GET['user-id'])) {
         </h2>
         <p><?php echo $userBio['biography'] ?></p>
     </div>
+    <div class="forms">
+        <form class="follow" action='/app/users/follow.php' method="post">
+            <input type="hidden" name="user-id" value="<?php echo $userId ?>">
+            <button type="button" class="follow-button button smaller-button">Follow</button>
+        </form>
+        <form class="unfollow" action='/app/users/unfollow.php' method="post">
+            <input type="hidden" name="user-id" value="<?php echo $userId ?>">
+            <button type="button" class="unfollow-button edit-button button smaller-button">Unfollow</button>
+        </form>
+    </div>
 </header>
 <?php if (!$userPosts) : ?>
     <p>There is no photos...</p>
