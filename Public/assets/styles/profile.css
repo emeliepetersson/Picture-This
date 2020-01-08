@@ -57,3 +57,42 @@
   margin-top: 1em;
   background-color: #fdfcfc;
 }
+
+/* This form appear when you click on the first delete button */
+.description-container .delete {
+  display: none;
+  position: fixed;
+  z-index: 3;
+  top: 40%;
+  left: 25%;
+  background-color: #ffffff;
+  width: 12em;
+  height: 10em;
+  padding: 1em;
+  border-radius: 10%;
+  border: 0.5px solid #cccccc;
+}
+.background-for-delete-form {
+  display: none;
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.24);
+}
+.description-container .forms .smaller-button {
+  display: inline-block;
+}
+/* Add .delete-show to display delete form */
+.description-container .show {
+  display: block;
+}
+
+@media only screen and (min-width: 900px) {
+  .description-container .delete {
+    top: 40%;
+    left: 43%;
+  }
+}
