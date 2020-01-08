@@ -18,14 +18,14 @@ array_multisort($postId, SORT_DESC, $allPosts);
             <article class="post">
 
                 <header>
-                    <img class="profile-image" src="/uploads/<?php echo $post['profile_image'] ?>" alt="profile image">
+                    <img class="profile-image" src="/uploads/<?php echo $post['profile_image'] ?>" alt="profile image" loading="lazy">
                     <h2>
                         <?php echo $post['first_name'] . " " . $post['last_name']; ?>
                     </h2>
                     <p><?php echo $post['date'] ?></p>
                 </header>
                 <div class="post-image">
-                    <img src="/uploads/<?php echo $post['image'] ?>" alt="uploaded post">
+                    <img src="/uploads/<?php echo $post['image'] ?>" alt="uploaded post" loading="lazy">
                 </div>
 
 
