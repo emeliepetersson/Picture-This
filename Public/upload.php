@@ -24,7 +24,7 @@ if (!isset($_SESSION['user'])) { // Make this into a function!!!
 
         <!--Preview image -->
         <div class="post-image">
-            <img src="/images/placeholder.png" id="output-image" alt="image preview" />
+            <img class="preview-image" src="/images/placeholder.png" id="output-image" alt="image preview" />
         </div>
 
         <label for="description">Write a caption</label>

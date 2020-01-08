@@ -17,11 +17,11 @@ require __DIR__ . '/../app/messages.php';
     <link rel="stylesheet" href="https://unpkg.com/sanitize.css">
     <link rel="stylesheet" href="/assets/styles/navigation.css">
     <link rel="stylesheet" href="/assets/styles/bottom-bar.css">
+    <link rel="stylesheet" href="/assets/styles/post.css">
     <link rel="stylesheet" href="/assets/styles/upload-post.css">
     <link rel="stylesheet" href="/assets/styles/like-button.css">
     <link rel="stylesheet" href="/assets/styles/main.css">
     <link rel="stylesheet" href="/assets/styles/form.css">
-    <link rel="stylesheet" href="/assets/styles/post.css">
     <link rel="stylesheet" href="/assets/styles/profile.css">
     <link rel="stylesheet" href="/assets/styles/settings.css">
     <link href="https://fonts.googleapis.com/css?family=Chilanka|Gayathri|Raleway|Roboto&display=swap" rel="stylesheet">

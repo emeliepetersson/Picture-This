@@ -11,3 +11,23 @@
 .settings form {
   margin: 3em 1em 4em;
 }
+
+@media only screen and (min-width: 900px) {
+  .preview-profile-image {
+    width: 20em;
+    height: 20em;
+  }
+  .settings form {
+    margin: 0 auto;
+  }
+  .settings {
+    width: 100%;
+  }
+  .settings form {
+    width: 80%;
+    margin: 0 auto;
+  }
+  .settings form .post-image {
+    margin: 1em 0;
+  }
+}
