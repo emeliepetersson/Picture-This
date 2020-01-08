@@ -5,7 +5,7 @@ if (!isset($_SESSION['user'])) { // Make this into a function!!!
     redirect('/');
 }
 
-$userPosts = displayPostsFromUser($pdo);
+$userPosts = displayPostsFromUser($pdo, (int) $_SESSION['user']['id']);
 
 //Sort all posts by id to get the latest uploaded posts on top of the page
 $postId = array_column($userPosts, 'id');

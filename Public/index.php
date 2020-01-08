@@ -19,9 +19,11 @@ array_multisort($postId, SORT_DESC, $allPosts);
 
                 <header>
                     <img class="profile-image" src="/uploads/<?php echo $post['profile_image'] ?>" alt="profile image" loading="lazy">
-                    <h2>
-                        <?php echo $post['first_name'] . " " . $post['last_name']; ?>
-                    </h2>
+                    <a href="/user-profiles.php?user-id=<?php echo $post['user_id'] ?>">
+                        <h2>
+                            <?php echo $post['first_name'] . " " . $post['last_name']; ?>
+                        </h2>
+                    </a>
                     <p><?php echo $post['date'] ?></p>
                 </header>
                 <div class="post-image">
