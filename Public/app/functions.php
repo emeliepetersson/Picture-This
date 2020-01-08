@@ -158,7 +158,7 @@ function getLikes(PDO $pdo, string $columns, string $table, string $conditionOne
  * @param PDO $pdo
  * @return array
  */
-function displayPostsFromUser(PDO $pdo): array
+function displayPostsFromUser(PDO $pdo, int $userId): array
 {
     $query = "SELECT posts.id, image, description, date, first_name, last_name, user_profiles.profile_image
     FROM posts
@@ -171,7 +171,7 @@ function displayPostsFromUser(PDO $pdo): array
     if (!$statement) {
         die(var_dump($pdo->errorInfo()));
     }
-    $statement->bindParam(':id', $_SESSION['user']['id'], PDO::PARAM_INT);
+    $statement->bindParam(':id', $userId, PDO::PARAM_INT);
     $statement->execute();
     $userPosts = $statement->fetchAll(PDO::FETCH_ASSOC);
     return $userPosts;
@@ -185,7 +185,7 @@ function displayPostsFromUser(PDO $pdo): array
  */
 function displayAllPosts(PDO $pdo): array
 {
-    $query = "SELECT posts.id, image, description, date, first_name, last_name, user_profiles.profile_image
+    $query = "SELECT posts.id, image, description, date, first_name, last_name, posts.user_id, user_profiles.profile_image
     FROM posts
     INNER JOIN users ON posts.user_id = users.id
     INNER JOIN user_profiles ON users.id = user_profiles.user_id";

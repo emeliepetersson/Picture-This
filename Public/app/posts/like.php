@@ -8,7 +8,13 @@ require __DIR__ . '/../autoload.php';
 // In this file we add likes to posts in the database.
 
 
-if (isset($_GET['id'])) {
+if (isset($_GET['id'], $_GET['location'])) {
+
+    if (isset($_GET['user-id'])) {
+        $location = $_GET['location'] . "?user-id=" . $_GET['user-id'];
+    } else {
+        $location = $_GET['location'];
+    }
     $postId = (int) trim(filter_var($_GET['id'], FILTER_SANITIZE_NUMBER_INT));
     $userId = (int) $_SESSION['user']['id'];
 
@@ -33,4 +39,4 @@ if (isset($_GET['id'])) {
     }
 }
 
-redirect('/' . $_GET['location']);
+redirect('/' . $location);
