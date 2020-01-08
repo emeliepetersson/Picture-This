@@ -3,6 +3,8 @@
   align-items: center;
   flex-wrap: wrap;
   height: 12em;
+  max-width: 30em;
+  margin: 0 auto;
 }
 .biography {
   display: inline-block;

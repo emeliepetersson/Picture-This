@@ -92,6 +92,10 @@ a:hover {
 }
 
 @media only screen and (min-width: 900px) {
+  .container {
+    width: 45%;
+    margin: 7em auto 5em;
+  }
   .big-logo {
     width: 20em;
     margin-top: 10em;
