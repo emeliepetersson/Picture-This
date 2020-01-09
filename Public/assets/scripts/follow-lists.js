@@ -16,18 +16,18 @@ followingButton.addEventListener("click", showFollowings);
 //show follower list
 function showFollowers() {
   followersList.classList.add("show");
-  background.classList.add("show");
+  background.classList.add("background-show");
 }
 
 //show following list
 function showFollowings() {
   followingList.classList.add("show");
-  background.classList.add("show");
+  background.classList.add("background-show");
 }
 
 //hide list
 function hideFollowList(event) {
   const list = event.currentTarget.parentNode;
-  background.classList.remove("show");
+  background.classList.remove("background-show");
   list.classList.remove("show");
 }

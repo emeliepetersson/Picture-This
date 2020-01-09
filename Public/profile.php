@@ -17,7 +17,7 @@ $userProfile = getOneColumnFromTable($pdo, 'biography, profile_image', 'user_pro
 $followings = getFollowers($pdo, "user_id", (int) $userId, "following_user_id");
 $followers = getFollowers($pdo, "following_user_id", (int) $userId, "user_id");
 ?>
-
+<div class="background"></div>
 <header class="profile">
     <div>
         <img class="profile-image" src="/<?php echo $userProfile['profile_image'] ? 'uploads/' . $userProfile['profile_image'] : 'images/profile-picture.png' ?>" alt="profile image" width="100px">
@@ -89,7 +89,6 @@ $followers = getFollowers($pdo, "following_user_id", (int) $userId, "user_id");
                     <p class="like-counter"><?php echo $amountOfLikes ?></p>
                 </div>
                 <div class="forms">
-                    <div class="background"></div>
                     <button class="delete-button button smaller-button">Delete</button>
                     <form class="delete" action='/app/posts/delete.php' method="post">
                         <input type="hidden" name="post-id" value="<?php echo $post['id'] ?>">

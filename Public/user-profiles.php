@@ -14,6 +14,9 @@ if (isset($_GET['user-id'])) {
     //Sort all posts by id to get the latest uploaded posts on top of the page
     $postId = array_column($userPosts, 'id');
     array_multisort($postId, SORT_DESC, $userPosts);
+
+    $followings = getFollowers($pdo, "user_id", $userId, "following_user_id");
+    $followers = getFollowers($pdo, "following_user_id", $userId, "user_id");
 }
 
 ?>
@@ -28,8 +31,9 @@ if (isset($_GET['user-id'])) {
     </div><!-- /alert -->
 <?php endforeach; ?>
 
+<div class="background"></div>
 <header class="profile">
-    <div>
+    <div class="profile-picture">
         <img class="profile-image" src="/<?php echo $userBio['profile_image'] ? 'uploads/' . $userBio['profile_image'] : 'images/profile-picture.png' ?>" alt="profile image" width="100px">
 
         <form class="follow-form" action="/app/users/<?php echo $userAlreadyFollow ? 'unfollow.php' : 'follow.php' ?>" method="post">
@@ -44,6 +48,24 @@ if (isset($_GET['user-id'])) {
             <?php echo $userInfo['first_name'] . " " . $userInfo['last_name']; ?>
         </h2>
         <p><?php echo $userBio['biography'] ?></p>
+        <div class="follow-lists">
+            <button class="button small-button followers-button">Followers</button>
+            <ul class="followers-list">
+                <h3>Followers</h3>
+                <?php foreach ($followers as $follower) : ?>
+                    <li><a href="/user-profiles.php?user-id=<?php echo $follower['user_id'] ?>"><?php echo $follower['first_name'] . " " . $follower['last_name'] ?></a></li>
+                <?php endforeach; ?>
+                <button class="button small-button back" type="button">Back</button>
+            </ul>
+            <button class="button small-button following-button">Following</button>
+            <ul class="following-list">
+                <h3>Following</h3>
+                <?php foreach ($followings as $following) : ?>
+                    <li><a href="/user-profiles.php?user-id=<?php echo $following['following_user_id'] ?>"><?php echo $following['first_name'] . " " . $following['last_name'] ?></a></li>
+                <?php endforeach; ?>
+                <button class="button small-button back" type="button">Back</button>
+            </ul>
+        </div>
     </div>
 </header>
 <?php if (!$userPosts) : ?>
