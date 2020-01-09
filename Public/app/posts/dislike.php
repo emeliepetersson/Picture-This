@@ -19,7 +19,7 @@ if (isset($_GET['id'], $_GET['location'])) {
     $userId = $_SESSION['user']['id'];
 
     //Check if the user already has liked the photo
-    $alreadyliked = getLikes($pdo, "post_id, user_id", "likes", "post_id", "user_id", (int) $postId, $userId);
+    $alreadyliked = getDataWithTwoConditions($pdo, "post_id, user_id", "likes", "post_id", "user_id", (int) $postId, $userId);
 
     //Check if the post exists
     $postExists = getDataAsArrayFromTable($pdo, 'id', 'posts', 'id', (string) $postId);

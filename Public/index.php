@@ -41,7 +41,7 @@ array_multisort($postId, SORT_DESC, $allPosts);
 
                 <div class="description-container">
                     <?php
-                    $postIsliked = getLikes($pdo, "post_id, user_id", "likes", "post_id", "user_id", (int) $post['id'], $_SESSION['user']['id']);
+                    $postIsliked = getDataWithTwoConditions($pdo, "post_id, user_id", "likes", "post_id", "user_id", (int) $post['id'], $_SESSION['user']['id']);
                     $amountOfLikes = count(getDataAsArrayFromTable($pdo, "post_id", "likes", "post_id", $post['id']));
                     ?>
                     <div class="likes-container">

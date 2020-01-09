@@ -26,11 +26,8 @@ if (isset($_POST['email'], $_POST['first-name'], $_POST['last-name'], $_POST['pa
         $errors[] = "The email already exist!";
     }
 
-    if (count($errors) > 0) {
-        $_SESSION['errors'] = $errors;
-        redirect('/signup.php');
-        exit;
-    }
+    countErrors('/signup.php', $errors);
+
 
     // If email doesn't already exist, insert the data into the user table.
     $query = 'INSERT INTO users (email, first_name, last_name, password) VALUES (:email, :first_name, :last_name, :password)';

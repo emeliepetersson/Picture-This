@@ -1,14 +1,16 @@
 .profile {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   flex-wrap: wrap;
-  height: 12em;
+  min-height: 12em;
   max-width: 30em;
   margin: 0 auto;
 }
 .biography {
   display: inline-block;
   margin: 0 1em;
+  max-width: 55%;
+  padding: 1em 0;
 }
 .biography > * {
   margin: 0;
@@ -29,6 +31,31 @@
   font-size: 14px;
   padding: 5px;
   display: block;
+}
+.follow-lists {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+.follow-lists .followers-button {
+  margin-right: 1em;
+}
+.followers-list,
+.following-list {
+  display: none;
+  position: fixed;
+  z-index: 3;
+  top: 40%;
+  left: 30%;
+  background-color: #ffffff;
+  max-width: 20em;
+  min-width: 10em;
+  min-height: 10em;
+  padding: 1em;
+  border-radius: 10%;
+  border: 0.5px solid #cccccc;
+  list-style-type: none;
+  text-align: left;
 }
 .description-container {
   display: flex;
@@ -72,7 +99,16 @@
   border-radius: 10%;
   border: 0.5px solid #cccccc;
 }
-.background-for-delete-form {
+.description-container .forms .smaller-button {
+  display: inline-block;
+}
+/* Add .delete-show to display delete form */
+.description-container .show,
+.follow-lists .show {
+  display: block;
+}
+/* Background that appears when showing delete form or followers/following lists */
+.background {
   display: none;
   position: fixed;
   z-index: 2;
@@ -81,13 +117,6 @@
   height: 100vh;
   width: 100vw;
   background-color: rgba(0, 0, 0, 0.24);
-}
-.description-container .forms .smaller-button {
-  display: inline-block;
-}
-/* Add .delete-show to display delete form */
-.description-container .show {
-  display: block;
 }
 
 @media only screen and (min-width: 900px) {

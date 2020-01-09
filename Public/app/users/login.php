@@ -20,11 +20,8 @@ if (isset($_POST['email'], $_POST['password'])) {
         $errors[] = "The password was not correct!";
     }
 
-    if (count($errors) > 0) {
-        $_SESSION['errors'] = $errors;
-        redirect('/login.php');
-        exit;
-    }
+    countErrors('/login.php', $errors);
+
 
     // If the user is found in the database, compare the given password from the
     // request with the one in the database using the password_verify function.

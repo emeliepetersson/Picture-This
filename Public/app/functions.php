@@ -121,7 +121,7 @@ function uploadFiles(array $uploadedFile, string $location): string
 }
 
 /**
- * return array with all likes or null if given post doesn't have any likes
+ * return array with data based on two conditions, or null if there is no data
  *
  * @param PDO $pdo
  * @param string $columns
@@ -132,7 +132,7 @@ function uploadFiles(array $uploadedFile, string $location): string
  * @param integer $valueTwo
  * @return array|null
  */
-function getLikes(PDO $pdo, string $columns, string $table, string $conditionOne, string $conditionTwo, int $valueOne, int $valueTwo): ?array
+function getDataWithTwoConditions(PDO $pdo, string $columns, string $table, string $conditionOne, string $conditionTwo, int $valueOne, int $valueTwo): ?array
 {
     $statement = $pdo->prepare("SELECT $columns FROM $table WHERE $conditionOne = :$conditionOne AND $conditionTwo = :$conditionTwo");
 
@@ -143,13 +143,13 @@ function getLikes(PDO $pdo, string $columns, string $table, string $conditionOne
     $statement->bindParam(":$conditionTwo", $valueTwo, PDO::PARAM_INT);
     $statement->execute();
 
-    $likes = $statement->fetchAll(PDO::FETCH_ASSOC);
+    $data = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-    if ($likes === false) {
+    if ($data === false) {
         return null;
     }
 
-    return $likes;
+    return $data;
 }
 
 /**
@@ -198,4 +198,31 @@ function displayAllPosts(PDO $pdo): array
     }
     $allPosts = $statement->fetchAll(PDO::FETCH_ASSOC);
     return $allPosts;
+}
+
+/**
+ * return all followers or followings from tables
+ *
+ * @param PDO $pdo
+ * @param string $condition
+ * @param integer $value
+ * @param string $join
+ * @return array
+ */
+function getFollowers(PDO $pdo, string $condition, int $value, string $join): array
+{
+    $query = "SELECT user_id, following_user_id, first_name, last_name FROM followers
+    INNER JOIN users ON followers.$join = users.id
+    WHERE $condition = :$condition";
+
+    // Get all posts from all users
+    $statement = $pdo->query($query);
+
+    if (!$statement) {
+        die(var_dump($pdo->errorInfo()));
+    }
+    $statement->bindParam(":$condition", $value, PDO::PARAM_INT);
+    $statement->execute();
+    $followers = $statement->fetchAll(PDO::FETCH_ASSOC);
+    return $followers;
 }

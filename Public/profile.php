@@ -13,17 +13,43 @@ array_multisort($postId, SORT_DESC, $userPosts);
 
 $userId = (string) $_SESSION['user']['id']; //convert user id into string to be able to use it in the function to get data from table
 $userProfile = getOneColumnFromTable($pdo, 'biography, profile_image', 'user_profiles', 'user_id', $userId);
+
+$followings = getFollowers($pdo, "user_id", (int) $userId, "following_user_id");
+$followers = getFollowers($pdo, "following_user_id", (int) $userId, "user_id");
 ?>
 
 <header class="profile">
-    <img class="profile-image" src="/<?php echo $userProfile['profile_image'] ? 'uploads/' . $userProfile['profile_image'] : 'images/profile-picture.png' ?>" alt="profile image" width="100px">
+    <div>
+        <img class="profile-image" src="/<?php echo $userProfile['profile_image'] ? 'uploads/' . $userProfile['profile_image'] : 'images/profile-picture.png' ?>" alt="profile image" width="100px">
+        <a class="button small-button" href="/settings.php">Edit profile</a>
+    </div>
+
     <div class="biography">
         <h2>
             <?php echo $_SESSION['user']['first_name'] . " " . $_SESSION['user']['last_name']; ?>
         </h2>
         <p><?php echo $userProfile['biography'] ?></p>
+        <div class="follow-lists">
+            <button class="button small-button followers-button">Followers</button>
+            <ul class="followers-list">
+                <h3>Followers</h3>
+                <?php foreach ($followers as $follower) : ?>
+                    <li><a href="/user-profiles.php?user-id=<?php echo $follower['user_id'] ?>"><?php echo $follower['first_name'] . " " . $follower['last_name'] ?></a></li>
+                <?php endforeach; ?>
+                <button class="button small-button back" type="button">Back</button>
+            </ul>
+            <button class="button small-button following-button">Following</button>
+            <ul class="following-list">
+                <h3>Following</h3>
+                <?php foreach ($followings as $following) : ?>
+                    <li><a href="/user-profiles.php?user-id=<?php echo $following['following_user_id'] ?>"><?php echo $following['first_name'] . " " . $following['last_name'] ?></a></li>
+                <?php endforeach; ?>
+                <button class="button small-button back" type="button">Back</button>
+            </ul>
+        </div>
     </div>
-    <a class="button small-button" href="/settings.php">Edit profile</a>
+
+
 </header>
 <?php if (!$userPosts) : ?>
     <p>There is no photos...</p>
@@ -51,7 +77,7 @@ $userProfile = getOneColumnFromTable($pdo, 'biography, profile_image', 'user_pro
 
             <div class="description-container">
                 <?php
-                $postIsliked = getLikes($pdo, "post_id, user_id", "likes", "post_id", "user_id", (int) $post['id'], $_SESSION['user']['id']);
+                $postIsliked = getDataWithTwoConditions($pdo, "post_id, user_id", "likes", "post_id", "user_id", (int) $post['id'], $_SESSION['user']['id']);
                 $amountOfLikes = count(getDataAsArrayFromTable($pdo, "post_id", "likes", "post_id", $post['id']));
                 ?>
                 <div class="likes-container">
@@ -63,7 +89,7 @@ $userProfile = getOneColumnFromTable($pdo, 'biography, profile_image', 'user_pro
                     <p class="like-counter"><?php echo $amountOfLikes ?></p>
                 </div>
                 <div class="forms">
-                    <div class="background-for-delete-form"></div>
+                    <div class="background"></div>
                     <button class="delete-button button smaller-button">Delete</button>
                     <form class="delete" action='/app/posts/delete.php' method="post">
                         <input type="hidden" name="post-id" value="<?php echo $post['id'] ?>">
