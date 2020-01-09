@@ -1,4 +1,4 @@
-# Picture-This
+# Picture This
 <img src="https://media.giphy.com/media/2tSodgDfwCjIMCBY8h/giphy.gif" width="100%">
 You're going to create a Instagram clone we call Picture This.
 
@@ -53,8 +53,6 @@ Clone down the project to you computer:
 - $ git clone https://github.com/emeliepetersson/Picture-This.
 - Start your server.
 - Open the index.php file in your browser.
-
-- Or visit https://thispicture.netlify.com
 
 ## Testers
 
