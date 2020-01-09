@@ -13,16 +13,19 @@ backButtons.forEach(backButton => {
 followersButton.addEventListener("click", showFollowers);
 followingButton.addEventListener("click", showFollowings);
 
+//show follower list
 function showFollowers() {
   followersList.classList.add("show");
   background.classList.add("show");
 }
 
+//show following list
 function showFollowings() {
   followingList.classList.add("show");
   background.classList.add("show");
 }
 
+//hide list
 function hideFollowList(event) {
   const list = event.currentTarget.parentNode;
   background.classList.remove("show");

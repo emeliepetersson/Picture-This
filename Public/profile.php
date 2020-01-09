@@ -95,7 +95,7 @@ $followers = getFollowers($pdo, "following_user_id", (int) $userId, "user_id");
                         <input type="hidden" name="post-id" value="<?php echo $post['id'] ?>">
                         <input type="hidden" name="post-name" value="<?php echo $post['image'] ?>">
                         <p>Are you sure you want to delete?</p>
-                        <button type="button" class="button smaller-button">Cancel</button>
+                        <button type="button" class="button smaller-button cancel">Cancel</button>
                         <button type="submit" class="button smaller-button">Delete</button>
                     </form>
                     <form class="edit" action='/app/posts/edit.php' method="post">
