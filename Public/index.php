@@ -18,7 +18,7 @@ array_multisort($postId, SORT_DESC, $allPosts);
             <article class="post">
 
                 <header>
-                    <img class="profile-image" src="/uploads/<?php echo $post['profile_image'] ?>" alt="profile image" loading="lazy">
+                    <img class="profile-image" src="/<?php echo $post['profile_image'] ? 'uploads/' . $post['profile_image'] : 'images/profile-picture.png' ?>" alt="profile image" loading="lazy">
                     <?php if ((int) $post['user_id'] === $_SESSION['user']['id']) : ?>
                         <a href="/profile.php">
                             <h2>
