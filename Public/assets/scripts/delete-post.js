@@ -2,6 +2,11 @@
 
 const deleteButtons = document.querySelectorAll(".delete-button");
 const background = document.querySelector(".background");
+const cancelButtons = document.querySelectorAll(".cancel");
+
+cancelButtons.forEach(cancelButton => {
+  cancelButton.addEventListener("click", hideDeleteForm);
+});
 
 deleteButtons.forEach(deleteButton => {
   deleteButton.addEventListener("click", showDeleteForm);
@@ -12,11 +17,6 @@ function showDeleteForm(event) {
   const deleteForm = event.currentTarget.nextElementSibling;
   deleteForm.classList.add("show");
   background.classList.add("show");
-
-  const cancelButton = event.currentTarget.nextElementSibling.childNodes[7];
-
-  cancelButton.addEventListener("click", hideDeleteForm);
-  event.currentTarget.removeEventListener("click", showDeleteForm);
 }
 
 //when clicking on cancel, hide the delete form
@@ -25,7 +25,4 @@ function hideDeleteForm(event) {
   deleteForm.classList.remove("show");
   background.classList.remove("show");
   event.currentTarget.classList.add("hide");
-
-  const deleteButton = event.currentTarget.parentNode.parentNode.childNodes[3];
-  deleteButton.addEventListener("click", showDeleteForm);
 }
