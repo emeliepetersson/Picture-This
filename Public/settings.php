@@ -28,7 +28,7 @@ $userProfile = getOneColumnFromTable($pdo, 'biography, profile_image', 'user_pro
         <input type="file" name="profile-image" id="image" class="choose-file">
 
         <!--Preview profile image -->
-        <img class="preview-profile-image" src="/uploads/<?php echo $userProfile['profile_image']; ?>" id="output-image" alt="image preview" />
+        <img class="preview-profile-image" src="/<?php echo $userProfile['profile_image'] ? 'uploads/' . $userProfile['profile_image'] : 'images/profile-picture.png' ?>" id="output-image" alt="image preview" />
 
         <small>Write your biography.</small>
         <textarea class="bio-textarea" name="biography" form="profile" maxlength="255"><?php echo ($userProfile !== null) ? $userProfile['biography'] : '' ?></textarea>
