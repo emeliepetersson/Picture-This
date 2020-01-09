@@ -16,13 +16,13 @@ deleteButtons.forEach(deleteButton => {
 function showDeleteForm(event) {
   const deleteForm = event.currentTarget.nextElementSibling;
   deleteForm.classList.add("show");
-  background.classList.add("show");
+  background.classList.add("background-show");
 }
 
 //when clicking on cancel, hide the delete form
 function hideDeleteForm(event) {
   const deleteForm = event.currentTarget.parentNode;
   deleteForm.classList.remove("show");
-  background.classList.remove("show");
+  background.classList.remove("background-show");
   event.currentTarget.classList.add("hide");
 }

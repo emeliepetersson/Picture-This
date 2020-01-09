@@ -1,16 +1,23 @@
 .profile {
   display: flex;
   align-items: flex-start;
+  justify-content: space-around;
   flex-wrap: wrap;
   min-height: 12em;
   max-width: 30em;
   margin: 0 auto;
 }
+.profile .profile-picture {
+  width: 6em;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
 .biography {
   display: inline-block;
   margin: 0 1em;
   max-width: 55%;
-  padding: 1em 0;
+  padding: 0.5em 0;
 }
 .biography > * {
   margin: 0;
@@ -118,10 +125,21 @@
   width: 100vw;
   background-color: rgba(0, 0, 0, 0.24);
 }
+.background-show {
+  display: block;
+}
 
 @media only screen and (min-width: 900px) {
   .description-container .delete {
     top: 40%;
     left: 43%;
+  }
+  .followers-list,
+  .following-list {
+    top: 40%;
+    left: 45%;
+  }
+  .profile .profile-picture .follow-form {
+    width: 80%;
   }
 }
