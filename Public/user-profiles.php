@@ -9,6 +9,7 @@ if (isset($_GET['user-id'])) {
     $userPosts = displayPostsFromUser($pdo, $userId);
     $userBio = getOneColumnFromTable($pdo, 'biography, profile_image', 'user_profiles', 'user_id', $userId);
     $userInfo = getOneColumnFromTable($pdo, 'first_name, last_name', 'users', 'id', $userId);
+    $userAlreadyFollow = getDataWithTwoConditions($pdo, "user_id, following_user_id", "followers", "user_id", "following_user_id", $_SESSION['user']['id'], $userId);
 
     //Sort all posts by id to get the latest uploaded posts on top of the page
     $postId = array_column($userPosts, 'id');
@@ -16,34 +17,38 @@ if (isset($_GET['user-id'])) {
 }
 
 ?>
+<?php foreach ($errors as $error) : ?>
+    <div class="error">
+        <?php echo $error; ?>
+    </div><!-- /alert -->
+<?php endforeach; ?>
+<?php foreach ($messages as $message) : ?>
+    <div class="message">
+        <?php echo $message; ?>
+    </div><!-- /alert -->
+<?php endforeach; ?>
 
 <header class="profile">
-    <img class="profile-image" src="/<?php echo $userBio['profile_image'] ? 'uploads/' . $userBio['profile_image'] : 'images/profile-picture.png' ?>" alt="profile image" width="100px">
+    <div>
+        <img class="profile-image" src="/<?php echo $userBio['profile_image'] ? 'uploads/' . $userBio['profile_image'] : 'images/profile-picture.png' ?>" alt="profile image" width="100px">
+
+        <form class="follow-form" action="/app/users/<?php echo $userAlreadyFollow ? 'unfollow.php' : 'follow.php' ?>" method="post">
+            <input type="hidden" name="user-id" value="<?php echo $userId ?>">
+            <button type="submit" class="follow-button button smaller-button"><?php echo $userAlreadyFollow ? 'Unfollow' : 'Follow' ?></button>
+        </form>
+
+    </div>
+
     <div class="biography">
         <h2>
             <?php echo $userInfo['first_name'] . " " . $userInfo['last_name']; ?>
         </h2>
         <p><?php echo $userBio['biography'] ?></p>
     </div>
-    <div class="forms">
-        <form class="follow" action='/app/users/follow.php' method="post">
-            <input type="hidden" name="user-id" value="<?php echo $userId ?>">
-            <button type="button" class="follow-button button smaller-button">Follow</button>
-        </form>
-        <form class="unfollow" action='/app/users/unfollow.php' method="post">
-            <input type="hidden" name="user-id" value="<?php echo $userId ?>">
-            <button type="button" class="unfollow-button edit-button button smaller-button">Unfollow</button>
-        </form>
-    </div>
 </header>
 <?php if (!$userPosts) : ?>
     <p>There is no photos...</p>
 <?php else : ?>
-    <?php foreach ($messages as $message) : ?>
-        <div class="message">
-            <?php echo $message; ?>
-        </div><!-- /alert -->
-    <?php endforeach; ?>
     <?php foreach ($userPosts as $post) : ?>
         <article class="post">
 
@@ -62,7 +67,7 @@ if (isset($_GET['user-id'])) {
 
             <div class="description-container">
                 <?php
-                $postIsliked = getLikes($pdo, "post_id, user_id", "likes", "post_id", "user_id", (int) $post['id'], $_SESSION['user']['id']);
+                $postIsliked = getDataWithTwoConditions($pdo, "post_id, user_id", "likes", "post_id", "user_id", (int) $post['id'], $_SESSION['user']['id']);
                 $amountOfLikes = count(getDataAsArrayFromTable($pdo, "post_id", "likes", "post_id", $post['id']));
                 ?>
                 <div class="likes-container">
