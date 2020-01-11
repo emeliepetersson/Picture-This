@@ -16,6 +16,7 @@ $userProfile = getOneColumnFromTable($pdo, 'biography, profile_image', 'user_pro
 
 $followings = getFollowers($pdo, "user_id", (int) $userId, "following_user_id");
 $followers = getFollowers($pdo, "following_user_id", (int) $userId, "user_id");
+
 ?>
 <div class="background"></div>
 <header class="profile">
@@ -89,7 +90,7 @@ $followers = getFollowers($pdo, "following_user_id", (int) $userId, "user_id");
                     <p class="like-counter"><?php echo $amountOfLikes ?></p>
                 </div>
                 <div class="forms">
-                    <button class="delete-button button smaller-button">Delete</button>
+                    <button type="button" class="delete-button button smaller-button">Delete</button>
                     <form class="delete" action='/app/posts/delete.php' method="post">
                         <input type="hidden" name="post-id" value="<?php echo $post['id'] ?>">
                         <input type="hidden" name="post-name" value="<?php echo $post['image'] ?>">
@@ -102,7 +103,7 @@ $followers = getFollowers($pdo, "following_user_id", (int) $userId, "user_id");
                         <button type="button" class="edit-button button smaller-button">Edit</button>
                     </form>
                 </div>
-                <p class="description"><?php echo $post['description'] ?></p>
+                <p class="description"><span class="bold"><?php echo $post['first_name'] . " " . $post['last_name'] . " " ?></span> <?php echo $post['description'] ?></p>
             </div>
         </article>
     <?php endforeach; ?>

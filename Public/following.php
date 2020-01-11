@@ -1,20 +1,24 @@
 <?php
 require __DIR__ . '/views/header.php';
-$allPosts = displayAllPosts($pdo);
+
+$followings = getFollowing($pdo);
 
 //Sort all posts by id to get the latest uploaded posts on top of the page
-$postId = array_column($allPosts, 'id');
-array_multisort($postId, SORT_DESC, $allPosts);
+$postId = array_column($followings, 'id');
+array_multisort($postId, SORT_DESC, $followings);
+
+
+
 ?>
 
 <!-- The view if the user is logged in -->
 <?php if (isset($_SESSION['user'])) : ?>
 
-    <h1>Explore</h1>
-    <?php if (!$allPosts) : ?>
+    <h1>Friends</h1>
+    <?php if (!$followings) : ?>
         <p>There is no photos...</p>
     <?php else : ?>
-        <?php foreach ($allPosts as $post) : ?>
+        <?php foreach ($followings as $post) : ?>
             <article class="post">
 
                 <header>
