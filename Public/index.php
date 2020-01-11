@@ -21,12 +21,12 @@ array_multisort($postId, SORT_DESC, $allPosts);
                 <article class="post">
 
                     <!-- This is shown as small pictures -->
-                    <div class="post-image">
+                    <div class="post-image thumbnail-post">
                         <img src="/uploads/<?php echo $post['image'] ?>" alt="uploaded post" loading="lazy">
                     </div>
 
                     <!-- This is shown as bigger pictures on click -->
-                    <div class="show-post">
+                    <div class="full-post">
                         <header>
                             <img class="profile-image" src="/<?php echo $post['profile_image'] ? 'uploads/' . $post['profile_image'] : 'images/profile-picture.png' ?>" alt="profile image" loading="lazy">
                             <?php if ((int) $post['user_id'] === $_SESSION['user']['id']) : ?>
@@ -42,7 +42,7 @@ array_multisort($postId, SORT_DESC, $allPosts);
                                     </h2>
                                 </a>
                             <?php endif; ?>
-                            <p><?php echo $post['date'] ?></p>
+                            <p class="date"><?php echo $post['date'] ?></p>
                         </header>
                         <div class="post-image">
                             <img src="/uploads/<?php echo $post['image'] ?>" alt="uploaded post" loading="lazy">
