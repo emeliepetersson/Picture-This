@@ -1,0 +1,45 @@
+.explore-container {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.explore-container .post {
+  width: 48%;
+}
+.explore-container .post .post-image {
+  height: 10em;
+  overflow: hidden;
+  transition: transform 0.5s;
+}
+.explore-container .post .post-image img {
+  object-fit: cover;
+  width: 100%;
+  height: 10em;
+}
+.explore-container .post .post-image:hover {
+  cursor: pointer;
+  scale: 1;
+  transform: scale(1.1);
+  box-shadow: rgba(63, 63, 63, 0.527) 3px 3px 10px;
+}
+.show-post {
+  background-color: #ffffff;
+  /* display: none; */
+  position: fixed;
+  top: 27%;
+  left: 20%;
+  width: 60%;
+}
+.show-post h2 {
+  font-size: 1.2em;
+}
+
+@media only screen and (min-width: 900px) {
+  .explore-container .post .post-image {
+    height: 20em;
+  }
+  .explore-container .post .post-image img {
+    height: 20em;
+  }
+}

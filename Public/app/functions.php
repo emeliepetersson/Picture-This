@@ -253,3 +253,15 @@ function getFollowing(Pdo $pdo): array
     $following = $statement->fetchAll(PDO::FETCH_ASSOC);
     return $following;
 }
+
+/**
+ * Function that checks if user is logged in, if not you will be redirected back to index page
+ *
+ * @return boolean
+ */
+function isLoggedIn()
+{
+    if (!isset($_SESSION['user'])) { // Make this into a function!!!
+        redirect('/');
+    }
+}

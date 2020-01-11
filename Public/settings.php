@@ -1,6 +1,8 @@
 <?php
 require __DIR__ . '/views/header.php';
 
+isLoggedIn();
+
 if (!isset($_SESSION['user'])) { // Make this into a function!!!
     redirect('/');
 }
