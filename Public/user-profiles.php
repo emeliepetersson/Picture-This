@@ -100,7 +100,7 @@ if (isset($_GET['user-id'])) {
                     <?php endif; ?>
                     <p class="like-counter"><?php echo $amountOfLikes ?></p>
                 </div>
-                <p class="description"><?php echo $post['description'] ?></p>
+                <p class="description"><span class="bold"><?php echo $post['first_name'] . " " . $post['last_name'] . " " ?></span> <?php echo $post['description'] ?></p>
             </div>
         </article>
     <?php endforeach; ?>

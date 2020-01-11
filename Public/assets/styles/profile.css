@@ -76,6 +76,9 @@
 .hide {
   display: none;
 }
+.forms {
+  margin-top: 1em;
+}
 
 /* delete and edit form */
 .description-container form {
@@ -141,5 +144,10 @@
   }
   .profile .profile-picture .follow-form {
     width: 80%;
+  }
+  .forms .edit textarea {
+    display: block;
+    margin: 1em;
+    width: 25em;
   }
 }

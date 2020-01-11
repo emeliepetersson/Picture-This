@@ -226,3 +226,30 @@ function getFollowers(PDO $pdo, string $condition, int $value, string $join): ar
     $followers = $statement->fetchAll(PDO::FETCH_ASSOC);
     return $followers;
 }
+
+/**
+ * Get all posts from people who the user follow
+ *
+ * @param Pdo $pdo
+ * @return void
+ */
+function getFollowing(Pdo $pdo): array
+{
+    $query = "SELECT followers.user_id, following_user_id, first_name, last_name, posts.id, posts.user_id, posts.image, posts.description, posts.date, user_profiles.profile_image
+    FROM followers
+    INNER JOIN users ON following_user_id = users.id
+    INNER JOIN posts ON users.id = posts.user_id
+    INNER JOIN user_profiles ON users.id = user_profiles.user_id
+    WHERE followers.user_id = :user_id";
+
+    // Get all posts from all users
+    $statement = $pdo->query($query);
+
+    if (!$statement) {
+        die(var_dump($pdo->errorInfo()));
+    }
+    $statement->bindParam(":user_id", $_SESSION['user']['id'], PDO::PARAM_INT);
+    $statement->execute();
+    $following = $statement->fetchAll(PDO::FETCH_ASSOC);
+    return $following;
+}

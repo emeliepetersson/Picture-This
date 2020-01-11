@@ -24,6 +24,9 @@ h3 {
   width: 12em;
   margin: 6em auto 4em;
 }
+.bold {
+  font-weight: 900;
+}
 
 /* Links */
 a {
