@@ -27,6 +27,9 @@ array_multisort($postId, SORT_DESC, $allPosts);
 
                     <!-- This is shown as bigger pictures on click -->
                     <div class="full-post">
+                        <div class="close-button-container">
+                            <button type="button"><img class="close" src="/images/close.png" alt="close icon"></button>
+                        </div>
                         <header>
                             <img class="profile-image" src="/<?php echo $post['profile_image'] ? 'uploads/' . $post['profile_image'] : 'images/profile-picture.png' ?>" alt="profile image" loading="lazy">
                             <?php if ((int) $post['user_id'] === $_SESSION['user']['id']) : ?>
