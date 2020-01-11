@@ -129,6 +129,21 @@ a:hover {
   margin: 1em;
 }
 
+/* Background that appears when showing delete form or followers/following lists */
+.background {
+  display: none;
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.24);
+}
+.background-show {
+  display: block;
+}
+
 @media only screen and (min-width: 900px) {
   .container {
     width: 45%;

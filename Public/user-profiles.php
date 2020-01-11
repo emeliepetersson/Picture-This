@@ -1,9 +1,8 @@
 <?php
 require __DIR__ . '/views/header.php';
 
-if (!isset($_SESSION['user'])) { // Make this into a function!!!
-    redirect('/');
-}
+isLoggedIn();
+
 if (isset($_GET['user-id'])) {
     $userId = (int) trim(filter_var($_GET['user-id'], FILTER_SANITIZE_NUMBER_INT));
     $userPosts = displayPostsFromUser($pdo, $userId);
