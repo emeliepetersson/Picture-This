@@ -16,11 +16,12 @@ $followings = getFollowers($pdo, "user_id", (int) $userId, "following_user_id");
 $followers = getFollowers($pdo, "following_user_id", (int) $userId, "user_id");
 
 ?>
+<!-- background is shown when module is opened -->
 <div class="background"></div>
+
 <header class="profile">
     <div>
         <img class="profile-image" src="/<?php echo $userProfile['profile_image'] ? 'uploads/' . $userProfile['profile_image'] : 'images/profile-picture.png' ?>" alt="profile image" width="100px">
-        <a class="button small-button" href="/settings.php">Edit profile</a>
     </div>
 
     <div class="biography">
@@ -28,6 +29,10 @@ $followers = getFollowers($pdo, "following_user_id", (int) $userId, "user_id");
             <?php echo $_SESSION['user']['first_name'] . " " . $_SESSION['user']['last_name']; ?>
         </h2>
         <p><?php echo $userProfile['biography'] ?></p>
+    </div>
+
+    <div class="profile-buttons">
+        <a class="button small-button" href="/settings.php">Edit profile</a>
         <div class="follow-lists">
             <button class="button small-button followers-button">Followers</button>
             <ul class="followers-list">
@@ -47,8 +52,6 @@ $followers = getFollowers($pdo, "following_user_id", (int) $userId, "user_id");
             </ul>
         </div>
     </div>
-
-
 </header>
 <?php if (!$userPosts) : ?>
     <p>There is no photos...</p>
@@ -74,7 +77,7 @@ $followers = getFollowers($pdo, "following_user_id", (int) $userId, "user_id");
             </div>
 
 
-            <div class="description-container">
+            <div class="caption-container">
                 <?php
                 $postIsliked = getDataWithTwoConditions($pdo, "post_id, user_id", "likes", "post_id", "user_id", (int) $post['id'], $_SESSION['user']['id']);
                 $amountOfLikes = count(getDataAsArrayFromTable($pdo, "post_id", "likes", "post_id", $post['id']));
@@ -101,7 +104,7 @@ $followers = getFollowers($pdo, "following_user_id", (int) $userId, "user_id");
                         <button type="button" class="edit-button button smaller-button">Edit</button>
                     </form>
                 </div>
-                <p class="description"><span class="bold"><?php echo $post['first_name'] . " " . $post['last_name'] . " " ?></span> <?php echo $post['description'] ?></p>
+                <p class="caption"><span class="bold"><?php echo $post['first_name'] . " " . $post['last_name'] . " " ?></span> <?php echo $post['description'] ?></p>
             </div>
         </article>
     <?php endforeach; ?>

@@ -32,9 +32,6 @@ input[type="file"] {
   font-size: 0.9em;
   padding: 0.5em;
 }
-.follow-form {
-  margin-top: 1em;
-}
 
 @media only screen and (min-width: 900px) {
   form {

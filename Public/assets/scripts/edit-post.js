@@ -24,7 +24,7 @@ function editMode(event) {
   textarea.classList.add("description-textarea");
   textarea.name = "description";
   textarea.maxLength = "255";
-  textarea.textContent = description.textContent;
+  textarea.textContent = description.childNodes[1].nodeValue;
   form.appendChild(textarea);
 
   const submitButton = document.createElement("button");

@@ -10,6 +10,7 @@ array_multisort($postId, SORT_DESC, $allPosts);
 <!-- The view if the user is logged in -->
 <?php if (isset($_SESSION['user'])) : ?>
 
+    <!-- background is shown when module is opened -->
     <div class="background"></div>
 
     <h1>Explore</h1>
@@ -28,7 +29,7 @@ array_multisort($postId, SORT_DESC, $allPosts);
                     <!-- This is shown as bigger pictures on click -->
                     <div class="full-post">
                         <div class="close-button-container">
-                            <button type="button"><img class="close" src="/images/close.png" alt="close icon"></button>
+                            <button class="close-button" type="button"><img class="close" src="/images/close.png" alt="close icon"></button>
                         </div>
                         <header>
                             <img class="profile-image" src="/<?php echo $post['profile_image'] ? 'uploads/' . $post['profile_image'] : 'images/profile-picture.png' ?>" alt="profile image" loading="lazy">
@@ -52,7 +53,7 @@ array_multisort($postId, SORT_DESC, $allPosts);
                         </div>
 
 
-                        <div class="description-container">
+                        <div class="caption-container">
                             <?php
                             $postIsliked = getDataWithTwoConditions($pdo, "post_id, user_id", "likes", "post_id", "user_id", (int) $post['id'], $_SESSION['user']['id']);
                             $amountOfLikes = count(getDataAsArrayFromTable($pdo, "post_id", "likes", "post_id", $post['id']));
@@ -65,7 +66,7 @@ array_multisort($postId, SORT_DESC, $allPosts);
                                 <?php endif; ?>
                                 <p class="like-counter"><?php echo $amountOfLikes ?></p>
                             </div>
-                            <p class="description"><span class="bold"><?php echo $post['first_name'] . " " . $post['last_name'] . " " ?></span> <?php echo $post['description'] ?></p>
+                            <p class="caption"><span class="bold"><?php echo $post['first_name'] . " " . $post['last_name'] . " " ?></span> <?php echo $post['description'] ?></p>
                         </div>
                     </div>
                 </article>

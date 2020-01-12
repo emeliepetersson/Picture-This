@@ -41,7 +41,7 @@ array_multisort($postId, SORT_DESC, $followings);
             </div>
 
 
-            <div class="description-container">
+            <div class="caption-container">
                 <?php
                 $postIsliked = getDataWithTwoConditions($pdo, "post_id, user_id", "likes", "post_id", "user_id", (int) $post['id'], $_SESSION['user']['id']);
                 $amountOfLikes = count(getDataAsArrayFromTable($pdo, "post_id", "likes", "post_id", $post['id']));
@@ -54,7 +54,7 @@ array_multisort($postId, SORT_DESC, $followings);
                     <?php endif; ?>
                     <p class="like-counter"><?php echo $amountOfLikes ?></p>
                 </div>
-                <p class="description"><span class="bold"><?php echo $post['first_name'] . " " . $post['last_name'] . " " ?></span> <?php echo $post['description'] ?></p>
+                <p class="caption"><span class="bold"><?php echo $post['first_name'] . " " . $post['last_name'] . " " ?></span> <?php echo $post['description'] ?></p>
             </div>
         </article>
     <?php endforeach; ?>
