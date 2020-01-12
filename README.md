@@ -30,6 +30,13 @@ Below you'll find a list of user stories the Picture This application must inclu
 
 - As a user I should be able to remove likes from posts.
 
+### Extra features
+
+- As a user I should be able to follow and unfollow other users.
+
+- As a user I should be able to view a list of posts by users I follow.
+
+
 #### Requirements
 Below you'll find a list of requirements which need to be fulfilled in order to complete the project. 
 
