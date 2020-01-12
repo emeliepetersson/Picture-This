@@ -30,16 +30,12 @@ if (isset($_GET['user-id'])) {
     </div><!-- /alert -->
 <?php endforeach; ?>
 
+<!-- background is shown when module is opened -->
 <div class="background"></div>
+
 <header class="profile">
     <div class="profile-picture">
         <img class="profile-image" src="/<?php echo $userBio['profile_image'] ? 'uploads/' . $userBio['profile_image'] : 'images/profile-picture.png' ?>" alt="profile image" width="100px">
-
-        <form class="follow-form" action="/app/users/<?php echo $userAlreadyFollow ? 'unfollow.php' : 'follow.php' ?>" method="post">
-            <input type="hidden" name="user-id" value="<?php echo $userId ?>">
-            <button type="submit" class="follow-button button smaller-button"><?php echo $userAlreadyFollow ? 'Unfollow' : 'Follow' ?></button>
-        </form>
-
     </div>
 
     <div class="biography">
@@ -47,6 +43,13 @@ if (isset($_GET['user-id'])) {
             <?php echo $userInfo['first_name'] . " " . $userInfo['last_name']; ?>
         </h2>
         <p><?php echo $userBio['biography'] ?></p>
+    </div>
+
+    <div class="profile-buttons">
+        <form class="follow-form" action="/app/users/<?php echo $userAlreadyFollow ? 'unfollow.php' : 'follow.php' ?>" method="post">
+            <input type="hidden" name="user-id" value="<?php echo $userId ?>">
+            <button type="submit" class="follow-button button small-button"><?php echo $userAlreadyFollow ? 'Unfollow' : 'Follow' ?></button>
+        </form>
         <div class="follow-lists">
             <button class="button small-button followers-button">Followers</button>
             <ul class="followers-list">
@@ -66,6 +69,7 @@ if (isset($_GET['user-id'])) {
             </ul>
         </div>
     </div>
+
 </header>
 <?php if (!$userPosts) : ?>
     <p>There is no photos...</p>
@@ -86,7 +90,7 @@ if (isset($_GET['user-id'])) {
             </div>
 
 
-            <div class="description-container">
+            <div class="caption-container">
                 <?php
                 $postIsliked = getDataWithTwoConditions($pdo, "post_id, user_id", "likes", "post_id", "user_id", (int) $post['id'], $_SESSION['user']['id']);
                 $amountOfLikes = count(getDataAsArrayFromTable($pdo, "post_id", "likes", "post_id", $post['id']));
@@ -99,7 +103,7 @@ if (isset($_GET['user-id'])) {
                     <?php endif; ?>
                     <p class="like-counter"><?php echo $amountOfLikes ?></p>
                 </div>
-                <p class="description"><span class="bold"><?php echo $post['first_name'] . " " . $post['last_name'] . " " ?></span> <?php echo $post['description'] ?></p>
+                <p class="caption"><span class="bold"><?php echo $post['first_name'] . " " . $post['last_name'] . " " ?></span> <?php echo $post['description'] ?></p>
             </div>
         </article>
     <?php endforeach; ?>

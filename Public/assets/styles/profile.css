@@ -26,11 +26,23 @@
   width: 6em;
   height: 6em;
 }
+
+/* Buttons in the profile header */
+.profile-buttons {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: flex-end;
+}
+.profile-buttons .follow-form {
+  margin: 0;
+}
 .small-button {
   width: 7em;
+  height: 2em;
   font-size: 14px;
   padding: 5px;
-  margin: 1em 0;
+  margin: 0;
   display: block;
 }
 .smaller-button {
@@ -39,13 +51,16 @@
   padding: 5px;
   display: block;
 }
+
+/* Lists of followers and followings */
 .follow-lists {
-  width: 100%;
+  width: 60%;
   display: flex;
   justify-content: space-evenly;
 }
-.follow-lists .followers-button {
-  margin-right: 1em;
+.follow-lists .followers-button,
+.follow-lists .following-button {
+  margin: 0;
 }
 .followers-list,
 .following-list {
@@ -64,12 +79,14 @@
   list-style-type: none;
   text-align: left;
 }
-.description-container {
+
+/* Post caption container */
+.caption-container {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
 }
-.description {
+.caption {
   display: block;
   width: 100%;
 }
@@ -81,12 +98,12 @@
 }
 
 /* delete and edit form */
-.description-container form {
+.caption-container form {
   display: inline-block;
   width: 5em;
   margin: 0.5em 0;
 }
-.description-container .edit-mode {
+.caption-container .edit-mode {
   display: block;
   width: 70vw;
 }
@@ -96,7 +113,7 @@
 }
 
 /* This form appear when you click on the first delete button */
-.description-container .delete {
+.caption-container .delete {
   display: none;
   position: fixed;
   z-index: 3;
@@ -109,17 +126,17 @@
   border-radius: 10%;
   border: 0.5px solid #cccccc;
 }
-.description-container .forms .smaller-button {
+.caption-container .forms .smaller-button {
   display: inline-block;
 }
 /* Add .delete-show to display delete form */
-.description-container .show,
+.caption-container .show,
 .follow-lists .show {
   display: block;
 }
 
 @media only screen and (min-width: 900px) {
-  .description-container .delete {
+  .caption-container .delete {
     top: 40%;
     left: 43%;
   }

@@ -9,17 +9,17 @@
 .explore-container .post {
   width: 48%;
 }
-.explore-container .post .post-image {
+.explore-container .post .thumbnail-post {
   height: 10em;
   overflow: hidden;
   transition: transform 0.5s;
 }
-.explore-container .post .post-image img {
+.explore-container .post .thumbnail-post img {
   object-fit: cover;
   width: 100%;
   height: 10em;
 }
-.explore-container .post .post-image:hover {
+.explore-container .post .thumbnail-post:hover {
   cursor: pointer;
   scale: 1;
   transform: scale(1.1);
@@ -66,7 +66,10 @@
   display: flex;
   justify-content: flex-end;
   align-items: flex-start;
-  padding: 0.5em 0.1em;
+  padding: 0.5em 0.5em;
+}
+.close-button {
+  all: unset;
 }
 .close {
   height: 1.5em;
@@ -78,5 +81,17 @@
   }
   .explore-container .post .post-image img {
     height: 20em;
+  }
+  .full-post {
+    top: 15%;
+    left: 40%;
+    width: 25%;
+    font-size: 0.9em;
+  }
+  .explore-container .post .full-post .post-image {
+    height: 25em;
+  }
+  .explore-container .post .full-post .post-image img {
+    height: 25em;
   }
 }
