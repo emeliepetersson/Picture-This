@@ -22,19 +22,19 @@ if (isset($_GET['user-id'])) {
 <?php foreach ($errors as $error) : ?>
     <div class="error">
         <?php echo $error; ?>
-    </div><!-- /alert -->
+    </div>
 <?php endforeach; ?>
 <?php foreach ($messages as $message) : ?>
     <div class="message">
         <?php echo $message; ?>
-    </div><!-- /alert -->
+    </div>
 <?php endforeach; ?>
 
 <!-- background is shown when module is opened -->
 <div class="background"></div>
 
 <header class="profile">
-    <img class="profile-image" src="/<?php echo $userBio['profile_image'] ? 'uploads/' . $userBio['profile_image'] : 'images/profile-picture.png' ?>" alt="profile image" width="100px">
+    <img class="profile-image" src="/<?php echo $userBio['profile_image'] ? 'uploads/' . $userBio['profile_image'] : 'images/profile-picture.png' ?>" alt="profile image" loading="lazy">
 
     <div class="biography">
         <h2>

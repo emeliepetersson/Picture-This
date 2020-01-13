@@ -24,7 +24,7 @@ isLoggedIn();
 
         <!--Preview image -->
         <div class="post-image">
-            <img class="preview-image" src="/images/placeholder.png" id="output-image" alt="image preview" />
+            <img class="preview-image" src="/images/placeholder.png" id="output-image" alt="image preview" loading="lazy" />
         </div>
 
         <label for="description">Write a caption</label>

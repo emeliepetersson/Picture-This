@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 require __DIR__ . '/../autoload.php';
 
-if (isset($_FILES['image'], $_POST['description'])) {
+if (isset($_FILES['image'], $_POST['description'], $_SESSION['user'])) {
     $description = filter_var($_POST['description'], FILTER_SANITIZE_STRING);
     $userId = $_SESSION['user']['id'];
     $messages = [];

@@ -20,7 +20,7 @@ $followers = getFollowers($pdo, "following_user_id", (int) $userId, "user_id");
 <div class="background"></div>
 
 <header class="profile">
-    <img class="profile-image" src="/<?php echo $userProfile['profile_image'] ? 'uploads/' . $userProfile['profile_image'] : 'images/profile-picture.png' ?>" alt="profile image" width="100px">
+    <img class="profile-image" src="/<?php echo $userProfile['profile_image'] ? 'uploads/' . $userProfile['profile_image'] : 'images/profile-picture.png' ?>" alt="profile image" loading="lazy">
 
     <div class="biography">
         <h2>

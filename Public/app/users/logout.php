@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 require __DIR__ . '/../autoload.php';
 
-if (!isset($_SESSION['user'])) { // Make this into a function!!!
-    redirect('/');
-}
+isLoggedIn();
+
 
 // In this file we logout users.
 
