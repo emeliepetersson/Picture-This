@@ -7,6 +7,12 @@ $postId = array_column($allPosts, 'id');
 array_multisort($postId, SORT_DESC, $allPosts);
 ?>
 
+<?php foreach ($messages as $message) : ?>
+    <div class="message">
+        <?php echo $message; ?>
+    </div><!-- /alert -->
+<?php endforeach; ?>
+
 <!-- The view if the user is logged in -->
 <?php if (isset($_SESSION['user'])) : ?>
 
