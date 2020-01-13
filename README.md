@@ -36,6 +36,8 @@ Below you'll find a list of user stories the Picture This application must inclu
 
 - As a user I should be able to view a list of posts by users I follow.
 
+- As a user I'm able to delete my account along with all posts and comments.
+
 
 #### Requirements
 Below you'll find a list of requirements which need to be fulfilled in order to complete the project. 
