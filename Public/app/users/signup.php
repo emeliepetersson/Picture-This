@@ -43,8 +43,27 @@ if (isset($_POST['email'], $_POST['first-name'], $_POST['last-name'], $_POST['pa
     $statement->bindParam(':last_name', $lastName, PDO::PARAM_STR);
     $statement->bindParam(':password', $password, PDO::PARAM_STR);
     $statement->execute();
+
+    // Get new user's ID in users table
+    $statementTwo = $pdo->prepare("SELECT id FROM users WHERE email = :email");
+
+    if (!$statementTwo) {
+        die(var_dump($pdo->errorInfo()));
+    }
+
+    $statementTwo->bindParam(':email', $email, PDO::PARAM_STR);
+    $statementTwo->execute();
+    $userId = $statementTwo->fetch(PDO::FETCH_ASSOC);
+
+    // Insert user into user_profiles with default values
+    $statementThree = $pdo->prepare("INSERT INTO user_profiles (user_id, biography, profile_image) VALUES (:user_id, '', '')");
+
+    if (!$statementThree) {
+        die(var_dump($pdo->errorInfo()));
+    }
+
+    $statementThree->bindParam(':user_id', $userId['id'], PDO::PARAM_STR);
+    $statementThree->execute();
 }
 
-// We should put this redirect in the end of this file since we always want to
-// redirect the user back from this file. We don't know
-redirect('/../../login.php');
+redirect('/login.php');
