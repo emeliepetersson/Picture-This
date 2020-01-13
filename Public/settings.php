@@ -11,6 +11,7 @@ $userId = (string) $_SESSION['user']['id']; //convert user id into string to be 
 $userProfile = getOneColumnFromTable($pdo, 'biography, profile_image', 'user_profiles', 'user_id', $userId);
 
 ?>
+<div class="background"></div>
 
 <article class="settings">
     <h1>Settings</h1>
@@ -72,6 +73,14 @@ $userProfile = getOneColumnFromTable($pdo, 'biography, profile_image', 'user_pro
             <input type="password" name="confirm-password">
         </div><!-- /form-group -->
         <button type="submit" class="button">Update password</button>
+    </form>
+
+    <button type="button" class="button delete-account-button">Delete Account</button>
+    <form class="delete-account-form" action="app/users/delete-account.php" method="post">
+        <p>Are you sure you want to delete your account?</p>
+        <input type="user-id" name="user-id" value="<?php echo $userId ?>" hidden>
+        <button type="button" class="button small-button cancel-delete-account">Cancel</button>
+        <button type="submit" class="button small-button delete-account-button">Delete</button>
     </form>
 </article>
 

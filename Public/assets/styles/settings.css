@@ -12,6 +12,22 @@
 .settings form {
   margin: 3em 1em 4em;
 }
+.delete-account-form {
+  display: none;
+  z-index: 3;
+  position: fixed;
+  padding: 1em;
+  top: 25%;
+  left: 15%;
+  width: 15em;
+  height: 10em;
+  background-color: #ffffff;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.delete-account-form-show {
+  display: flex;
+}
 
 @media only screen and (min-width: 900px) {
   .preview-profile-image {
