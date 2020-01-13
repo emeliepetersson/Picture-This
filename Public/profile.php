@@ -20,9 +20,7 @@ $followers = getFollowers($pdo, "following_user_id", (int) $userId, "user_id");
 <div class="background"></div>
 
 <header class="profile">
-    <div>
-        <img class="profile-image" src="/<?php echo $userProfile['profile_image'] ? 'uploads/' . $userProfile['profile_image'] : 'images/profile-picture.png' ?>" alt="profile image" width="100px">
-    </div>
+    <img class="profile-image" src="/<?php echo $userProfile['profile_image'] ? 'uploads/' . $userProfile['profile_image'] : 'images/profile-picture.png' ?>" alt="profile image" width="100px">
 
     <div class="biography">
         <h2>
@@ -69,7 +67,7 @@ $followers = getFollowers($pdo, "following_user_id", (int) $userId, "user_id");
                 <h2>
                     <?php echo $post['first_name'] . " " . $post['last_name']; ?>
                 </h2>
-                <footer><?php echo $post['date'] ?></footer>
+                <p><?php echo $post['date'] ?></p>
             </header>
 
             <div class="post-image">
