@@ -261,7 +261,7 @@ function getFollowing(Pdo $pdo): array
  */
 function isLoggedIn()
 {
-    if (!isset($_SESSION['user'])) { // Make this into a function!!!
+    if (!isset($_SESSION['user'])) {
         redirect('/');
     }
 }

@@ -6,9 +6,10 @@ require __DIR__ . '/../autoload.php';
 
 // In this file we delete posts in the database.
 
-if (isset($_POST['post-id'], $_POST['description'])) {
+if (isset($_POST['post-id'], $_POST['description'], $_SESSION['user'])) {
     $postId = filter_var($_POST['post-id'], FILTER_SANITIZE_NUMBER_INT);
     $description = filter_var($_POST['description'], FILTER_SANITIZE_STRING);
+    $userId = $_SESSION['user']['id'];
 
     $statement = $pdo->prepare('UPDATE posts
     SET description = :description
@@ -20,7 +21,7 @@ if (isset($_POST['post-id'], $_POST['description'])) {
 
     $statement->bindParam(':description', $description, PDO::PARAM_STR);
     $statement->bindParam(':id', $postId, PDO::PARAM_INT);
-    $statement->bindParam(':user_id',  $_SESSION['user']['id'], PDO::PARAM_INT);
+    $statement->bindParam(':user_id', $userId, PDO::PARAM_INT);
     $statement->execute();
 
     $messages[] = "The post has been updated!";

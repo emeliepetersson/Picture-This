@@ -8,7 +8,7 @@ require __DIR__ . '/../autoload.php';
 // In this file we remove likes from posts in the database.
 
 
-if (isset($_GET['id'], $_GET['location'])) {
+if (isset($_GET['id'], $_GET['location'], $_SESSION['user'])) {
 
     if (isset($_GET['user-id'])) {
         $location = $_GET['location'] . "?user-id=" . $_GET['user-id'];
@@ -33,7 +33,7 @@ if (isset($_GET['id'], $_GET['location'])) {
         }
 
         $statement->bindParam(':post_id', $postId, PDO::PARAM_INT);
-        $statement->bindParam(':user_id',  $_SESSION['user']['id'], PDO::PARAM_INT);
+        $statement->bindParam(':user_id', $userId, PDO::PARAM_INT);
         $statement->execute();
     }
 }

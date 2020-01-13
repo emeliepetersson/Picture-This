@@ -31,7 +31,7 @@ $userProfile = getOneColumnFromTable($pdo, 'biography, profile_image', 'user_pro
         <input type="file" name="profile-image" id="image" class="choose-file">
 
         <!--Preview profile image -->
-        <img class="preview-profile-image" src="/<?php echo $userProfile['profile_image'] ? 'uploads/' . $userProfile['profile_image'] : 'images/profile-picture.png' ?>" id="output-image" alt="image preview" />
+        <img class="preview-profile-image" src="/<?php echo $userProfile['profile_image'] ? 'uploads/' . $userProfile['profile_image'] : 'images/profile-picture.png' ?>" id="output-image" alt="image preview" loading="lazy" />
 
         <small>Write your biography.</small>
         <textarea class="bio-textarea" name="biography" form="profile" maxlength="255"><?php echo ($userProfile !== null) ? $userProfile['biography'] : '' ?></textarea>
@@ -78,7 +78,6 @@ $userProfile = getOneColumnFromTable($pdo, 'biography, profile_image', 'user_pro
     <button type="button" class="button delete-account-button">Delete Account</button>
     <form class="delete-account-form" action="app/users/delete-account.php" method="post">
         <p>Are you sure you want to delete your account?</p>
-        <input type="user-id" name="user-id" value="<?php echo $userId ?>" hidden>
         <button type="button" class="button small-button cancel-delete-account">Cancel</button>
         <button type="submit" class="button small-button delete-account-button">Delete</button>
     </form>

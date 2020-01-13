@@ -6,8 +6,8 @@ require __DIR__ . '/../autoload.php';
 
 $messages = [];
 
-if (isset($_POST['user-id'])) {
-    $userId = (int) trim(filter_var($_POST['user-id'], FILTER_SANITIZE_NUMBER_INT));
+if (isset($_SESSION['user'])) {
+    $userId = (int) filter_var($_SESSION['user']['id'], FILTER_SANITIZE_NUMBER_INT);
 
 
     //Delete user's profile image in uploads folder

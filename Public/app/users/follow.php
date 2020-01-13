@@ -6,7 +6,7 @@ require __DIR__ . '/../autoload.php';
 
 // In this file users follow users
 
-if (isset($_POST['user-id'])) {
+if (isset($_POST['user-id'], $_SESSION['user'])) {
     $followUserId = (int) trim(filter_var($_POST['user-id'], FILTER_SANITIZE_NUMBER_INT));
     $userId = (int) $_SESSION['user']['id'];
     $errors = [];
