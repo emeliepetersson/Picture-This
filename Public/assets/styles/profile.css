@@ -1,17 +1,14 @@
 .profile {
   display: flex;
   align-items: flex-start;
-  justify-content: space-around;
+  justify-content: flex-start;
   flex-wrap: wrap;
   min-height: 12em;
   max-width: 30em;
   margin: 0 auto;
 }
-.profile .profile-picture {
-  width: 6em;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
+.profile .profile-image {
+  margin-left: 1em;
 }
 .biography {
   display: inline-block;
@@ -152,5 +149,21 @@
     display: block;
     margin: 1em;
     width: 25em;
+  }
+  .profile-buttons {
+    padding-left: 1em;
+    justify-content: flex-start;
+    align-items: flex-end;
+  }
+  .follow-lists {
+    padding-left: 1em;
+    justify-content: flex-start;
+  }
+  .follow-lists .followers-button,
+  .follow-lists .following-button {
+    margin-right: 0.5em;
+  }
+  .follow-form {
+    width: 6em;
   }
 }

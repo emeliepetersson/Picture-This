@@ -13,7 +13,6 @@ $messages = [];
 if (isset($_FILES['profile-image'], $_POST['biography'])) {
     $biography = filter_var($_POST['biography'], FILTER_SANITIZE_STRING);
     $userId = (string) $_SESSION['user']['id']; //convert user id into string to be able to use it in the functions to get data from table
-    $messages = [];
 
     $profileExist = getOneColumnFromTable($pdo, '*', 'user_profiles', 'user_id', $userId);
 
