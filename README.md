@@ -66,6 +66,32 @@ Clone down the project to you computer:
 ## Testers
 
 ## Code review
+By <a href="https://github.com/mikaelaalu"> Mikaela Lundsgård </a>
+
+[Functions#157](https://github.com/emeliepetersson/Picture-This/blob/f179a9477426095c204a62dd8f53f3ba3e3f5c18/Public/app/functions.php#L157) - Remeber to add @param $userId INT
+
+[Upload#12](https://github.com/emeliepetersson/Picture-This/blob/f179a9477426095c204a62dd8f53f3ba3e3f5c18/Public/upload.php#L12) and
+[User-profiles#22](https://github.com/emeliepetersson/Picture-This/blob/f179a9477426095c204a62dd8f53f3ba3e3f5c18/Public/user-profiles.php#L22) - It would be good to put this into a function to make your code more DRY
+
+[Upload#17](https://github.com/emeliepetersson/Picture-This/blob/f179a9477426095c204a62dd8f53f3ba3e3f5c18/Public/upload.php#L17) and
+[Users-profiles#27](https://github.com/emeliepetersson/Picture-This/blob/f179a9477426095c204a62dd8f53f3ba3e3f5c18/Public/user-profiles.php#L27) - It would be good to put this into a function aswell, to make your code more DRY
+
+
+[Edit-settings#99](https://github.com/emeliepetersson/Picture-This/blob/f179a9477426095c204a62dd8f53f3ba3e3f5c18/Public/app/users/edit-settings.php#L99) - Sanitize email before insert into database
+
+[Edit-settings#100](https://github.com/emeliepetersson/Picture-This/blob/f179a9477426095c204a62dd8f53f3ba3e3f5c18/Public/app/users/edit-settings.php#L100) - Sanatize name before insert into database
+
+[Edit-settings#101](https://github.com/emeliepetersson/Picture-This/blob/f179a9477426095c204a62dd8f53f3ba3e3f5c18/Public/app/users/edit-settings.php#L101) - Sanatize last name before insert into database
+
+[Signup#13](https://github.com/emeliepetersson/Picture-This/blob/f179a9477426095c204a62dd8f53f3ba3e3f5c18/Public/app/users/signup.php#L13) - Could be good to have validation for length on passwords, now it’s able to have a password with only one letter
+
+[Functions#262](https://github.com/emeliepetersson/Picture-This/blob/f179a9477426095c204a62dd8f53f3ba3e3f5c18/Public/app/functions.php#L262) - Dosent says what the function returns 
+
+[Functions#1](https://github.com/emeliepetersson/Picture-This/blob/f179a9477426095c204a62dd8f53f3ba3e3f5c18/Public/app/functions.php#L1) - In some functions descriptions you start with upper case, and in some you start with lower case
+
+[Functions#31](https://github.com/emeliepetersson/Picture-This/blob/f179a9477426095c204a62dd8f53f3ba3e3f5c18/Public/app/functions.php#L31) - Really good function!
+
+It was fun and inspiring reading your code, great job!
 
 ## License
 See [The MIT License](https://github.com/emeliepetersson/Picture-This/blob/master/LICENSE).
