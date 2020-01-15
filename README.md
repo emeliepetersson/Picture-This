@@ -64,6 +64,8 @@ Clone down the project to you computer:
 - Open the index.php file in your browser.
 
 ## Testers
+- Camilla Kylmänen Sjörén
+- Maja Alin
 
 ## Code review
 By <a href="https://github.com/mikaelaalu"> Mikaela Lundsgård </a>
