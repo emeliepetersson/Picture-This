@@ -47,11 +47,7 @@ array_multisort($postId, SORT_DESC, $followings);
                 $amountOfLikes = count(getDataAsArrayFromTable($pdo, "post_id", "likes", "post_id", $post['id']));
                 ?>
                 <div class="likes-container">
-                    <form class="like-form" method="post">
-                        <input type="text" name="post-id" value="<?php echo $post['id'] ?>" hidden>
-                        <button type="submit" class="like-form-button <?php echo $postIsliked ? "dislike" : "like" ?>"><img src="/images/<?php echo $postIsliked ? "dislike.svg" : "like.svg" ?>" alt="like button"></button>
-                    </form>
-                    <p class="like-counter"><?php echo $amountOfLikes ?></p>
+                    <?php require __DIR__ . '/views/like-form.php'; ?>
                 </div>
                 <p class="caption"><span class="bold"><?php echo $post['first_name'] . " " . $post['last_name'] . " " ?></span> <?php echo $post['description'] ?></p>
             </div>
