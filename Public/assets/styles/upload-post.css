@@ -4,6 +4,7 @@
 .upload-post form .post-image {
   border: 1px solid #cccccc;
 }
+
 @media only screen and (min-width: 900px) {
   .upload-post {
     width: 100%;

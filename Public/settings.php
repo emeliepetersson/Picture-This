@@ -3,10 +3,6 @@ require __DIR__ . '/views/header.php';
 
 isLoggedIn();
 
-if (!isset($_SESSION['user'])) { // Make this into a function!!!
-    redirect('/');
-}
-
 $userId = (string) $_SESSION['user']['id']; //convert user id into string to be able to use it in the function to get data from table
 $userProfile = getOneColumnFromTable($pdo, 'biography, profile_image', 'user_profiles', 'user_id', $userId);
 
@@ -15,16 +11,9 @@ $userProfile = getOneColumnFromTable($pdo, 'biography, profile_image', 'user_pro
 
 <article class="settings">
     <h1>Settings</h1>
-    <?php foreach ($errors as $error) : ?>
-        <div class="error">
-            <?php echo $error; ?>
-        </div><!-- /alert -->
-    <?php endforeach; ?>
-    <?php foreach ($messages as $message) : ?>
-        <div class="message">
-            <?php echo $message; ?>
-        </div><!-- /alert -->
-    <?php endforeach; ?>
+
+    <?php require __DIR__ . '/views/errors.php'; ?>
+    <?php require __DIR__ . '/views/messages.php'; ?>
 
     <form action="app/users/edit-settings.php" method="post" enctype="multipart/form-data" id="profile">
         <label for="image">Choose an image to upload</label>
@@ -42,17 +31,17 @@ $userProfile = getOneColumnFromTable($pdo, 'biography, profile_image', 'user_pro
         <div class="form-group">
             <label for="email">Email</label>
             <input type="email" name="email" value="<?php echo $_SESSION['user']['email'] ?>">
-        </div><!-- /form-group -->
+        </div>
 
         <div class="form-group">
             <label for="first-name">First name</label>
             <input type="name" name="first-name" value="<?php echo $_SESSION['user']['first_name'] ?>">
-        </div><!-- /form-group -->
+        </div>
 
         <div class="form-group">
             <label for="last-name">Last name</label>
             <input type="name" name="last-name" value="<?php echo $_SESSION['user']['last_name'] ?>">
-        </div><!-- /form-group -->
+        </div>
         <button type="submit" class="button">Update info</button>
     </form>
 
@@ -61,17 +50,17 @@ $userProfile = getOneColumnFromTable($pdo, 'biography, profile_image', 'user_pro
             <label for="password">Current password</label>
             <input type="password" name="current-password" required>
             <small>Please provide your current password to be able to change to a new one.</small>
-        </div><!-- /form-group -->
+        </div>
 
         <div class="form-group">
             <label for="password">New password</label>
             <input type="password" name="password">
-        </div><!-- /form-group -->
+        </div>
 
         <div class="form-group">
             <label for="password">Confirm new password</label>
             <input type="password" name="confirm-password">
-        </div><!-- /form-group -->
+        </div>
         <button type="submit" class="button">Update password</button>
     </form>
 

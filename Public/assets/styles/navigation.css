@@ -46,7 +46,7 @@
   margin-top: 0.6em;
 }
 
-/* Class "change" turns hamburgerIcon to a cross when clicked */
+/* Class "change" turns hamburger-icon to a cross when clicked */
 .change .bar1 {
   -webkit-transform: rotate(-45deg) translate(-1em, 0.5em);
   transform: rotate(-45deg) translate(-0.5em, 0.1em);
@@ -79,8 +79,8 @@
   z-index: -1;
   top: 0;
   right: 0;
-  animation: drop-down 1s forwards;
-  -webkit-animation: drop-down 1s forwards;
+  animation: drop-down 0.5s forwards;
+  -webkit-animation: drop-down 0.5s forwards;
 }
 
 /* Animations on mobile menu */

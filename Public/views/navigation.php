@@ -1,8 +1,10 @@
 <nav class="main-navbar">
+
     <!-- if the user is on index.php and is not logged in, then the logo won't show in the navbar -->
     <?php if ($_SERVER['SCRIPT_NAME'] !== '/index.php' || isset($_SESSION['user'])) : ?>
         <a href="/index.php"><img class="logo" src="<?php echo $config['logo']; ?>" alt="Picture this logo"></a>
     <?php endif; ?>
+
     <!-- Hamburger menu icon -->
     <div class="hamburger-icon">
         <div class="bar1"></div>
@@ -15,33 +17,31 @@
                 <?php if (isset($_SESSION['user'])) : ?>
                     <li>
                         <a href="/profile.php">Profile</a>
-                    </li><!-- /nav-item -->
+                    </li>
                     <li>
                         <a href="/settings.php">Settings</a>
-                    </li><!-- /nav-item -->
+                    </li>
                     <li>
                         <a href="/upload.php">Upload post</a>
-                    </li><!-- /nav-item -->
+                    </li>
                     <li>
                         <a href="/app/users/logout.php">Logout</a>
-                    </li><!-- /nav-item -->
+                    </li>
                 <?php else : ?>
                     <li>
                         <a href="/index.php">Home</a>
-                    </li><!-- /nav-item -->
+                    </li>
                     <li>
                         <a href="/about.php">About</a>
-                    </li><!-- /nav-item -->
+                    </li>
                     <li>
                         <a href="/login.php">Login</a>
-                    </li><!-- /nav-item -->
+                    </li>
                     <li>
                         <a href="/signup.php">Sign up</a>
-                    </li><!-- /nav-item -->
+                    </li>
                 <?php endif; ?>
+            </ul>
         </div>
     </div>
-
-
-    </ul><!-- /navbar-nav -->
 </nav><!-- /navbar -->

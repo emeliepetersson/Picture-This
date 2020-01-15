@@ -4,7 +4,7 @@ const editButtons = document.querySelectorAll(".edit-button");
 
 //Add textarea and submit button to form to change the description of the post
 function editMode(event) {
-  // Change edit button to cancel button and add quitEditMode function to eventlistener
+  // Change edit-button to cancel-button and add quitEditMode function to eventlistener
   event.currentTarget.textContent = "Cancel";
   editButtons.forEach(editButton => {
     editButton.removeEventListener("click", editMode);
@@ -17,7 +17,7 @@ function editMode(event) {
     event.currentTarget.parentNode.parentNode.nextElementSibling;
   description.classList.toggle("hide");
 
-  //Get the form element that the current target is child of and add textarea and save button
+  //Get the form element that the current target is child of and add textarea and save-button
   const form = event.currentTarget.parentElement;
   form.classList.add("edit-mode");
   const textarea = document.createElement("textarea");
@@ -38,7 +38,7 @@ function editMode(event) {
 
 //Remove textarea and submitbutton to cancel the edit mode
 function quitEditMode(event) {
-  //Change the button back to contain "edit" and editMode function to eventlistener
+  //Change the button back to contain "edit" and add editMode function to eventlistener
   event.currentTarget.textContent = "Edit";
   editButtons.forEach(editButton => {
     editButton.addEventListener("click", editMode);
@@ -50,7 +50,7 @@ function quitEditMode(event) {
   const form = event.currentTarget.parentElement;
   form.classList.remove("edit-mode");
 
-  // Show the description paragraph again and remove textarea and save button from the form
+  // Show the description paragraph again, and remove textarea and save button from the form
   const description =
     event.currentTarget.parentNode.parentNode.nextElementSibling;
   description.classList.toggle("hide");
