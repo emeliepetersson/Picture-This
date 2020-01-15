@@ -46,7 +46,7 @@ $followers = getFollowers($pdo, "following_user_id", (int) $userId, "user_id");
         <article class="post">
 
             <header>
-                <img class="profile-image" src="/<?php echo $userProfile['profile_image'] ? 'uploads/' . $userProfile['profile_image'] : 'images/profile-picture.png' ?>" alt="profile image" loading="lazy">
+                <img class="profile-image" src="/<?php echo $post['profile_image'] ? 'uploads/' . $post['profile_image'] : 'images/profile-picture.png' ?>" alt="profile image" loading="lazy">
                 <h2>
                     <?php echo $post['first_name'] . " " . $post['last_name']; ?>
                 </h2>
