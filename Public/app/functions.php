@@ -160,7 +160,7 @@ function getDataWithTwoConditions(PDO $pdo, string $columns, string $table, stri
  */
 function displayPostsFromUser(PDO $pdo, int $userId): array
 {
-    $query = "SELECT posts.id, image, description, date, first_name, last_name, user_profiles.profile_image
+    $query = "SELECT posts.id, posts.user_id, image, description, date, first_name, last_name, user_profiles.profile_image
     FROM posts
     INNER JOIN users ON posts.user_id = users.id
     INNER JOIN user_profiles ON users.id = user_profiles.user_id

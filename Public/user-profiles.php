@@ -57,30 +57,7 @@ if (isset($_GET['user-id'])) {
 <?php else : ?>
     <?php foreach ($userPosts as $post) : ?>
         <article class="post">
-
-            <header>
-                <img class="profile-image" src="/uploads/<?php echo $post['profile_image'] ?>" alt="profile image" loading="lazy">
-                <h2>
-                    <?php echo $post['first_name'] . " " . $post['last_name']; ?>
-                </h2>
-                <p><?php echo $post['date'] ?></p>
-            </header>
-
-            <div class="post-image">
-                <img src="/uploads/<?php echo $post['image'] ?>" alt="uploaded post" loading="lazy">
-            </div>
-
-
-            <div class="caption-container">
-                <?php
-                $postIsliked = getDataWithTwoConditions($pdo, "post_id, user_id", "likes", "post_id", "user_id", (int) $post['id'], $_SESSION['user']['id']);
-                $amountOfLikes = count(getDataAsArrayFromTable($pdo, "post_id", "likes", "post_id", $post['id']));
-                ?>
-                <div class="likes-container">
-                    <?php require __DIR__ . '/views/like-form.php'; ?>
-                </div>
-                <p class="caption"><span class="bold"><?php echo $post['first_name'] . " " . $post['last_name'] . " " ?></span> <?php echo $post['description'] ?></p>
-            </div>
+            <?php require __DIR__ . '/views/post.php'; ?>
         </article>
     <?php endforeach; ?>
 <?php endif; ?>

@@ -32,6 +32,9 @@ input[type="file"] {
   font-size: 0.9em;
   padding: 0.5em;
 }
+.caption-container .like-form {
+  width: 2.5em;
+}
 
 @media only screen and (min-width: 900px) {
   form {
