@@ -5,6 +5,7 @@ $allPosts = displayAllPosts($pdo);
 //Sort all posts by id to get the latest uploaded posts on top of the page
 $postId = array_column($allPosts, 'id');
 array_multisort($postId, SORT_DESC, $allPosts);
+
 ?>
 
 <?php foreach ($messages as $message) : ?>
@@ -65,11 +66,10 @@ array_multisort($postId, SORT_DESC, $allPosts);
                             $amountOfLikes = count(getDataAsArrayFromTable($pdo, "post_id", "likes", "post_id", $post['id']));
                             ?>
                             <div class="likes-container">
-                                <?php if (!$postIsliked) : ?>
-                                    <a class="like" href="/app/posts/like.php?location=index.php&id=<?php echo $post['id'] ?>"><img src="/images/like.svg" alt="heart shaped like button"></a>
-                                <?php else : ?>
-                                    <a class="dislike" href="/app/posts/dislike.php?location=index.php&id=<?php echo  $post['id'] ?>"> <img src="/images/dislike.svg" alt="heart shaped dislike button"></a>
-                                <?php endif; ?>
+                                <form class="like-form" method="post">
+                                    <input type="text" name="post-id" value="<?php echo $post['id'] ?>" hidden>
+                                    <button type="submit" class="like-form-button <?php echo $postIsliked ? "dislike" : "like" ?>"><img src="/images/<?php echo $postIsliked ? "dislike.svg" : "like.svg" ?>" alt="like button"></button>
+                                </form>
                                 <p class="like-counter"><?php echo $amountOfLikes ?></p>
                             </div>
                             <p class="caption"><span class="bold"><?php echo $post['first_name'] . " " . $post['last_name'] . " " ?></span> <?php echo $post['description'] ?></p>
