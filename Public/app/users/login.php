@@ -11,6 +11,10 @@ if (isset($_POST['email'], $_POST['password'])) {
     $password = $_POST['password'];
     $errors = [];
 
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $errors[] = 'The email address is not a valid email address!';
+    }
+
     $user = getOneColumnFromTable($pdo, '*', 'users', 'email', $email);
 
     // If the user isn't found in the database, redirect back to the login page.
