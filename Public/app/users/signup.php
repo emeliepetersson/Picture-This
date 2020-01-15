@@ -14,6 +14,10 @@ if (isset($_POST['email'], $_POST['first-name'], $_POST['last-name'], $_POST['pa
     $confirmPassword = $_POST['confirm-password'];
     $errors = [];
 
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $errors[] = 'The email address is not a valid email address!';
+    }
+
     if ($password !== $confirmPassword) {
         $errors[] = "Your passwords do not match!";
     } else {
