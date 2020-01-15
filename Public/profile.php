@@ -81,11 +81,7 @@ $followers = getFollowers($pdo, "following_user_id", (int) $userId, "user_id");
                 $amountOfLikes = count(getDataAsArrayFromTable($pdo, "post_id", "likes", "post_id", $post['id']));
                 ?>
                 <div class="likes-container">
-                    <form class="like-form" method="post">
-                        <input type="text" name="post-id" value="<?php echo $post['id'] ?>" hidden>
-                        <button type="submit" class="like-form-button <?php echo $postIsliked ? "dislike" : "like" ?>"><img src="/images/<?php echo $postIsliked ? "dislike.svg" : "like.svg" ?>" alt="like button"></button>
-                    </form>
-                    <p class="like-counter"><?php echo $amountOfLikes ?></p>
+                    <?php require __DIR__ . '/views/like-form.php'; ?>
                 </div>
                 <div class="forms">
                     <button type="button" class="delete-button button smaller-button">Delete</button>
