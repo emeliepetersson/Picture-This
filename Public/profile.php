@@ -67,7 +67,7 @@ $followers = getFollowers($pdo, "following_user_id", (int) $userId, "user_id");
                 <h2>
                     <?php echo $post['first_name'] . " " . $post['last_name']; ?>
                 </h2>
-                <p><?php echo $post['date'] ?></p>
+                <p class="date"><?php echo $post['date'] ?></p>
             </header>
 
             <div class="post-image">
