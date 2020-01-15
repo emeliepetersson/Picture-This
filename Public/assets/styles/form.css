@@ -35,6 +35,9 @@ input[type="file"] {
 .caption-container .like-form {
   width: 2.5em;
 }
+.like-form-button {
+  all: unset;
+}
 
 @media only screen and (min-width: 900px) {
   form {

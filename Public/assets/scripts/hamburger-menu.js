@@ -5,11 +5,13 @@ const menuItems = document.querySelector(".menu-items");
 const menuContainer = document.querySelector(".menu");
 
 // Function toggles between class names to show/hide menu items and change styling to menu and icon.
-hamburgerIcon.addEventListener("click", () => {
+hamburgerIcon.addEventListener("click", showMenu);
+
+function showMenu() {
   menuItems.classList.toggle("show-menu");
   menuContainer.classList.toggle("change-background");
   hamburgerIcon.classList.toggle("change");
-});
+}
 
 // Function hides menu when window innerWidth is larger than 400 and the menu is displayed
 window.addEventListener("resize", function() {
