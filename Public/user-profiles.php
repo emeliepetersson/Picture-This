@@ -48,24 +48,7 @@ if (isset($_GET['user-id'])) {
             <input type="hidden" name="user-id" value="<?php echo $userId ?>">
             <button type="submit" class="follow-button button small-button"><?php echo $userAlreadyFollow ? 'Unfollow' : 'Follow' ?></button>
         </form>
-        <div class="follow-lists">
-            <button class="button small-button followers-button">Followers</button>
-            <ul class="followers-list">
-                <h3>Followers</h3>
-                <?php foreach ($followers as $follower) : ?>
-                    <li><a href="/user-profiles.php?user-id=<?php echo $follower['user_id'] ?>"><?php echo $follower['first_name'] . " " . $follower['last_name'] ?></a></li>
-                <?php endforeach; ?>
-                <button class="button small-button back" type="button">Back</button>
-            </ul>
-            <button class="button small-button following-button">Following</button>
-            <ul class="following-list">
-                <h3>Following</h3>
-                <?php foreach ($followings as $following) : ?>
-                    <li><a href="/user-profiles.php?user-id=<?php echo $following['following_user_id'] ?>"><?php echo $following['first_name'] . " " . $following['last_name'] ?></a></li>
-                <?php endforeach; ?>
-                <button class="button small-button back" type="button">Back</button>
-            </ul>
-        </div>
+        <?php require __DIR__ . '/views/follow-lists.php'; ?>
     </div>
 
 </header>
@@ -94,12 +77,7 @@ if (isset($_GET['user-id'])) {
                 $amountOfLikes = count(getDataAsArrayFromTable($pdo, "post_id", "likes", "post_id", $post['id']));
                 ?>
                 <div class="likes-container">
-                    <?php if (!$postIsliked) : ?>
-                        <a class="like" href="/app/posts/like.php?location=user-profiles.php&user-id=<?php echo $userId ?>=&id=<?php echo $post['id'] ?>"><img src="/images/like.svg" alt="heart shaped like button"></a>
-                    <?php else : ?>
-                        <a class="dislike" href="/app/posts/dislike.php?location=user-profiles.php&user-id=<?php echo $userId ?>&id=<?php echo  $post['id'] ?>"> <img src="/images/dislike.svg" alt="heart shaped dislike button"></a>
-                    <?php endif; ?>
-                    <p class="like-counter"><?php echo $amountOfLikes ?></p>
+                    <?php require __DIR__ . '/views/like-form.php'; ?>
                 </div>
                 <p class="caption"><span class="bold"><?php echo $post['first_name'] . " " . $post['last_name'] . " " ?></span> <?php echo $post['description'] ?></p>
             </div>
