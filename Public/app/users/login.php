@@ -24,7 +24,7 @@ if (isset($_POST['email'], $_POST['password'])) {
 
 
     // If the user is found in the database, compare the given password from the
-    // request with the one in the database using the password_verify function.
+    // request with the one in the database.
     if (password_verify($_POST['password'], $user['password'])) {
         unset($user['password']); //Remove the password so that it won't be saved in the session variable.
         $_SESSION['user'] = $user;

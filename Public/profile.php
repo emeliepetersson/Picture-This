@@ -37,14 +37,12 @@ $followers = getFollowers($pdo, "following_user_id", (int) $userId, "user_id");
 <?php if (!$userPosts) : ?>
     <p>There is no photos...</p>
 <?php else : ?>
-    <?php foreach ($messages as $message) : ?>
-        <div class="message">
-            <?php echo $message; ?>
-        </div><!-- /alert -->
-    <?php endforeach; ?>
-    <?php foreach ($userPosts as $post) : ?>
-        <article class="post">
 
+    <?php require __DIR__ . '/views/messages.php'; ?>
+
+    <?php foreach ($userPosts as $post) : ?>
+
+        <article class="post">
             <header>
                 <img class="profile-image" src="/<?php echo $post['profile_image'] ? 'uploads/' . $post['profile_image'] : 'images/profile-picture.png' ?>" alt="profile image" loading="lazy">
                 <h2>

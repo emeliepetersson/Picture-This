@@ -96,9 +96,9 @@ if (isset($_FILES['profile-image'], $_POST['biography'], $_SESSION['user'])) {
 
 //Change email, first name and last name
 if (isset($_POST['email'], $_POST['first-name'], $_POST['last-name'])) {
-    $email = $_POST['email'];
-    $firstName = $_POST['first-name'];
-    $lastName = $_POST['last-name'];
+    $email = trim(filter_var($_POST['email'], FILTER_SANITIZE_EMAIL));
+    $firstName = trim(filter_var($_POST['first-name'], FILTER_SANITIZE_STRING));
+    $lastName = trim(filter_var($_POST['last-name'], FILTER_SANITIZE_STRING));
 
     $emailExist = getOneColumnFromTable($pdo, 'email', 'users', 'email', $email);
 

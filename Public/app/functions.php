@@ -156,6 +156,7 @@ function getDataWithTwoConditions(PDO $pdo, string $columns, string $table, stri
  * Return all posts from posts table
  *
  * @param PDO $pdo
+ * @param integer $userId
  * @return array
  */
 function displayPostsFromUser(PDO $pdo, int $userId): array
@@ -257,9 +258,9 @@ function getFollowing(Pdo $pdo): array
 /**
  * Function that checks if user is logged in, if not you will be redirected back to index page
  *
- * @return boolean
+ * @return void
  */
-function isLoggedIn()
+function isLoggedIn(): void
 {
     if (!isset($_SESSION['user'])) {
         redirect('/');

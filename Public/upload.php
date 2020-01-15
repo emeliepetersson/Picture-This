@@ -7,18 +7,11 @@ isLoggedIn();
 
 <div class="upload-post">
     <h1>Upload post</h1>
-    <!-- Is ID needed in form?? -->
     <form action="app/users/upload.php" method="post" enctype="multipart/form-data" id="post">
-        <?php foreach ($errors as $error) : ?>
-            <div class="error">
-                <?php echo $error; ?>
-            </div><!-- /alert -->
-        <?php endforeach; ?>
-        <?php foreach ($messages as $message) : ?>
-            <div class="message">
-                <?php echo $message; ?>
-            </div><!-- /alert -->
-        <?php endforeach; ?>
+
+        <?php require __DIR__ . '/views/errors.php'; ?>
+        <?php require __DIR__ . '/views/messages.php'; ?>
+
         <label for="image">Choose an image to upload</label>
         <input type="file" name="image" id="image" class="choose-file" required>
 

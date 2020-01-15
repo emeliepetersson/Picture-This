@@ -19,16 +19,9 @@ if (isset($_GET['user-id'])) {
 }
 
 ?>
-<?php foreach ($errors as $error) : ?>
-    <div class="error">
-        <?php echo $error; ?>
-    </div>
-<?php endforeach; ?>
-<?php foreach ($messages as $message) : ?>
-    <div class="message">
-        <?php echo $message; ?>
-    </div>
-<?php endforeach; ?>
+
+<?php require __DIR__ . '/views/errors.php'; ?>
+<?php require __DIR__ . '/views/messages.php'; ?>
 
 <!-- background is shown when module is opened -->
 <div class="background"></div>

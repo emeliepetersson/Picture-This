@@ -1,5 +1,6 @@
 <?php
 require __DIR__ . '/views/header.php';
+
 $allPosts = displayAllPosts($pdo);
 
 //Sort all posts by id to get the latest uploaded posts on top of the page
@@ -8,11 +9,7 @@ array_multisort($postId, SORT_DESC, $allPosts);
 
 ?>
 
-<?php foreach ($messages as $message) : ?>
-    <div class="message">
-        <?php echo $message; ?>
-    </div><!-- /alert -->
-<?php endforeach; ?>
+<?php require __DIR__ . '/views/messages.php'; ?>
 
 <!-- The view if the user is logged in -->
 <?php if (isset($_SESSION['user'])) : ?>
