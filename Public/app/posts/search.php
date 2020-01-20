@@ -14,7 +14,11 @@ if (isset($_POST['search'])) {
         echo json_encode('No posts found');
         exit;
     }
-    $query = 'SELECT id, image, description, user_id, date FROM posts WHERE description LIKE :query';
+    $query = 'SELECT posts.id, image, description, posts.user_id, date, first_name, last_name, user_profiles.profile_image
+    FROM posts
+    INNER JOIN users ON posts.user_id = users.id
+    INNER JOIN user_profiles ON users.id = user_profiles.user_id
+    WHERE description LIKE :query';
     $statement = $pdo->prepare($query);
 
     if (!$statement) {
