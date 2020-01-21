@@ -10,15 +10,15 @@ isLoggedIn();
 
 if (isset($_POST['search'])) {
     $search = trim(filter_var($_POST['search'], FILTER_SANITIZE_STRING));
+    $usersPosts = [];
+
     if (empty($search)) {
         echo json_encode('No posts found');
         exit;
     }
-    $query = 'SELECT posts.id, image, description, posts.user_id, date, first_name, last_name, user_profiles.profile_image
-    FROM posts
-    INNER JOIN users ON posts.user_id = users.id
-    INNER JOIN user_profiles ON users.id = user_profiles.user_id
-    WHERE description LIKE :query';
+    $query = 'SELECT id FROM users
+    WHERE first_name LIKE :query
+    OR last_name LIKE :query';
     $statement = $pdo->prepare($query);
 
     if (!$statement) {
@@ -28,10 +28,19 @@ if (isset($_POST['search'])) {
     $statement->execute([
         'query' => "%" . $search . "%",
     ]);
-    $posts = $statement->fetchAll(PDO::FETCH_ASSOC);
+    $users = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    // do something here to get likes for posts and attach to the post and send as json to js
+    foreach ($users as $user) {
+        $userPosts = displayPostsFromUser($pdo, (int) $user['id']);
+        if (count($userPosts) === 0) {
+            continue;
+        }
+        $usersPosts[] = $userPosts;
+    }
 
     header('Content-Type: application/json');
-    echo json_encode($posts);
+    echo json_encode($usersPosts);
 } else {
     redirect('/');
 }
