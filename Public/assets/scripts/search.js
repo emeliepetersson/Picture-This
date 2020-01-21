@@ -57,19 +57,11 @@ if (searchInput) {
                       <div>
                           <header>
                               <img class="profile-image" src="/${post.profile_image}" alt="profile image" loading="lazy">
-                              <?php if ((int) $post['user_id'] === $_SESSION['user']['id']) : ?>
-                                  <a href="/profile.php">
+                                  <a href="${post.profile_url}${post.user_id}">
                                       <h2>
                                           ${post.first_name} ${post.last_name}
                                       </h2>
                                   </a>
-                              <?php else : ?>
-                                  <a href="/user-profiles.php?user-id=${post.user_id}">
-                                      <h2>
-                                          ${post.first_name} ${post.last_name}
-                                      </h2>
-                                  </a>
-                              <?php endif; ?>
                               <p class="date">${post.date}</p>
                           </header>
                           <div class="post-image">
@@ -77,17 +69,16 @@ if (searchInput) {
                           </div>
 
                           <div class="caption-container">
-                              <?php
-                              $postIsliked = getDataWithTwoConditions($pdo, "post_id, user_id", "likes", "post_id", "user_id", (int) $post['id'], $_SESSION['user']['id']);
-                              $amountOfLikes = count(getDataAsArrayFromTable($pdo, "post_id", "likes", "post_id", $post['id']));
-                              ?>
                               <div class="likes-container">
                                   <form class="like-form" method="post">
                                       <input type="text" name="post-id" value="${post.id}" hidden>
                                       <button type="submit" class="like-form-button ${post.like}"><img src="${likeImage}" alt="like button"></button>
                                   </form>
                                   <p class="like-counter">${post.likes}</p>
-                                  <button class="comment-btn">Comment</button>
+                                  <form class="comment-form" method="post">
+                                    <input type="text" name="post-id" value="${post.id}" hidden>
+                                    <button class="comment-form-button">Comment</button>
+                                  </form>
                               </div>
                               <p class="caption"><span class="bold">${post.first_name} ${post.last_name} </span> ${post.description}</p>
                           </div>
@@ -107,9 +98,9 @@ if (searchInput) {
             thumbnail.addEventListener("click", showPost);
           });
 
-          const commentBtns = document.querySelectorAll(".comment-btn");
+          const commentBtns = document.querySelectorAll(".comment-form-button");
           commentBtns.forEach(btn => {
-            btn.addEventListener("click", e => {
+            btn.addEventListener("submit", e => {
               console.log(e);
             });
           });

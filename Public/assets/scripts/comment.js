@@ -4,7 +4,7 @@
 
 console.log("Loaded comments.");
 
-const commentBtns = document.querySelectorAll(".comment-btn");
+const commentBtns = document.querySelectorAll(".comment-form-button");
 
 commentBtns.forEach(btn => {
   btn.addEventListener("click", e => {

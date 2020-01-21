@@ -6,7 +6,7 @@ require __DIR__ . '/../autoload.php';
 
 isLoggedIn();
 
-// here we search for posts in the database
+// here we search for users in the database and send back their posts
 
 if (isset($_POST['search'])) {
     $search = trim(filter_var($_POST['search'], FILTER_SANITIZE_STRING));
@@ -40,12 +40,17 @@ if (isset($_POST['search'])) {
 
         foreach ($userPosts as $post) {
 
-            $post['likes'] = count(getDataAsArrayFromTable($pdo, "post_id", "likes", "post_id", (string) $post['id']));
-            $alreadyLiked = getDataWithTwoConditions($pdo, "post_id, user_id", "likes", "post_id", "user_id", (int) $post['id'], $userId);
+            $post['profile_url'] = '/user-profiles.php?user-id=';
+            if ((int) $post['user_id'] === $userId) {
+                $post['profile_url'] = '/profile.php';
+            }
 
-            $post['like'] = "";
+            $post['likes'] = count(getDataAsArrayFromTable($pdo, 'post_id', 'likes', 'post_id', (string) $post['id']));
+            $alreadyLiked = getDataWithTwoConditions($pdo, 'post_id, user_id', 'likes', 'post_id', 'user_id', (int) $post['id'], $userId);
+
+            $post['like'] = '';
             if ($alreadyLiked != null) {
-                $post['like'] = "liked";
+                $post['like'] = 'liked';
             }
             $usersPosts[] = $post;
         }
