@@ -40,9 +40,9 @@ if (searchInput) {
               }
 
               if (post.like === "liked") {
-                likeImage = "/images/like.svg";
+                likeImage = "images/dislike.svg";
               } else {
-                likeImage = "/images/dislike.svg";
+                likeImage = "images/like.svg";
               }
 
               const template = `
@@ -97,9 +97,21 @@ if (searchInput) {
               searchResults.innerHTML += template;
             });
 
+            const likeForms = document.querySelectorAll(".like-form");
+            likeForms.forEach(form => {
+              form.addEventListener("submit", sendFormData);
+            });
+
             const thumbnails = document.querySelectorAll(".thumbnail-post");
             thumbnails.forEach(thumbnail => {
               thumbnail.addEventListener("click", showPost);
+            });
+
+            const commentBtns = document.querySelectorAll(".comment-btn");
+            commentBtns.forEach(btn => {
+              btn.addEventListener("click", e => {
+                console.log(e);
+              });
             });
           });
         }
