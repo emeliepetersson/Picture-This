@@ -10,6 +10,7 @@ isLoggedIn();
 
 if (isset($_POST['search'])) {
     $search = trim(filter_var($_POST['search'], FILTER_SANITIZE_STRING));
+    $userId = (int) $_SESSION['user']['id'];
     $usersPosts = [];
 
     if (empty($search)) {
@@ -36,7 +37,18 @@ if (isset($_POST['search'])) {
         if (count($userPosts) === 0) {
             continue;
         }
-        $usersPosts[] = $userPosts;
+
+        foreach ($userPosts as $post) {
+
+            $post['likes'] = count(getDataAsArrayFromTable($pdo, "post_id", "likes", "post_id", (string) $post['id']));
+            $alreadyLiked = getDataWithTwoConditions($pdo, "post_id, user_id", "likes", "post_id", "user_id", (int) $post['id'], $userId);
+
+            $post['like'] = "";
+            if ($alreadyLiked != null) {
+                $post['like'] = "liked";
+            }
+            $usersPosts[] = $post;
+        }
     }
 
     header('Content-Type: application/json');

@@ -27,25 +27,25 @@ if (searchInput) {
         console.log(usersPosts);
 
         if (usersPosts != "No posts found") {
-          usersPosts.forEach(userPosts => {
-            console.log(userPosts);
+          // usersPosts.forEach(userPosts => {
+          console.log(usersPosts);
 
-            userPosts.forEach(post => {
-              let likeImage;
+          usersPosts.forEach(post => {
+            let likeImage;
 
-              if (post.profile_image === "") {
-                post.profile_image = "images/profile-picture.png";
-              } else {
-                post.profile_image = "uploads/" + post.profile_image;
-              }
+            if (post.profile_image === "") {
+              post.profile_image = "images/profile-picture.png";
+            } else {
+              post.profile_image = "uploads/" + post.profile_image;
+            }
 
-              if (post.like === "liked") {
-                likeImage = "images/dislike.svg";
-              } else {
-                likeImage = "images/like.svg";
-              }
+            if (post.like === "liked") {
+              likeImage = "images/dislike.svg";
+            } else {
+              likeImage = "images/like.svg";
+            }
 
-              const template = `
+            const template = `
               <article class="post">
                   <div class="post-image thumbnail-post">
                       <img src="/uploads/${post.image}" alt="uploaded post" loading="lazy">
@@ -94,26 +94,26 @@ if (searchInput) {
                       </div>
               </article>
               `;
-              searchResults.innerHTML += template;
-            });
+            searchResults.innerHTML += template;
+          });
 
-            const likeForms = document.querySelectorAll(".like-form");
-            likeForms.forEach(form => {
-              form.addEventListener("submit", sendFormData);
-            });
+          const likeForms = document.querySelectorAll(".like-form");
+          likeForms.forEach(form => {
+            form.addEventListener("submit", sendFormData);
+          });
 
-            const thumbnails = document.querySelectorAll(".thumbnail-post");
-            thumbnails.forEach(thumbnail => {
-              thumbnail.addEventListener("click", showPost);
-            });
+          const thumbnails = document.querySelectorAll(".thumbnail-post");
+          thumbnails.forEach(thumbnail => {
+            thumbnail.addEventListener("click", showPost);
+          });
 
-            const commentBtns = document.querySelectorAll(".comment-btn");
-            commentBtns.forEach(btn => {
-              btn.addEventListener("click", e => {
-                console.log(e);
-              });
+          const commentBtns = document.querySelectorAll(".comment-btn");
+          commentBtns.forEach(btn => {
+            btn.addEventListener("click", e => {
+              console.log(e);
             });
           });
+          // });
         }
       })
       .catch(console.error);
