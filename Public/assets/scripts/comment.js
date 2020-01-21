@@ -2,10 +2,12 @@
 
 // in this file comment buttons are handled
 
-commentBtns = document.querySelectorAll(".comment-btn");
+console.log("Loaded comments.");
+
+const commentBtns = document.querySelectorAll(".comment-btn");
 
 commentBtns.forEach(btn => {
-  btn.addEventlistener("click", e => {
+  btn.addEventListener("click", e => {
     console.log(e);
   });
 });
