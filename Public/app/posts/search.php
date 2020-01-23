@@ -31,7 +31,6 @@ if (isset($_POST['search'])) {
     ]);
     $users = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-    // do something here to get likes for posts and attach to the post and send as json to js
     foreach ($users as $user) {
         $userPosts = displayPostsFromUser($pdo, (int) $user['id']);
         if (count($userPosts) === 0) {
