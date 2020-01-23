@@ -1,20 +1,18 @@
 "use strict";
 
 // this is where searching is handled
-// magic fetch stuff to be made :)
-
-console.log("Loaded search.");
 
 const searchForm = document.querySelector(".search-form");
 const searchInput = document.querySelector(".search-input");
 const searchResults = document.querySelector(".search-results");
 
+// makes sure searchInput exists, we are on the search page
 if (searchInput) {
+  // everytime a user lets go of a key a fetch is sent to see if entered text matches user in database
   searchInput.addEventListener("keyup", event => {
     event.preventDefault();
     const searchData = new FormData();
     searchData.append("search", searchInput.value);
-    // console.log(event);
 
     fetch("/app/posts/search.php", {
       method: "POST",
@@ -24,12 +22,7 @@ if (searchInput) {
       .then(usersPosts => {
         searchResults.innerHTML = "";
 
-        console.log(usersPosts);
-
         if (usersPosts != "No posts found") {
-          // usersPosts.forEach(userPosts => {
-          console.log(usersPosts);
-
           usersPosts.forEach(post => {
             let likeImage;
 
@@ -75,7 +68,7 @@ if (searchInput) {
                                       <button type="submit" class="like-form-button ${post.like}"><img src="${likeImage}" alt="like button"></button>
                                   </form>
                                   <p class="like-counter">${post.likes}</p>
-                                  <form class="comment-form" method="post">
+                                  <form action="comments.php?post=${post.id}" class="comment-form" method="post">
                                     <input type="text" name="post-id" value="${post.id}" hidden>
                                     <button class="comment-form-button">Comment</button>
                                   </form>
@@ -83,6 +76,7 @@ if (searchInput) {
                               <p class="caption"><span class="bold">${post.first_name} ${post.last_name} </span> ${post.description}</p>
                           </div>
                       </div>
+                  </div>
               </article>
               `;
             searchResults.innerHTML += template;
@@ -97,14 +91,6 @@ if (searchInput) {
           thumbnails.forEach(thumbnail => {
             thumbnail.addEventListener("click", showPost);
           });
-
-          const commentBtns = document.querySelectorAll(".comment-form-button");
-          commentBtns.forEach(btn => {
-            btn.addEventListener("submit", e => {
-              console.log(e);
-            });
-          });
-          // });
         }
       })
       .catch(console.error);
