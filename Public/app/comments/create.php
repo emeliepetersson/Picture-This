@@ -8,12 +8,12 @@ require __DIR__ . '/../autoload.php';
 
 isLoggedIn();
 
-if (isset($_POST['comment'], $_POST['post_id'], $_SESSION['user'])) {
-    $comment = filter_var($_POST['comment'], FILTER_SANITIZE_STRING);
+if (isset($_POST['content'], $_POST['post_id'], $_SESSION['user'])) {
+    $content = filter_var($_POST['content'], FILTER_SANITIZE_STRING);
     $postId = filter_var($_POST['post_id'], FILTER_SANITIZE_NUMBER_INT);
     $userId = $_SESSION['user']['id'];
 
-    $query = 'INSERT INTO comments (post_id, user_id, comment, date) VALUES (:post_id, :user_id, :comment, :date)';
+    $query = 'INSERT INTO comments (post_id, user_id, date, content) VALUES (:post_id, :user_id, :date, :content )';
 
     $statement = $pdo->prepare($query);
 
@@ -23,11 +23,12 @@ if (isset($_POST['comment'], $_POST['post_id'], $_SESSION['user'])) {
 
     $statement->bindParam(':post_id', $postId, PDO::PARAM_INT);
     $statement->bindParam(':user_id', $userId, PDO::PARAM_INT);
-    $statement->bindParam(':comment', $comment, PDO::PARAM_STR);
     $statement->bindParam(':date', date('d-m-Y, H:i:s'), PDO::PARAM_STR);
+    $statement->bindParam(':content', $content, PDO::PARAM_STR);
 
     $statement->execute();
 
+    // reminder: might need to delete this
     $messages[] = "Your comment have been successfully posted!";
 
     $_SESSION['messages'] = $messages;
