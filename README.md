@@ -10,33 +10,33 @@ The assignment is to create an Instagram clone with CSS, HTML, Javascript and PH
 ### Features
 Below you'll find a list of user stories the Picture This application must include.
 
-- As a user I should be able to create an account.
+- [x] As a user I should be able to create an account.
 
-- As a user I should be able to login.
+- [x] As a user I should be able to login.
 
-- As a user I should be able to logout.
+- [x] As a user I should be able to logout.
 
-- As a user I should be able to edit my account email, password and biography.
+- [x] As a user I should be able to edit my account email, password and biography.
 
-- As a user I should be able to upload a profile avatar image.
+- [x] As a user I should be able to upload a profile avatar image.
 
-- As a user I should be able to create new posts with image and description.
+- [x] As a user I should be able to create new posts with image and description.
 
-- As a user I should be able to edit my posts.
+- [x] As a user I should be able to edit my posts.
 
-- As a user I should be able to delete my posts.
+- [x] As a user I should be able to delete my posts.
 
-- As a user I should be able to like posts.
+- [x] As a user I should be able to like posts.
 
-- As a user I should be able to remove likes from posts.
+- [x] As a user I should be able to remove likes from posts.
 
 ### Extra features
 
-- As a user I should be able to follow and unfollow other users.
+- [x] As a user I should be able to follow and unfollow other users.
 
-- As a user I should be able to view a list of posts by users I follow.
+- [x] As a user I should be able to view a list of posts by users I follow.
 
-- As a user I'm able to delete my account along with all posts and comments.
+- [x] As a user I'm able to delete my account along with all posts and comments.
 
 
 #### Requirements
@@ -58,10 +58,20 @@ Below you'll find a list of requirements which need to be fulfilled in order to 
 
 
 ## Installation instructions
-Clone down the project to you computer:
-- $ git clone https://github.com/emeliepetersson/Picture-This.
-- Start your server.
-- Open the index.php file in your browser.
+ 1. Clone down the project to you computer:
+```
+$ git clone https://github.com/emeliepetersson/Picture-This
+```
+
+2. Change current directory to the Public directory
+```
+$ cd Public
+```
+
+3. Start your web server.
+```
+$ php -S localhost:1337
+```
 
 ## Testers
 - Camilla Kylmänen Sjörén
@@ -70,28 +80,27 @@ Clone down the project to you computer:
 ## Code review
 By <a href="https://github.com/mikaelaalu"> Mikaela Lundsgård </a>
 
-[Functions#157](https://github.com/emeliepetersson/Picture-This/blob/f179a9477426095c204a62dd8f53f3ba3e3f5c18/Public/app/functions.php#L157) - Remeber to add @param $userId INT
+- [Functions#157](https://github.com/emeliepetersson/Picture-This/blob/f179a9477426095c204a62dd8f53f3ba3e3f5c18/Public/app/functions.php#L157) - Remeber to add @param $userId INT
 
-[Upload#12](https://github.com/emeliepetersson/Picture-This/blob/f179a9477426095c204a62dd8f53f3ba3e3f5c18/Public/upload.php#L12) and
+- [Upload#12](https://github.com/emeliepetersson/Picture-This/blob/f179a9477426095c204a62dd8f53f3ba3e3f5c18/Public/upload.php#L12) and
 [User-profiles#22](https://github.com/emeliepetersson/Picture-This/blob/f179a9477426095c204a62dd8f53f3ba3e3f5c18/Public/user-profiles.php#L22) - It would be good to put this into a function to make your code more DRY
 
-[Upload#17](https://github.com/emeliepetersson/Picture-This/blob/f179a9477426095c204a62dd8f53f3ba3e3f5c18/Public/upload.php#L17) and
+- [Upload#17](https://github.com/emeliepetersson/Picture-This/blob/f179a9477426095c204a62dd8f53f3ba3e3f5c18/Public/upload.php#L17) and
 [Users-profiles#27](https://github.com/emeliepetersson/Picture-This/blob/f179a9477426095c204a62dd8f53f3ba3e3f5c18/Public/user-profiles.php#L27) - It would be good to put this into a function aswell, to make your code more DRY
 
+- [Edit-settings#99](https://github.com/emeliepetersson/Picture-This/blob/f179a9477426095c204a62dd8f53f3ba3e3f5c18/Public/app/users/edit-settings.php#L99) - Sanitize email before insert into database
 
-[Edit-settings#99](https://github.com/emeliepetersson/Picture-This/blob/f179a9477426095c204a62dd8f53f3ba3e3f5c18/Public/app/users/edit-settings.php#L99) - Sanitize email before insert into database
+- [Edit-settings#100](https://github.com/emeliepetersson/Picture-This/blob/f179a9477426095c204a62dd8f53f3ba3e3f5c18/Public/app/users/edit-settings.php#L100) - Sanatize name before insert into database
 
-[Edit-settings#100](https://github.com/emeliepetersson/Picture-This/blob/f179a9477426095c204a62dd8f53f3ba3e3f5c18/Public/app/users/edit-settings.php#L100) - Sanatize name before insert into database
+- [Edit-settings#101](https://github.com/emeliepetersson/Picture-This/blob/f179a9477426095c204a62dd8f53f3ba3e3f5c18/Public/app/users/edit-settings.php#L101) - Sanatize last name before insert into database
 
-[Edit-settings#101](https://github.com/emeliepetersson/Picture-This/blob/f179a9477426095c204a62dd8f53f3ba3e3f5c18/Public/app/users/edit-settings.php#L101) - Sanatize last name before insert into database
+- [Signup#13](https://github.com/emeliepetersson/Picture-This/blob/f179a9477426095c204a62dd8f53f3ba3e3f5c18/Public/app/users/signup.php#L13) - Could be good to have validation for length on passwords, now it’s able to have a password with only one letter
 
-[Signup#13](https://github.com/emeliepetersson/Picture-This/blob/f179a9477426095c204a62dd8f53f3ba3e3f5c18/Public/app/users/signup.php#L13) - Could be good to have validation for length on passwords, now it’s able to have a password with only one letter
+- [Functions#262](https://github.com/emeliepetersson/Picture-This/blob/f179a9477426095c204a62dd8f53f3ba3e3f5c18/Public/app/functions.php#L262) - Dosent says what the function returns 
 
-[Functions#262](https://github.com/emeliepetersson/Picture-This/blob/f179a9477426095c204a62dd8f53f3ba3e3f5c18/Public/app/functions.php#L262) - Dosent says what the function returns 
+- [Functions#1](https://github.com/emeliepetersson/Picture-This/blob/f179a9477426095c204a62dd8f53f3ba3e3f5c18/Public/app/functions.php#L1) - In some functions descriptions you start with upper case, and in some you start with lower case
 
-[Functions#1](https://github.com/emeliepetersson/Picture-This/blob/f179a9477426095c204a62dd8f53f3ba3e3f5c18/Public/app/functions.php#L1) - In some functions descriptions you start with upper case, and in some you start with lower case
-
-[Functions#31](https://github.com/emeliepetersson/Picture-This/blob/f179a9477426095c204a62dd8f53f3ba3e3f5c18/Public/app/functions.php#L31) - Really good function!
+- [Functions#31](https://github.com/emeliepetersson/Picture-This/blob/f179a9477426095c204a62dd8f53f3ba3e3f5c18/Public/app/functions.php#L31) - Really good function!
 
 It was fun and inspiring reading your code, great job!
 
