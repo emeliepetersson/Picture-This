@@ -28,7 +28,7 @@ if (commentContainer != undefined) {
       .then(comments => {
         console.log(comments);
 
-        if (comments.length != 0) {
+        if (comments.length != 0 && comments != "Post not found.") {
           comments.forEach(comment => {
             console.log(comment);
 
@@ -97,6 +97,8 @@ if (commentContainer != undefined) {
           });
           console.log(commentDeleteBtns);
           console.log(commentEditBtns);
+        } else if (comments === "Post not found.") {
+          commentContainer.textContent = comments;
         } else {
           commentContainer.textContent = "Be the first to comment!";
         }
