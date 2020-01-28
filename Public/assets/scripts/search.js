@@ -72,7 +72,7 @@ if (searchInput) {
                               <p class="caption"><span class="bold">${post.first_name} ${post.last_name} </span> ${post.description}</p>
                               <form action="comments.php?post=${post.id}" class="comment-form" method="post">
                                   <input type="text" name="post-id" value="${post.id}" hidden>
-                                  <button class="comment-form-button">Comment</button>
+                                  <button class="button smaller-button comment-form-button">Comment</button>
                               </form>
                           </div>
                       </div>

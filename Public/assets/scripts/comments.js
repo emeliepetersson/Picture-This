@@ -43,8 +43,8 @@ if (commentContainer != undefined) {
             if (parseInt(comment.user_id) === parseInt(currentUserId)) {
               commentTemplate = `
               <div class="comment">
-                  <div class="profile">
-                      <img class="profile-image" src="/${comment.profile_image}" alt="profile image" loading="lazy">
+                  <div class="profile comment-profile">
+                      <img class="profile-image comment-profile-image" src="/${comment.profile_image}" alt="profile image" loading="lazy">
                       <a href="${comment.profile_url}${comment.user_id}">
                           <h2>
                               ${comment.first_name} ${comment.last_name}
@@ -54,20 +54,21 @@ if (commentContainer != undefined) {
                   </div>
                   <div class="comment-text">${comment.content}</div>
                   <div class="comment-button-container">
-                      <button class="comment-edit-btn"><img src="" alt="Edit"></button>
-                      <button class="comment-delete-btn"><img src="" alt="Delete"></button>
+                      <form class="edit-comment-form hide">
+                          <input class="hidden" type="hidden" name="edit-comment-id" value="${comment.id}">
+                          <input class="hidden" type="text" name="edit-comment-content" value="${comment.content}">
+                      </form>
+                      <button class="button smaller-button comment-edit-btn">Edit</button>
+                      <button class="button smaller-button comment-delete-btn">Delete</button>
                   </div>
-                  <from>
-                      <input class="hidden" type="hidden" name="edit-comment-id" id="edit-comment-id" value="${comment.id}">
-                      <input class="hidden" type="text" name="edit-comment-content" id="edit-comment-content" value="${comment.content}">
-                  </from>
+                  
               </div>
               `;
             } else {
               commentTemplate = `
               <div class="comment">
-                  <div class="profile">
-                      <img class="profile-image" src="/${comment.profile_image}" alt="profile image" loading="lazy">
+                  <div class="profile comment-profile">
+                      <img class="profile-image comment-profile-image" src="/${comment.profile_image}" alt="profile image" loading="lazy">
                       <a href="${comment.profile_url}${comment.user_id}">
                           <h2>
                               ${comment.first_name} ${comment.last_name}
@@ -81,10 +82,26 @@ if (commentContainer != undefined) {
             }
             commentContainer.innerHTML += commentTemplate;
           });
+          const commentEditBtns = document.querySelectorAll(
+            ".comment-edit-btn"
+          );
+          const commentDeleteBtns = document.querySelectorAll(
+            ".comment-delete-btn"
+          );
+
+          commentEditBtns.forEach(editBtn => {
+            editBtn.addEventListener("click", editComment);
+          });
+          commentDeleteBtns.forEach(deleteBtn => {
+            deleteBtn.addEventListener("click", deleteComment);
+          });
+          console.log(commentDeleteBtns);
+          console.log(commentEditBtns);
         } else {
           commentContainer.textContent = "Be the first to comment!";
         }
-      });
+      })
+      .then();
   };
 
   const createComment = () => {
@@ -98,34 +115,34 @@ if (commentContainer != undefined) {
     }).then(getComments());
   };
 
-  const editComment = () => {
-    const editCommentData = new FormData();
-    editCommentData.append("comment", something.value);
-    editCommentData.append("post_id", commentPostId.value);
+  const editComment = e => {
+    e.preventDefault();
+    console.log(e);
 
-    fetch("/app/comments/edit.php", {
-      method: "POST",
-      body: editCommentData
-    }).then(getComments());
+    // const editCommentData = new FormData();
+    // editCommentData.append("comment", something.value);
+    // editCommentData.append("post_id", commentPostId.value);
+
+    // fetch("/app/comments/edit.php", {
+    //   method: "POST",
+    //   body: editCommentData
+    // }).then(getComments());
   };
 
-  const deleteComment = () => {
-    const datathing = new FormData();
-    datathing.append("comment", something.value);
-    datathing.append("post_id", commentPostId.value);
+  const deleteComment = e => {
+    e.preventDefault();
 
-    fetch("/app/comments/delete.php", {
-      method: "POST",
-      body: datathing
-    }).then(getComments());
+    console.log(e);
+
+    // const deleteCommentData = new FormData();
+    // deleteCommentData.append("comment", something.value);
+    // deleteCommentData.append("post_id", commentPostId.value);
+
+    // fetch("/app/comments/delete.php", {
+    //   method: "POST",
+    //   body: datathing
+    // }).then(getComments());
   };
-
-  // todo
-  const commentEditBtns = document.querySelectorAll("comment-edit-btn");
-  const commentDeleteBtns = document.querySelectorAll("comment-delete-btn");
-
-  commentEditBtns.forEach(editBtn => {});
-  commentDeleteBtns.forEach(deleteBtn => {});
 
   getComments();
 }
