@@ -53,10 +53,12 @@ if (commentContainer != undefined) {
                       <p>${comment.date}</p>
                   </div>
                   <div class="comment-text">${comment.content}</div>
-                  <div class="comment-button-container">
+                  <div class="comment-button-container" data-id="${comment.id}" data-pid="${comment.post_id}">
                       <form class="edit-comment-form hide">
                           <input class="hidden" type="hidden" name="edit-comment-id" value="${comment.id}">
                           <input class="hidden" type="text" name="edit-comment-content" value="${comment.content}">
+                          <button class="button smaller-button comment-confirm-edit-btn">Save</button>
+                          <button class="button smaller-button comment-cancel-edit-btn">Cancel</button>
                       </form>
                       <button class="button smaller-button comment-edit-btn">Edit</button>
                       <button class="button smaller-button comment-delete-btn">Delete</button>
@@ -121,6 +123,14 @@ if (commentContainer != undefined) {
     e.preventDefault();
     console.log(e);
 
+    console.log(e.target.parentElement);
+    const editForm = e.target.parentElement.firstElementChild;
+    // let otherBtn = e.nextElementSibling;
+
+    editForm.classList.remove("hide");
+    // otherBtn.textContent = "Cancel";
+    // otherBtn.addEventListener("click", cancelEdit);
+
     // const editCommentData = new FormData();
     // editCommentData.append("comment", something.value);
     // editCommentData.append("post_id", commentPostId.value);
@@ -131,19 +141,30 @@ if (commentContainer != undefined) {
     // }).then(getComments());
   };
 
+  const cancelEdit = e => {
+    let editForm = e.parentElement;
+    editForm.classList.add("hide");
+    // editForm.children;
+  };
+
+  const confirmEdit = e => {};
+
   const deleteComment = e => {
     e.preventDefault();
+    let targetComment = e.target.parentElement;
 
     console.log(e);
+    console.log(targetComment.dataset.id);
+    console.log(targetComment.dataset.pid);
 
-    // const deleteCommentData = new FormData();
-    // deleteCommentData.append("comment", something.value);
-    // deleteCommentData.append("post_id", commentPostId.value);
+    const deleteCommentData = new FormData();
+    deleteCommentData.append("comment-id", targetComment.dataset.id);
+    deleteCommentData.append("post-id", targetComment.dataset.pid);
 
-    // fetch("/app/comments/delete.php", {
-    //   method: "POST",
-    //   body: datathing
-    // }).then(getComments());
+    fetch("/app/comments/delete.php", {
+      method: "POST",
+      body: deleteCommentData
+    }).then(getComments());
   };
 
   getComments();
