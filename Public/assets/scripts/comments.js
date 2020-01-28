@@ -128,7 +128,9 @@ if (commentContainer != undefined) {
     // let otherBtn = e.nextElementSibling;
 
     editForm.classList.remove("hide");
-    // otherBtn.textContent = "Cancel";
+    e.target.textContent = "Cancel";
+    e.target.removeEventListener("click", editComment);
+    e.target.addEventListener("click", cancelEdit);
     // otherBtn.addEventListener("click", cancelEdit);
 
     // const editCommentData = new FormData();
@@ -142,8 +144,11 @@ if (commentContainer != undefined) {
   };
 
   const cancelEdit = e => {
-    let editForm = e.parentElement;
+    let editForm = e.target.parentElement.firstElementChild;
     editForm.classList.add("hide");
+    e.target.textContent = "Cancel";
+    e.target.removeEventListener("click", cancelEdit);
+    e.target.addEventListener("click", editComment);
     // editForm.children;
   };
 
@@ -164,7 +169,10 @@ if (commentContainer != undefined) {
     fetch("/app/comments/delete.php", {
       method: "POST",
       body: deleteCommentData
-    }).then(getComments());
+    }).then(() => {
+      commentContainer.innerHTML = "";
+      getComments();
+    });
   };
 
   getComments();
