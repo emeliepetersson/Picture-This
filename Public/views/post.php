@@ -29,4 +29,8 @@
         <?php require __DIR__ . '/like-form.php'; ?>
     </div>
     <p class="caption"><span class="bold"><?php echo $post['first_name'] . " " . $post['last_name'] . " " ?></span> <?php echo $post['description'] ?></p>
+    <form action="comments.php?post=<?php echo $post['id'] ?>" class="comment-form" method="post">
+        <input type="text" name="post-id" value="<?php echo $post['id'] ?>" hidden>
+        <button class="comment-form-button">Comments</button>
+    </form>
 </div>

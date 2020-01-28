@@ -14,9 +14,9 @@ if (isset($_POST['post_id'], $_SESSION['user'])) {
     $comments = [];
     $commentsWithUsers = [];
 
+
     $comments = getDataAsArrayFromTable($pdo, "*", "comments", "post_id", $postId);
 
-    // todo attach user profile info to comments
     foreach ($comments as $comment) {
         $query = "SELECT first_name, last_name, user_profiles.profile_image
         FROM users
