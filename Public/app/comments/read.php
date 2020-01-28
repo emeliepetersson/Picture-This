@@ -14,35 +14,40 @@ if (isset($_POST['post_id'], $_SESSION['user'])) {
     $comments = [];
     $commentsWithUsers = [];
 
+    $post = getDataAsArrayFromTable($pdo, "id", "posts", "id", $postId);
 
-    $comments = getDataAsArrayFromTable($pdo, "*", "comments", "post_id", $postId);
+    if ($post) {
+        $comments = getDataAsArrayFromTable($pdo, "*", "comments", "post_id", $postId);
 
-    foreach ($comments as $comment) {
-        $query = "SELECT first_name, last_name, user_profiles.profile_image
+        foreach ($comments as $comment) {
+            $query = "SELECT first_name, last_name, user_profiles.profile_image
         FROM users
         INNER JOIN user_profiles ON users.id = user_profiles.user_id
         WHERE users.id = :id";
 
-        $statement = $pdo->prepare($query);
-        if (!$statement) {
-            die(var_dump($pdo->errorInfo()));
-        }
-        $statement->bindParam(':id', $comment['user_id'], PDO::PARAM_INT);
-        $statement->execute();
-        $user = $statement->fetch(PDO::FETCH_ASSOC);
+            $statement = $pdo->prepare($query);
+            if (!$statement) {
+                die(var_dump($pdo->errorInfo()));
+            }
+            $statement->bindParam(':id', $comment['user_id'], PDO::PARAM_INT);
+            $statement->execute();
+            $user = $statement->fetch(PDO::FETCH_ASSOC);
 
-        $comment['profile_url'] = '/user-profiles.php?user-id=';
-        if ((int) $comment['user_id'] === $userId) {
-            $comment['profile_url'] = '/profile.php';
+            $comment['profile_url'] = '/user-profiles.php?user-id=';
+            if ((int) $comment['user_id'] === $userId) {
+                $comment['profile_url'] = '/profile.php';
+            }
+
+            $comment['first_name'] = $user['first_name'];
+            $comment['last_name'] = $user['last_name'];
+            $comment['profile_image'] = $user['profile_image'];
+            $commentsWithUsers[] = $comment;
         }
 
-        $comment['first_name'] = $user['first_name'];
-        $comment['last_name'] = $user['last_name'];
-        $comment['profile_image'] = $user['profile_image'];
-        $commentsWithUsers[] = $comment;
+        echo json_encode($commentsWithUsers);
+    } else {
+        echo json_encode("Post not found.");
     }
-
-    echo json_encode($commentsWithUsers);
 } else {
     redirect('/');
 }
