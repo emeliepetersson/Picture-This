@@ -54,9 +54,13 @@ if (commentContainer != undefined) {
                   </div>
                   <div class="comment-text">${comment.content}</div>
                   <div class="comment-button-container">
-                      <button class="comment-edit"><img src="" alt="Edit"></button>
-                      <button class="comment-delete"><img src="" alt="Delete"></button>
+                      <button class="comment-edit-btn"><img src="" alt="Edit"></button>
+                      <button class="comment-delete-btn"><img src="" alt="Delete"></button>
                   </div>
+                  <from>
+                      <input class="hidden" type="hidden" name="edit-comment-id" id="edit-comment-id" value="${comment.id}">
+                      <input class="hidden" type="text" name="edit-comment-content" id="edit-comment-content" value="${comment.content}">
+                  </from>
               </div>
               `;
             } else {
@@ -116,7 +120,12 @@ if (commentContainer != undefined) {
     }).then(getComments());
   };
 
-  if (commentContainer != undefined) {
-    getComments();
-  }
+  // todo
+  const commentEditBtns = document.querySelectorAll("comment-edit-btn");
+  const commentDeleteBtns = document.querySelectorAll("comment-delete-btn");
+
+  commentEditBtns.forEach(editBtn => {});
+  commentDeleteBtns.forEach(deleteBtn => {});
+
+  getComments();
 }
