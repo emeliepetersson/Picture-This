@@ -15,6 +15,7 @@ form.comment-form {
 
 .comment-button-container {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .comment-profile {
@@ -48,9 +49,15 @@ form.comment-form {
 .comment-delete-btn {
   height: 25px;
   width: 50px;
+  min-width: 50px;
   padding: 0;
   text-align: center;
 }
 .comment-delete-btn {
   width: 60px;
+  margin-left: 3px;
+}
+
+.edit-comment-content {
+  width: 100%;
 }
