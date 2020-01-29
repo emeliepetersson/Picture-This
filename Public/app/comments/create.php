@@ -28,11 +28,6 @@ if (isset($_POST['content'], $_POST['post_id'], $_SESSION['user'])) {
     $statement->bindParam(':content', $content, PDO::PARAM_STR);
 
     $statement->execute();
-
-    // reminder: might need to delete this
-    $messages[] = "Your comment have been successfully posted!";
-
-    $_SESSION['messages'] = $messages;
 } else {
     redirect('/');
 }

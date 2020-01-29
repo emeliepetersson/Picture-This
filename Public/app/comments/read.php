@@ -21,9 +21,9 @@ if (isset($_POST['post_id'], $_SESSION['user'])) {
 
         foreach ($comments as $comment) {
             $query = "SELECT first_name, last_name, user_profiles.profile_image
-        FROM users
-        INNER JOIN user_profiles ON users.id = user_profiles.user_id
-        WHERE users.id = :id";
+            FROM users
+            INNER JOIN user_profiles ON users.id = user_profiles.user_id
+            WHERE users.id = :id";
 
             $statement = $pdo->prepare($query);
             if (!$statement) {
