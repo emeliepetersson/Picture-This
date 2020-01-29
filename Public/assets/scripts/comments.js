@@ -26,19 +26,13 @@ if (commentContainer != undefined) {
     })
       .then(response => response.json())
       .then(comments => {
-        console.log(comments);
-
         if (comments.length != 0 && comments != "Post not found.") {
           comments.forEach(comment => {
-            console.log(comment);
-
             if (comment.profile_image === "") {
               comment.profile_image = "images/profile-picture.png";
             } else {
               comment.profile_image = "uploads/" + comment.profile_image;
             }
-
-            console.log(currentUserId);
 
             if (parseInt(comment.user_id) === parseInt(currentUserId)) {
               commentTemplate = `
@@ -54,12 +48,8 @@ if (commentContainer != undefined) {
                   </div>
                   <div class="comment-text">${comment.content}</div>
                   <div class="comment-button-container" data-id="${comment.id}" data-pid="${comment.post_id}">
-                      <form class="edit-comment-form hide">
-                          <input class="hidden" type="hidden" name="edit-comment-id" value="${comment.id}">
-                          <input class="hidden" type="text" name="edit-comment-content" value="${comment.content}">
-                          <button class="button smaller-button comment-confirm-edit-btn">Save</button>
-                          <button class="button smaller-button comment-cancel-edit-btn">Cancel</button>
-                      </form>
+                      <input class="edit-comment-content hide" type="text" name="edit-comment-content" value="${comment.content}">
+                      <input type="hidden" name="edit-comment-id" value="${comment.id}">
                       <button class="button smaller-button comment-edit-btn">Edit</button>
                       <button class="button smaller-button comment-delete-btn">Delete</button>
                   </div>
@@ -97,8 +87,6 @@ if (commentContainer != undefined) {
           commentDeleteBtns.forEach(deleteBtn => {
             deleteBtn.addEventListener("click", deleteComment);
           });
-          console.log(commentDeleteBtns);
-          console.log(commentEditBtns);
         } else if (comments === "Post not found.") {
           commentContainer.textContent = comments;
         } else {
@@ -125,57 +113,110 @@ if (commentContainer != undefined) {
 
   const editComment = e => {
     e.preventDefault();
-    console.log(e);
+    const currentBtn = e.target;
+    const editInput = currentBtn.parentElement.firstElementChild;
+    const commentContent = currentBtn.parentElement.parentElement.children[1];
+    const otherBtn = currentBtn.nextElementSibling;
 
-    console.log(e.target.parentElement);
-    const editForm = e.target.parentElement.firstElementChild;
-    // let otherBtn = e.nextElementSibling;
-
-    editForm.classList.remove("hide");
-    e.target.textContent = "Cancel";
-    e.target.removeEventListener("click", editComment);
-    e.target.addEventListener("click", cancelEdit);
-    // otherBtn.addEventListener("click", cancelEdit);
-
-    // const editCommentData = new FormData();
-    // editCommentData.append("comment", something.value);
-    // editCommentData.append("post_id", commentPostId.value);
-
-    // fetch("/app/comments/edit.php", {
-    //   method: "POST",
-    //   body: editCommentData
-    // }).then(getComments());
+    commentContent.classList.add("hide");
+    editInput.classList.remove("hide");
+    currentBtn.textContent = "Cancel";
+    otherBtn.textContent = "Edit";
+    currentBtn.removeEventListener("click", editComment);
+    currentBtn.addEventListener("click", cancelEdit);
+    otherBtn.removeEventListener("click", deleteComment);
+    otherBtn.addEventListener("click", confirmEdit);
   };
 
   const cancelEdit = e => {
-    let editForm = e.target.parentElement.firstElementChild;
-    editForm.classList.add("hide");
-    e.target.textContent = "Cancel";
-    e.target.removeEventListener("click", cancelEdit);
-    e.target.addEventListener("click", editComment);
-    // editForm.children;
+    e.preventDefault();
+    const currentBtn = e.target;
+    const editInput = currentBtn.parentElement.firstElementChild;
+    const commentContent = currentBtn.parentElement.parentElement.children[1];
+    const otherBtn = currentBtn.nextElementSibling;
+
+    currentBtn.textContent = "Edit";
+    otherBtn.textContent = "Delete";
+
+    currentBtn.removeEventListener("click", cancelEdit);
+    currentBtn.addEventListener("click", editComment);
+    otherBtn.removeEventListener("click", confirmEdit);
+    otherBtn.addEventListener("click", deleteComment);
+    reshowComment(editInput, commentContent);
   };
 
-  const confirmEdit = e => {};
+  const confirmEdit = e => {
+    e.preventDefault();
+    const currentBtn = e.target;
+    const comment = e.target.parentElement;
+    const editInput = currentBtn.parentElement.firstElementChild;
+    const commentContent = currentBtn.parentElement.parentElement.children[1];
+    const otherBtn = currentBtn.previousElementSibling;
+
+    const editCommentData = new FormData();
+    editCommentData.append("content", editInput.value);
+    editCommentData.append("post-id", comment.dataset.pid);
+    editCommentData.append("comment-id", comment.dataset.id);
+
+    fetch("/app/comments/edit.php", {
+      method: "POST",
+      body: editCommentData
+    }).then(() => {
+      commentContent.textContent = editInput.value;
+      otherBtn.textContent = "Edit";
+      currentBtn.textContent = "Delete";
+      otherBtn.removeEventListener("click", cancelEdit);
+      otherBtn.addEventListener("click", editComment);
+      currentBtn.removeEventListener("click", confirmEdit);
+      currentBtn.addEventListener("click", deleteComment);
+      reshowComment(editInput, commentContent);
+    });
+  };
 
   const deleteComment = e => {
     e.preventDefault();
-    let targetComment = e.target.parentElement;
+    const currentBtn = e.target;
+    const otherBtn = currentBtn.previousElementSibling;
 
-    console.log(e);
-    console.log(targetComment.dataset.id);
-    console.log(targetComment.dataset.pid);
+    currentBtn.textContent = "Confirm";
+    otherBtn.textContent = "Cancel";
+    currentBtn.removeEventListener("click", deleteComment);
+    currentBtn.addEventListener("click", confirmDelete);
+    otherBtn.removeEventListener("click", editComment);
+    otherBtn.addEventListener("click", cancelDelete);
+  };
+
+  const cancelDelete = e => {
+    e.preventDefault();
+    const currentBtn = e.target;
+    const otherBtn = currentBtn.nextElementSibling;
+    currentBtn.textContent = "Edit";
+    otherBtn.textContent = "Delete";
+    currentBtn.removeEventListener("click", cancelDelete);
+    currentBtn.addEventListener("click", editComment);
+    otherBtn.removeEventListener("click", confirmDelete);
+    otherBtn.addEventListener("click", deleteComment);
+  };
+
+  const confirmDelete = e => {
+    e.preventDefault();
+    const comment = e.target.parentElement;
 
     const deleteCommentData = new FormData();
-    deleteCommentData.append("comment-id", targetComment.dataset.id);
-    deleteCommentData.append("post-id", targetComment.dataset.pid);
+    deleteCommentData.append("comment-id", comment.dataset.id);
+    deleteCommentData.append("post-id", comment.dataset.pid);
 
     fetch("/app/comments/delete.php", {
       method: "POST",
       body: deleteCommentData
     }).then(() => {
-      targetComment.parentElement.remove();
+      comment.parentElement.remove();
     });
+  };
+
+  const reshowComment = (editInput, commentContent) => {
+    editInput.classList.add("hide");
+    commentContent.classList.remove("hide");
   };
 
   getComments();
