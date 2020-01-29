@@ -82,6 +82,14 @@ if (isset($_SESSION['user'])) {
     $statementFive->bindParam(':user_id', $userId, PDO::PARAM_INT);
     $statementFive->execute();
 
+    // Delete from comments table
+    $statementFive = $pdo->prepare('DELETE FROM comments WHERE user_id = :user_id');
+    if (!$statementFive) {
+        die(var_dump($pdo->errorInfo()));
+    }
+    $statementFive->bindParam(':user_id', $userId, PDO::PARAM_INT);
+    $statementFive->execute();
+
     $messages[] = "Your account has been deleted!";
 
     $_SESSION['messages'] = $messages;

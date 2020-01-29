@@ -3,8 +3,10 @@
 const deleteButton = document.querySelector(".delete-account-button");
 const cancelButton = document.querySelector(".cancel-delete-account");
 
-deleteButton.addEventListener("click", showDeleteAccountForm);
-cancelButton.addEventListener("click", hideDeleteAccountForm);
+if (deleteButton != undefined) {
+  deleteButton.addEventListener("click", showDeleteAccountForm);
+  cancelButton.addEventListener("click", hideDeleteAccountForm);
+}
 
 function showDeleteAccountForm() {
   const form = document.querySelector(".delete-account-form");

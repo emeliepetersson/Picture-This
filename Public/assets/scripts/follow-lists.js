@@ -10,8 +10,10 @@ backButtons.forEach(backButton => {
   backButton.addEventListener("click", hideFollowList);
 });
 
-followersButton.addEventListener("click", showFollowers);
-followingButton.addEventListener("click", showFollowings);
+if (followersButton != undefined) {
+  followersButton.addEventListener("click", showFollowers);
+  followingButton.addEventListener("click", showFollowings);
+}
 
 //show follower list
 function showFollowers() {
