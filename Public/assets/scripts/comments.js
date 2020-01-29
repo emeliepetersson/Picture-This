@@ -116,7 +116,11 @@ if (commentContainer != undefined) {
     fetch("/app/comments/create.php", {
       method: "POST",
       body: newCommentData
-    }).then(getComments());
+    }).then(() => {
+      commentContent.value = "";
+      commentContainer.innerHTML = "";
+      getComments();
+    });
   };
 
   const editComment = e => {
@@ -170,8 +174,7 @@ if (commentContainer != undefined) {
       method: "POST",
       body: deleteCommentData
     }).then(() => {
-      commentContainer.innerHTML = "";
-      getComments();
+      targetComment.parentElement.remove();
     });
   };
 
