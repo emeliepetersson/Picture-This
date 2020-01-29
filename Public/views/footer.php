@@ -8,6 +8,9 @@
 <script src="/assets/scripts/show-post.js"></script>
 <script src="/assets/scripts/show-delete-account.js"></script>
 <script src="/assets/scripts/likes.js"></script>
+<script src="/assets/scripts/search.js"></script>
+<script src="/assets/scripts/comments.js"></script>
+
 </body>
 
 </html>
