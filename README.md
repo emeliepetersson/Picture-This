@@ -38,6 +38,14 @@ Below you'll find a list of user stories the Picture This application must inclu
 
 - [x] As a user I'm able to delete my account along with all posts and comments.
 
+### Extra features added by <a href="https://github.com/Vehx"> Bernhard Stedt </a>
+
+- [x] As a user I'm able to search for username and see posts from users matching search.
+
+- [x] As a user I'm able to add, edit and delete comments.
+
+View pull request <a href="https://github.com/emeliepetersson/Picture-This/pull/10">here!</a>
+
 
 #### Requirements
 Below you'll find a list of requirements which need to be fulfilled in order to complete the project. 
