@@ -1,18 +1,16 @@
 <?php
 
-
 declare(strict_types=1);
 
-require __DIR__ . '/../autoload.php';
+require __DIR__.'/../autoload.php';
 
 $messages = [];
 
 if (isset($_SESSION['user'])) {
     $userId = (int) filter_var($_SESSION['user']['id'], FILTER_SANITIZE_NUMBER_INT);
 
-
     //Delete user's profile image in uploads folder
-    $statement = $pdo->prepare("SELECT profile_image FROM user_profiles WHERE user_id = :user_id");
+    $statement = $pdo->prepare('SELECT profile_image FROM user_profiles WHERE user_id = :user_id');
     if (!$statement) {
         die(var_dump($pdo->errorInfo()));
     }
@@ -21,12 +19,12 @@ if (isset($_SESSION['user'])) {
     $profileImage = $statement->fetch(PDO::FETCH_ASSOC);
 
     if ($profileImage !== false) {
-        $path = '../../uploads/' . $profileImage['profile_image'];
+        $path = '../../uploads/'.$profileImage['profile_image'];
         unlink($path);
     }
 
     //Delete post images from user in uploads folder
-    $statement = $pdo->prepare("SELECT image FROM posts WHERE user_id = :user_id");
+    $statement = $pdo->prepare('SELECT image FROM posts WHERE user_id = :user_id');
     if (!$statement) {
         die(var_dump($pdo->errorInfo()));
     }
@@ -34,10 +32,9 @@ if (isset($_SESSION['user'])) {
     $statement->execute();
     $images = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-
     if (count($images) > 0) {
         foreach ($images as $image) {
-            $path = '../../uploads/' . $image['image'];
+            $path = '../../uploads/'.$image['image'];
             unlink($path);
         }
     }
@@ -91,7 +88,7 @@ if (isset($_SESSION['user'])) {
     $statementFive->bindParam(':user_id', $userId, PDO::PARAM_INT);
     $statementFive->execute();
 
-    $messages[] = "Your account has been deleted!";
+    $messages[] = 'Your account has been deleted!';
 
     $_SESSION['messages'] = $messages;
 

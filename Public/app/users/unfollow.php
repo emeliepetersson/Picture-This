@@ -1,9 +1,8 @@
 <?php
 
-
 declare(strict_types=1);
 
-require __DIR__ . '/../autoload.php';
+require __DIR__.'/../autoload.php';
 
 // In this file users follow users
 
@@ -13,12 +12,12 @@ if (isset($_POST['user-id'], $_SESSION['user'])) {
     $errors = [];
 
     //First check if the user already follows the other user
-    $userAlreadyFollow = getDataWithTwoConditions($pdo, "user_id, following_user_id", "followers", "user_id", "following_user_id", $userId, $followUserId);
+    $userAlreadyFollow = getDataWithTwoConditions($pdo, 'user_id, following_user_id', 'followers', 'user_id', 'following_user_id', $userId, $followUserId);
 
     //If the user do not already follow the other user display an error message
     if (!$userAlreadyFollow) {
-        $errors[] = "You do not follow this user!";
-        countErrors("/user-profiles.php?user-id=" . $_POST['user-id'], $errors);
+        $errors[] = 'You do not follow this user!';
+        countErrors('/user-profiles.php?user-id='.$_POST['user-id'], $errors);
     } else {
         $query = 'DELETE FROM followers where user_id = :user_id AND following_user_id = :following_user_id';
 
@@ -32,7 +31,7 @@ if (isset($_POST['user-id'], $_SESSION['user'])) {
         $statement->bindParam(':following_user_id', $followUserId, PDO::PARAM_INT);
         $statement->execute();
 
-        $messages[] = "You have unfollowed this user!";
+        $messages[] = 'You have unfollowed this user!';
 
         if (count($messages) > 0) {
             $_SESSION['messages'] = $messages;
@@ -40,4 +39,4 @@ if (isset($_POST['user-id'], $_SESSION['user'])) {
     }
 }
 
-redirect("/user-profiles.php?user-id=" . $_POST['user-id']);
+redirect('/user-profiles.php?user-id='.$_POST['user-id']);

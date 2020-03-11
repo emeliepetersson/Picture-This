@@ -1,9 +1,9 @@
 <nav class="main-navbar">
 
     <!-- if the user is on index.php and is not logged in, then the logo won't show in the navbar -->
-    <?php if ($_SERVER['SCRIPT_NAME'] !== '/index.php' || isset($_SESSION['user'])) : ?>
+    <?php if ($_SERVER['SCRIPT_NAME'] !== '/index.php' || isset($_SESSION['user'])) { ?>
         <a href="/index.php"><img class="logo" src="<?php echo $config['logo']; ?>" alt="Picture this logo"></a>
-    <?php endif; ?>
+    <?php } ?>
 
     <!-- Hamburger menu icon -->
     <div class="hamburger-icon">
@@ -14,7 +14,7 @@
     <div class="menu">
         <div class="menu-items">
             <ul>
-                <?php if (isset($_SESSION['user'])) : ?>
+                <?php if (isset($_SESSION['user'])) { ?>
                     <li>
                         <a href="/profile.php">Profile</a>
                     </li>
@@ -27,7 +27,7 @@
                     <li>
                         <a href="/app/users/logout.php">Logout</a>
                     </li>
-                <?php else : ?>
+                <?php } else { ?>
                     <li>
                         <a href="/index.php">Home</a>
                     </li>
@@ -40,7 +40,7 @@
                     <li>
                         <a href="/signup.php">Sign up</a>
                     </li>
-                <?php endif; ?>
+                <?php } ?>
             </ul>
         </div>
     </div>

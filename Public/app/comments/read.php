@@ -1,10 +1,8 @@
 <?php
 
-
-
 declare(strict_types=1);
 
-require __DIR__ . '/../autoload.php';
+require __DIR__.'/../autoload.php';
 
 // here we get all comments on a post
 
@@ -16,16 +14,16 @@ if (isset($_POST['post_id'], $_SESSION['user'])) {
     $comments = [];
     $commentsWithUsers = [];
 
-    $post = getDataAsArrayFromTable($pdo, "id", "posts", "id", $postId);
+    $post = getDataAsArrayFromTable($pdo, 'id', 'posts', 'id', $postId);
 
     if ($post) {
-        $comments = getDataAsArrayFromTable($pdo, "*", "comments", "post_id", $postId);
+        $comments = getDataAsArrayFromTable($pdo, '*', 'comments', 'post_id', $postId);
 
         foreach ($comments as $comment) {
-            $query = "SELECT first_name, last_name, user_profiles.profile_image
+            $query = 'SELECT first_name, last_name, user_profiles.profile_image
             FROM users
             INNER JOIN user_profiles ON users.id = user_profiles.user_id
-            WHERE users.id = :id";
+            WHERE users.id = :id';
 
             $statement = $pdo->prepare($query);
             if (!$statement) {
@@ -48,7 +46,7 @@ if (isset($_POST['post_id'], $_SESSION['user'])) {
 
         echo json_encode($commentsWithUsers);
     } else {
-        echo json_encode("Post not found.");
+        echo json_encode('Post not found.');
     }
 } else {
     redirect('/');

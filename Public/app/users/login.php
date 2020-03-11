@@ -1,10 +1,8 @@
 <?php
 
-
-
 declare(strict_types=1);
 
-require __DIR__ . '/../autoload.php';
+require __DIR__.'/../autoload.php';
 
 // In this file we login users.
 
@@ -21,13 +19,12 @@ if (isset($_POST['email'], $_POST['password'])) {
 
     // If the user isn't found in the database, redirect back to the login page.
     if ($user === null) {
-        $errors[] = "The email adress do not exist!";
+        $errors[] = 'The email adress do not exist!';
     } elseif (!password_verify($_POST['password'], $user['password'])) {
-        $errors[] = "The password was not correct!";
+        $errors[] = 'The password was not correct!';
     }
 
     countErrors('/login.php', $errors);
-
 
     // If the user is found in the database, compare the given password from the
     // request with the one in the database.

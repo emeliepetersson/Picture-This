@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . '/views/header.php';
+require __DIR__.'/views/header.php';
 
 isLoggedIn();
 
@@ -12,41 +12,41 @@ array_multisort($postId, SORT_DESC, $userPosts);
 $userId = (string) $_SESSION['user']['id']; //convert user id into string to be able to use it in the function to get data from table
 $userProfile = getOneColumnFromTable($pdo, 'biography, profile_image', 'user_profiles', 'user_id', $userId);
 
-$followings = getFollowers($pdo, "user_id", (int) $userId, "following_user_id");
-$followers = getFollowers($pdo, "following_user_id", (int) $userId, "user_id");
+$followings = getFollowers($pdo, 'user_id', (int) $userId, 'following_user_id');
+$followers = getFollowers($pdo, 'following_user_id', (int) $userId, 'user_id');
 
 ?>
 <!-- background is shown when module is opened -->
 <div class="background"></div>
 
 <header class="profile">
-    <img class="profile-image" src="/<?php echo $userProfile['profile_image'] ? 'uploads/' . $userProfile['profile_image'] : 'images/profile-picture.png' ?>" alt="profile image" loading="lazy">
+    <img class="profile-image" src="/<?php echo $userProfile['profile_image'] ? 'uploads/'.$userProfile['profile_image'] : 'images/profile-picture.png' ?>" alt="profile image" loading="lazy">
 
     <div class="biography">
         <h2>
-            <?php echo $_SESSION['user']['first_name'] . " " . $_SESSION['user']['last_name']; ?>
+            <?php echo $_SESSION['user']['first_name'].' '.$_SESSION['user']['last_name']; ?>
         </h2>
         <p><?php echo $userProfile['biography'] ?></p>
     </div>
 
     <div class="profile-buttons">
         <a class="button small-button" href="/settings.php">Edit profile</a>
-        <?php require __DIR__ . '/views/follow-lists.php'; ?>
+        <?php require __DIR__.'/views/follow-lists.php'; ?>
     </div>
 </header>
-<?php if (!$userPosts) : ?>
+<?php if (!$userPosts) { ?>
     <p>There is no photos...</p>
-<?php else : ?>
+<?php } else { ?>
 
-    <?php require __DIR__ . '/views/messages.php'; ?>
+    <?php require __DIR__.'/views/messages.php'; ?>
 
-    <?php foreach ($userPosts as $post) : ?>
+    <?php foreach ($userPosts as $post) { ?>
 
         <article class="post">
             <header>
-                <img class="profile-image" src="/<?php echo $post['profile_image'] ? 'uploads/' . $post['profile_image'] : 'images/profile-picture.png' ?>" alt="profile image" loading="lazy">
+                <img class="profile-image" src="/<?php echo $post['profile_image'] ? 'uploads/'.$post['profile_image'] : 'images/profile-picture.png' ?>" alt="profile image" loading="lazy">
                 <h2>
-                    <?php echo $post['first_name'] . " " . $post['last_name']; ?>
+                    <?php echo $post['first_name'].' '.$post['last_name']; ?>
                 </h2>
                 <p class="date"><?php echo $post['date'] ?></p>
             </header>
@@ -58,11 +58,11 @@ $followers = getFollowers($pdo, "following_user_id", (int) $userId, "user_id");
 
             <div class="caption-container">
                 <?php
-                $postIsliked = getDataWithTwoConditions($pdo, "post_id, user_id", "likes", "post_id", "user_id", (int) $post['id'], $_SESSION['user']['id']);
-                $amountOfLikes = count(getDataAsArrayFromTable($pdo, "post_id", "likes", "post_id", $post['id']));
+                $postIsliked = getDataWithTwoConditions($pdo, 'post_id, user_id', 'likes', 'post_id', 'user_id', (int) $post['id'], $_SESSION['user']['id']);
+                $amountOfLikes = count(getDataAsArrayFromTable($pdo, 'post_id', 'likes', 'post_id', $post['id']));
                 ?>
                 <div class="likes-container">
-                    <?php require __DIR__ . '/views/like-form.php'; ?>
+                    <?php require __DIR__.'/views/like-form.php'; ?>
                 </div>
                 <div class="forms">
                     <button type="button" class="delete-button button smaller-button">Delete</button>
@@ -78,14 +78,14 @@ $followers = getFollowers($pdo, "following_user_id", (int) $userId, "user_id");
                         <button type="button" class="edit-button button smaller-button">Edit</button>
                     </form>
                 </div>
-                <p class="caption"><span class="bold"><?php echo $post['first_name'] . " " . $post['last_name'] . " " ?></span> <?php echo $post['description'] ?></p>
+                <p class="caption"><span class="bold"><?php echo $post['first_name'].' '.$post['last_name'].' ' ?></span> <?php echo $post['description'] ?></p>
                 <form action="comments.php?post=<?php echo $post['id'] ?>" class="comment-form" method="post">
                     <input type="text" name="post-id" value="<?php echo $post['id'] ?>" hidden>
                     <button class="button smaller-button comment-form-button">Comments</button>
                 </form>
             </div>
         </article>
-    <?php endforeach; ?>
-<?php endif; ?>
-<?php require __DIR__ . '/views/bottom-bar.php'; ?>
-<?php require __DIR__ . '/views/footer.php'; ?>
+    <?php } ?>
+<?php } ?>
+<?php require __DIR__.'/views/bottom-bar.php'; ?>
+<?php require __DIR__.'/views/footer.php'; ?>
