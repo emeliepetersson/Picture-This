@@ -1,5 +1,7 @@
 <?php
 
+
+
 declare(strict_types=1);
 
 require __DIR__ . '/../autoload.php';
@@ -30,7 +32,7 @@ if (isset($_POST['post-id'], $_SESSION['user'])) {
         $statement->bindParam(':post_id', $postId, PDO::PARAM_INT);
         $statement->bindParam(':user_id', $userId, PDO::PARAM_INT);
         $statement->execute();
-    } else if ($alreadyliked && $postExists) {  //Delete like from table if the user has already liked the photo
+    } elseif ($alreadyliked && $postExists) {  //Delete like from table if the user has already liked the photo
         $statement = $pdo->prepare('DELETE FROM likes WHERE post_id = :post_id AND user_id = :user_id');
 
         if (!$statement) {

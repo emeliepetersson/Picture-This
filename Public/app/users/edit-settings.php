@@ -1,5 +1,6 @@
 <?php
 
+
 declare(strict_types=1);
 
 require __DIR__ . '/../autoload.php';
@@ -146,7 +147,6 @@ if (isset($_POST['current-password'], $_POST['password'], $_POST['confirm-passwo
     $user = getOneColumnFromTable($pdo, '*', 'users', 'email', $_SESSION['user']['email']);
 
     if (password_verify($_POST['current-password'], $user['password'])) {
-
         if ($password !== $confirmPassword) { // ADD AS FUNCTION!?!?!? signup.php
             $errors[] = "Your passwords do not match!";
         } else {

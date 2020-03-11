@@ -1,5 +1,7 @@
 <?php
 
+
+
 declare(strict_types=1);
 
 require __DIR__ . '/../autoload.php';
@@ -38,7 +40,6 @@ if (isset($_POST['search'])) {
         }
 
         foreach ($userPosts as $post) {
-
             $post['profile_url'] = '/user-profiles.php?user-id=';
             if ((int) $post['user_id'] === $userId) {
                 $post['profile_url'] = '/profile.php';
