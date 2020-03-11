@@ -1,4 +1,5 @@
 # Picture This
+<img src="https://github.styleci.io/repos/7548986/shield?style=plastic" width="100%">
 <img src="https://media.giphy.com/media/2tSodgDfwCjIMCBY8h/giphy.gif" width="100%">
 You're going to create a Instagram clone we call Picture This.
 
