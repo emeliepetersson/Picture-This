@@ -1,11 +1,11 @@
-<?php require __DIR__ . '/views/header.php'; ?>
+<?php require __DIR__.'/views/header.php'; ?>
 
 <article class="create-account">
     <h1>Create account</h1>
 
     <form action="app/users/signup.php" method="post">
 
-        <?php require __DIR__ . '/views/errors.php'; ?>
+        <?php require __DIR__.'/views/errors.php'; ?>
 
         <div class="form-group">
             <label for="email">Email</label>
@@ -36,4 +36,4 @@
     </form>
 </article>
 
-<?php require __DIR__ . '/views/footer.php'; ?>
+<?php require __DIR__.'/views/footer.php'; ?>

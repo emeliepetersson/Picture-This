@@ -1,5 +1,5 @@
-<?php foreach ($errors as $error) : ?>
+<?php foreach ($errors as $error) { ?>
     <div class="error">
         <?php echo $error; ?>
     </div>
-<?php endforeach; ?>
+<?php } ?>

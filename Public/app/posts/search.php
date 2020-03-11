@@ -1,10 +1,8 @@
 <?php
 
-
-
 declare(strict_types=1);
 
-require __DIR__ . '/../autoload.php';
+require __DIR__.'/../autoload.php';
 
 isLoggedIn();
 
@@ -29,7 +27,7 @@ if (isset($_POST['search'])) {
     }
 
     $statement->execute([
-        'query' => "%" . $search . "%",
+        'query' => '%'.$search.'%',
     ]);
     $users = $statement->fetchAll(PDO::FETCH_ASSOC);
 

@@ -1,7 +1,7 @@
-<?php require __DIR__ . '/views/header.php'; ?>
+<?php require __DIR__.'/views/header.php'; ?>
 <?php isLoggedIn(); ?>
 
-<?php require __DIR__ . '/views/messages.php'; ?>
+<?php require __DIR__.'/views/messages.php'; ?>
 
 <div class="comment-new">
     <label for="comment-content" hidden>Create comment</label>
@@ -13,5 +13,5 @@
 
 <div class="comment-container"></div>
 
-<?php require __DIR__ . '/views/bottom-bar.php'; ?>
-<?php require __DIR__ . '/views/footer.php'; ?>
+<?php require __DIR__.'/views/bottom-bar.php'; ?>
+<?php require __DIR__.'/views/footer.php'; ?>

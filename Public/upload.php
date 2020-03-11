@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . '/views/header.php';
+require __DIR__.'/views/header.php';
 
 isLoggedIn();
 
@@ -9,8 +9,8 @@ isLoggedIn();
     <h1>Upload post</h1>
     <form action="app/users/upload.php" method="post" enctype="multipart/form-data" id="post">
 
-        <?php require __DIR__ . '/views/errors.php'; ?>
-        <?php require __DIR__ . '/views/messages.php'; ?>
+        <?php require __DIR__.'/views/errors.php'; ?>
+        <?php require __DIR__.'/views/messages.php'; ?>
 
         <label for="image">Choose an image to upload</label>
         <input type="file" name="image" id="image" class="choose-file" required>
@@ -26,5 +26,5 @@ isLoggedIn();
     </form>
 </div>
 
-<?php require __DIR__ . '/views/bottom-bar.php'; ?>
-<?php require __DIR__ . '/views/footer.php'; ?>
+<?php require __DIR__.'/views/bottom-bar.php'; ?>
+<?php require __DIR__.'/views/footer.php'; ?>

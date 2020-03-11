@@ -1,9 +1,8 @@
 <?php
 
-
 declare(strict_types=1);
 
-require __DIR__ . '/../autoload.php';
+require __DIR__.'/../autoload.php';
 
 $errors = [];
 $messages = [];
@@ -18,7 +17,7 @@ if (isset($_FILES['profile-image'], $_POST['biography'], $_SESSION['user'])) {
     $profileExist = getOneColumnFromTable($pdo, '*', 'user_profiles', 'user_id', $userId);
 
     //If no new profile image is set, only add the biography to the database
-    if ($_FILES['profile-image']['name'] === "" && $biography !== "") {
+    if ($_FILES['profile-image']['name'] === '' && $biography !== '') {
         if ($profileExist) {
             //Update biography in user_profiles where user_id is the same as the logged in user's id
             $statement = $pdo->prepare('UPDATE user_profiles SET biography = :biography WHERE user_id = :user_id');
@@ -48,7 +47,7 @@ if (isset($_FILES['profile-image'], $_POST['biography'], $_SESSION['user'])) {
         $newFileName = uploadFiles($_FILES['profile-image'], '/settings.php');
         if ($profileExist) {
             //First we delete the previous profile image from the uploads folder
-            $statementOne = $pdo->prepare("SELECT profile_image FROM user_profiles WHERE user_id = :user_id");
+            $statementOne = $pdo->prepare('SELECT profile_image FROM user_profiles WHERE user_id = :user_id');
             if (!$statementOne) {
                 die(var_dump($pdo->errorInfo()));
             }
@@ -57,7 +56,7 @@ if (isset($_FILES['profile-image'], $_POST['biography'], $_SESSION['user'])) {
             $profileImage = $statementOne->fetch(PDO::FETCH_ASSOC);
 
             if ($profileImage !== false) {
-                $path = '../../uploads/' . $profileImage['profile_image'];
+                $path = '../../uploads/'.$profileImage['profile_image'];
                 unlink($path);
             }
 
@@ -89,11 +88,10 @@ if (isset($_FILES['profile-image'], $_POST['biography'], $_SESSION['user'])) {
         }
     }
 
-    $messages[] = "Your profile have been updated!";
+    $messages[] = 'Your profile have been updated!';
 
     $_SESSION['messages'] = $messages;
 }
-
 
 //Change email, first name and last name
 if (isset($_POST['email'], $_POST['first-name'], $_POST['last-name'])) {
@@ -106,7 +104,7 @@ if (isset($_POST['email'], $_POST['first-name'], $_POST['last-name'])) {
     $emailExist = implode($emailExist);
 
     if ($emailExist && $emailExist !== $_SESSION['user']['email']) { //If email already exists an error message will be printed
-        $errors[] = "The email already exist!";
+        $errors[] = 'The email already exist!';
     }
 
     countErrors('/settings.php', $errors); //redirect to settings.php if there is any errors
@@ -125,7 +123,7 @@ if (isset($_POST['email'], $_POST['first-name'], $_POST['last-name'])) {
     $statement->bindParam(':id', $_SESSION['user']['id'], PDO::PARAM_INT);
     $statement->execute();
 
-    $messages[] = "Your information has been updated!";
+    $messages[] = 'Your information has been updated!';
 
     if (count($messages) > 0) {
         $_SESSION['messages'] = $messages;
@@ -137,7 +135,6 @@ if (isset($_POST['email'], $_POST['first-name'], $_POST['last-name'])) {
     }
 }
 
-
 //Change password
 if (isset($_POST['current-password'], $_POST['password'], $_POST['confirm-password'])) {
     $currentPassword = $_POST['current-password'];
@@ -148,13 +145,12 @@ if (isset($_POST['current-password'], $_POST['password'], $_POST['confirm-passwo
 
     if (password_verify($_POST['current-password'], $user['password'])) {
         if ($password !== $confirmPassword) { // ADD AS FUNCTION!?!?!? signup.php
-            $errors[] = "Your passwords do not match!";
+            $errors[] = 'Your passwords do not match!';
         } else {
             $password = password_hash($password, PASSWORD_BCRYPT);
         }
 
         countErrors('/settings.php', $errors); //redirect to settings.php if there is any errors
-
 
         $statement = $pdo->prepare('UPDATE users SET password = :password WHERE id = :id');
 
@@ -166,15 +162,14 @@ if (isset($_POST['current-password'], $_POST['password'], $_POST['confirm-passwo
         $statement->bindParam(':id', $_SESSION['user']['id'], PDO::PARAM_INT);
         $statement->execute();
 
-        $messages[] = "Your password has been updated!";
+        $messages[] = 'Your password has been updated!';
 
         $_SESSION['messages'] = $messages;
     } else {
-        $errors[] = "You entered an incorrect password!";
+        $errors[] = 'You entered an incorrect password!';
         countErrors('/settings.php', $errors); //redirect to settings.php if there is any errors
     }
 }
-
 
 redirect('/settings.php');
 
