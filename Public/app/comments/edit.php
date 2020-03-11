@@ -1,9 +1,8 @@
 <?php
 
-
 declare(strict_types=1);
 
-require __DIR__ . '/../autoload.php';
+require __DIR__.'/../autoload.php';
 
 // here we edit a comment
 
@@ -15,10 +14,10 @@ if (isset($_POST['post-id'], $_POST['comment-id'], $_POST['content'], $_SESSION[
     $postId = filter_var($_POST['post-id'], FILTER_SANITIZE_NUMBER_INT);
     $userId = $_SESSION['user']['id'];
 
-    if ($content === "") {
+    if ($content === '') {
         $messages[] = "The comment can't be empty.";
         $_SESSION['messages'] = $messages;
-        redirect('/comments.php?post=' . $postId);
+        redirect('/comments.php?post='.$postId);
     }
 
     $statement = $pdo->prepare('UPDATE comments

@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . '/views/header.php';
+require __DIR__.'/views/header.php';
 
 $allPosts = displayAllPosts($pdo);
 
@@ -9,20 +9,20 @@ array_multisort($postId, SORT_DESC, $allPosts);
 
 ?>
 
-<?php require __DIR__ . '/views/messages.php'; ?>
+<?php require __DIR__.'/views/messages.php'; ?>
 
 <!-- The view if the user is logged in -->
-<?php if (isset($_SESSION['user'])) : ?>
+<?php if (isset($_SESSION['user'])) { ?>
 
     <!-- background is shown when module is opened -->
     <div class="background"></div>
 
     <h1>Explore</h1>
-    <?php if (!$allPosts) : ?>
+    <?php if (!$allPosts) { ?>
         <p>There is no photos...</p>
-    <?php else : ?>
+    <?php } else { ?>
         <div class="explore-container">
-            <?php foreach ($allPosts as $post) : ?>
+            <?php foreach ($allPosts as $post) { ?>
                 <article class="post">
 
                     <!-- This is shown as small pictures -->
@@ -35,20 +35,20 @@ array_multisort($postId, SORT_DESC, $allPosts);
                         <div class="close-button-container">
                             <button class="close-button" type="button"><img class="close" src="/images/close.png" alt="close icon"></button>
                         </div>
-                        <?php require __DIR__ . '/views/post.php'; ?>
+                        <?php require __DIR__.'/views/post.php'; ?>
                 </article>
-            <?php endforeach; ?>
+            <?php } ?>
         </div>
-    <?php endif; ?>
-    <?php require __DIR__ . '/views/bottom-bar.php'; ?>
+    <?php } ?>
+    <?php require __DIR__.'/views/bottom-bar.php'; ?>
 
     <!-- The view if the user is not logged in -->
-<?php else : ?>
+<?php } else { ?>
     <img class="big-logo" src="<?php echo $config['logo']; ?>" alt="Picture this logo">
     <a class="button" href="login.php">Login</a>
     <p class="instruction">or create an account</p>
     <a class="button" href="signup.php">Sign up</a>
-<?php endif; ?>
+<?php } ?>
 
 
-<?php require __DIR__ . '/views/footer.php'; ?>
+<?php require __DIR__.'/views/footer.php'; ?>

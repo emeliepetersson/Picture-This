@@ -1,7 +1,7 @@
 <?php
-require __DIR__ . '/../app/autoload.php';
-require __DIR__ . '/../app/errors.php';
-require __DIR__ . '/../app/messages.php';
+require __DIR__.'/../app/autoload.php';
+require __DIR__.'/../app/errors.php';
+require __DIR__.'/../app/messages.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,6 +27,6 @@ require __DIR__ . '/../app/messages.php';
 </head>
 
 <body>
-    <?php require __DIR__ . '/navigation.php'; ?>
+    <?php require __DIR__.'/navigation.php'; ?>
 
     <div class="container">

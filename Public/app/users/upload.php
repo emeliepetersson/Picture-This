@@ -1,9 +1,8 @@
 <?php
 
-
 declare(strict_types=1);
 
-require __DIR__ . '/../autoload.php';
+require __DIR__.'/../autoload.php';
 
 if (isset($_FILES['image'], $_POST['description'], $_SESSION['user'])) {
     $description = filter_var($_POST['description'], FILTER_SANITIZE_STRING);
@@ -27,7 +26,7 @@ if (isset($_FILES['image'], $_POST['description'], $_SESSION['user'])) {
     $statement->bindParam(':date', date('d-m-Y, H:i:s'), PDO::PARAM_STR);
     $statement->execute();
 
-    $messages[] = "Your post have been successfully uploaded!";
+    $messages[] = 'Your post have been successfully uploaded!';
 
     $_SESSION['messages'] = $messages;
 }

@@ -1,21 +1,17 @@
 <?php
 
-
-
 declare(strict_types=1);
 
-require __DIR__ . '/../autoload.php';
-
+require __DIR__.'/../autoload.php';
 
 // In this file we add and remove likes to posts in the database.
-
 
 if (isset($_POST['post-id'], $_SESSION['user'])) {
     $postId = (int) trim(filter_var($_POST['post-id'], FILTER_SANITIZE_NUMBER_INT));
     $userId = (int) $_SESSION['user']['id'];
 
     //Check if the user already has liked the photo
-    $alreadyliked = getDataWithTwoConditions($pdo, "post_id, user_id", "likes", "post_id", "user_id", $postId, $userId);
+    $alreadyliked = getDataWithTwoConditions($pdo, 'post_id, user_id', 'likes', 'post_id', 'user_id', $postId, $userId);
 
     //Check if the post exists
     $postExists = getDataAsArrayFromTable($pdo, 'id', 'posts', 'id', (string) $postId);
@@ -45,7 +41,7 @@ if (isset($_POST['post-id'], $_SESSION['user'])) {
     }
 
     // Get amount of likes and turn it into json
-    $totalLikes = count(getDataAsArrayFromTable($pdo, "post_id", "likes", "post_id", (string) $postId));
+    $totalLikes = count(getDataAsArrayFromTable($pdo, 'post_id', 'likes', 'post_id', (string) $postId));
     $totalLikes = json_encode($totalLikes);
     header('Content-Type: application/json');
 
