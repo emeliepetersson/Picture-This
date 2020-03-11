@@ -1,5 +1,6 @@
 <?php
 
+
 declare(strict_types=1);
 
 require __DIR__ . '/../autoload.php';
@@ -20,8 +21,8 @@ if (isset($_POST['post-id'], $_POST['comment-id'], $_POST['content'], $_SESSION[
         redirect('/comments.php?post=' . $postId);
     }
 
-    $statement = $pdo->prepare('UPDATE comments 
-    SET content = :content 
+    $statement = $pdo->prepare('UPDATE comments
+    SET content = :content
     where id = :id AND user_id = :user_id AND post_id = :post_id');
 
     if (!$statement) {

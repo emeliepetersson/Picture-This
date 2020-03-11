@@ -1,5 +1,6 @@
 <?php
 
+
 declare(strict_types=1);
 
 require __DIR__ . '/../autoload.php';
@@ -19,7 +20,6 @@ if (isset($_POST['user-id'], $_SESSION['user'])) {
         $errors[] = "You do not follow this user!";
         countErrors("/user-profiles.php?user-id=" . $_POST['user-id'], $errors);
     } else {
-
         $query = 'DELETE FROM followers where user_id = :user_id AND following_user_id = :following_user_id';
 
         $statement = $pdo->prepare($query);
