@@ -1,9 +1,8 @@
 <?php
 
-
 declare(strict_types=1);
 
-require __DIR__ . '/../autoload.php';
+require __DIR__.'/../autoload.php';
 
 //In this file we sign up users.
 
@@ -20,7 +19,7 @@ if (isset($_POST['email'], $_POST['first-name'], $_POST['last-name'], $_POST['pa
     }
 
     if ($password !== $confirmPassword) {
-        $errors[] = "Your passwords do not match!";
+        $errors[] = 'Your passwords do not match!';
     } else {
         $password = password_hash($password, PASSWORD_BCRYPT);
     }
@@ -28,11 +27,10 @@ if (isset($_POST['email'], $_POST['first-name'], $_POST['last-name'], $_POST['pa
     $emailExist = getDataAsArrayFromTable($pdo, 'email', 'users', 'email', $email);
 
     if ($emailExist) { //If $emailExist exists an error message will be printed
-        $errors[] = "The email already exist!";
+        $errors[] = 'The email already exist!';
     }
 
     countErrors('/signup.php', $errors);
-
 
     // If email doesn't already exist, insert the data into the user table.
     $query = 'INSERT INTO users (email, first_name, last_name, password) VALUES (:email, :first_name, :last_name, :password)';
@@ -50,7 +48,7 @@ if (isset($_POST['email'], $_POST['first-name'], $_POST['last-name'], $_POST['pa
     $statement->execute();
 
     // Get new user's ID in users table
-    $statementTwo = $pdo->prepare("SELECT id FROM users WHERE email = :email");
+    $statementTwo = $pdo->prepare('SELECT id FROM users WHERE email = :email');
 
     if (!$statementTwo) {
         die(var_dump($pdo->errorInfo()));

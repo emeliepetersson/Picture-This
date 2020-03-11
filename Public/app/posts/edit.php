@@ -1,10 +1,8 @@
 <?php
 
-
-
 declare(strict_types=1);
 
-require __DIR__ . '/../autoload.php';
+require __DIR__.'/../autoload.php';
 
 // In this file we edit posts in the database.
 
@@ -26,7 +24,7 @@ if (isset($_POST['post-id'], $_POST['description'], $_SESSION['user'])) {
     $statement->bindParam(':user_id', $userId, PDO::PARAM_INT);
     $statement->execute();
 
-    $messages[] = "The post has been updated!";
+    $messages[] = 'The post has been updated!';
 
     if (count($messages) > 0) {
         $_SESSION['messages'] = $messages;

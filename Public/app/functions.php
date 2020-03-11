@@ -1,6 +1,5 @@
 <?php
 
-
 declare(strict_types=1);
 
 if (!function_exists('redirect')) {
@@ -21,11 +20,12 @@ if (!function_exists('redirect')) {
 /**
  * return an array with data from a given table, or null if the data isn't found.
  *
- * @param PDO $pdo
+ * @param PDO    $pdo
  * @param string $columns
  * @param string $table
  * @param string $column
  * @param string $value
+ *
  * @return array|null
  */
 function getDataAsArrayFromTable(PDO $pdo, string $columns, string $table, string $column, string $value): ?array
@@ -50,11 +50,12 @@ function getDataAsArrayFromTable(PDO $pdo, string $columns, string $table, strin
 /**
  * return an array with data from one given column in table, or null if the data isn't found.
  *
- * @param PDO $pdo
+ * @param PDO    $pdo
  * @param string $columns
  * @param string $table
  * @param string $column
  * @param string $value
+ *
  * @return array|null
  */
 function getOneColumnFromTable(PDO $pdo, string $columns, string $table, string $column, string $value): ?array
@@ -77,10 +78,11 @@ function getOneColumnFromTable(PDO $pdo, string $columns, string $table, string 
 }
 
 /**
- * Set $_SESSION['errors'] and redirect to given location if there is any errors
+ * Set $_SESSION['errors'] and redirect to given location if there is any errors.
  *
  * @param string $location
- * @param array $errors
+ * @param array  $errors
+ *
  * @return void
  */
 function countErrors(string $location, array $errors): void
@@ -93,10 +95,11 @@ function countErrors(string $location, array $errors): void
 }
 
 /**
- * move uploaded file into Uploads directory, and return the new file name
+ * move uploaded file into Uploads directory, and return the new file name.
  *
- * @param array $uploadedFile
+ * @param array  $uploadedFile
  * @param string $location
+ *
  * @return string
  */
 function uploadFiles(array $uploadedFile, string $location): string
@@ -105,31 +108,32 @@ function uploadFiles(array $uploadedFile, string $location): string
     $errors = [];
 
     if ($file['type'] !== 'image/gif' && $file['type'] !== 'image/jpeg' && $file['type'] !== 'image/png') {
-        $errors[] = 'The ' . $file['name'] . ' image file type is not allowed.';
+        $errors[] = 'The '.$file['name'].' image file type is not allowed.';
     }
     if ($file['size'] >= 3000000) {
-        $errors[] = 'The uploaded file ' . $file['name'] . ' exceeded the filesize limit.';
+        $errors[] = 'The uploaded file '.$file['name'].' exceeded the filesize limit.';
     }
 
     countErrors($location, $errors);
 
-    $newFileName = uniqid() . $file['name'];
-    $destination = __DIR__ . '/../uploads/' .  $newFileName;
+    $newFileName = uniqid().$file['name'];
+    $destination = __DIR__.'/../uploads/'.$newFileName;
     move_uploaded_file($file['tmp_name'], $destination);
 
     return $newFileName;
 }
 
 /**
- * return array with data based on two conditions, or null if there is no data
+ * return array with data based on two conditions, or null if there is no data.
  *
- * @param PDO $pdo
+ * @param PDO    $pdo
  * @param string $columns
  * @param string $table
  * @param string $conditionOne
  * @param string $conditionTwo
- * @param integer $valueOne
- * @param integer $valueTwo
+ * @param int    $valueOne
+ * @param int    $valueTwo
+ *
  * @return array|null
  */
 function getDataWithTwoConditions(PDO $pdo, string $columns, string $table, string $conditionOne, string $conditionTwo, int $valueOne, int $valueTwo): ?array
@@ -153,19 +157,20 @@ function getDataWithTwoConditions(PDO $pdo, string $columns, string $table, stri
 }
 
 /**
- * Return all posts from posts table
+ * Return all posts from posts table.
  *
  * @param PDO $pdo
- * @param integer $userId
+ * @param int $userId
+ *
  * @return array
  */
 function displayPostsFromUser(PDO $pdo, int $userId): array
 {
-    $query = "SELECT posts.id, posts.user_id, image, description, date, first_name, last_name, user_profiles.profile_image
+    $query = 'SELECT posts.id, posts.user_id, image, description, date, first_name, last_name, user_profiles.profile_image
     FROM posts
     INNER JOIN users ON posts.user_id = users.id
     INNER JOIN user_profiles ON users.id = user_profiles.user_id
-    WHERE users.id = :id";
+    WHERE users.id = :id';
 
     // Get all posts from logged in user
     $statement = $pdo->prepare($query);
@@ -175,21 +180,23 @@ function displayPostsFromUser(PDO $pdo, int $userId): array
     $statement->bindParam(':id', $userId, PDO::PARAM_INT);
     $statement->execute();
     $userPosts = $statement->fetchAll(PDO::FETCH_ASSOC);
+
     return $userPosts;
 }
 
 /**
- * Return all posts from logged in user
+ * Return all posts from logged in user.
  *
  * @param PDO $pdo
+ *
  * @return array
  */
 function displayAllPosts(PDO $pdo): array
 {
-    $query = "SELECT posts.id, image, description, date, first_name, last_name, posts.user_id, user_profiles.profile_image
+    $query = 'SELECT posts.id, image, description, date, first_name, last_name, posts.user_id, user_profiles.profile_image
     FROM posts
     INNER JOIN users ON posts.user_id = users.id
-    INNER JOIN user_profiles ON users.id = user_profiles.user_id";
+    INNER JOIN user_profiles ON users.id = user_profiles.user_id';
 
     // Get all posts from all users
     $statement = $pdo->query($query);
@@ -198,16 +205,18 @@ function displayAllPosts(PDO $pdo): array
         die(var_dump($pdo->errorInfo()));
     }
     $allPosts = $statement->fetchAll(PDO::FETCH_ASSOC);
+
     return $allPosts;
 }
 
 /**
- * return all followers or followings from tables
+ * return all followers or followings from tables.
  *
- * @param PDO $pdo
+ * @param PDO    $pdo
  * @param string $condition
- * @param integer $value
+ * @param int    $value
  * @param string $join
+ *
  * @return array
  */
 function getFollowers(PDO $pdo, string $condition, int $value, string $join): array
@@ -225,23 +234,25 @@ function getFollowers(PDO $pdo, string $condition, int $value, string $join): ar
     $statement->bindParam(":$condition", $value, PDO::PARAM_INT);
     $statement->execute();
     $followers = $statement->fetchAll(PDO::FETCH_ASSOC);
+
     return $followers;
 }
 
 /**
- * Get all posts from people who the user follow
+ * Get all posts from people who the user follow.
  *
  * @param Pdo $pdo
+ *
  * @return void
  */
 function getFollowing(Pdo $pdo): array
 {
-    $query = "SELECT followers.user_id, following_user_id, first_name, last_name, posts.id, posts.user_id, posts.image, posts.description, posts.date, user_profiles.profile_image
+    $query = 'SELECT followers.user_id, following_user_id, first_name, last_name, posts.id, posts.user_id, posts.image, posts.description, posts.date, user_profiles.profile_image
     FROM followers
     INNER JOIN users ON following_user_id = users.id
     INNER JOIN posts ON users.id = posts.user_id
     INNER JOIN user_profiles ON users.id = user_profiles.user_id
-    WHERE followers.user_id = :user_id";
+    WHERE followers.user_id = :user_id';
 
     // Get all posts from all users
     $statement = $pdo->query($query);
@@ -249,14 +260,15 @@ function getFollowing(Pdo $pdo): array
     if (!$statement) {
         die(var_dump($pdo->errorInfo()));
     }
-    $statement->bindParam(":user_id", $_SESSION['user']['id'], PDO::PARAM_INT);
+    $statement->bindParam(':user_id', $_SESSION['user']['id'], PDO::PARAM_INT);
     $statement->execute();
     $following = $statement->fetchAll(PDO::FETCH_ASSOC);
+
     return $following;
 }
 
 /**
- * Function that checks if user is logged in, if not you will be redirected back to index page
+ * Function that checks if user is logged in, if not you will be redirected back to index page.
  *
  * @return void
  */

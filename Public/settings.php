@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . '/views/header.php';
+require __DIR__.'/views/header.php';
 
 isLoggedIn();
 
@@ -12,15 +12,15 @@ $userProfile = getOneColumnFromTable($pdo, 'biography, profile_image', 'user_pro
 <article class="settings">
     <h1>Settings</h1>
 
-    <?php require __DIR__ . '/views/errors.php'; ?>
-    <?php require __DIR__ . '/views/messages.php'; ?>
+    <?php require __DIR__.'/views/errors.php'; ?>
+    <?php require __DIR__.'/views/messages.php'; ?>
 
     <form action="app/users/edit-settings.php" method="post" enctype="multipart/form-data" id="profile">
         <label for="image">Choose an image to upload</label>
         <input type="file" name="profile-image" id="image" class="choose-file">
 
         <!--Preview profile image -->
-        <img class="preview-profile-image" src="/<?php echo $userProfile['profile_image'] ? 'uploads/' . $userProfile['profile_image'] : 'images/profile-picture.png' ?>" id="output-image" alt="image preview" loading="lazy" />
+        <img class="preview-profile-image" src="/<?php echo $userProfile['profile_image'] ? 'uploads/'.$userProfile['profile_image'] : 'images/profile-picture.png' ?>" id="output-image" alt="image preview" loading="lazy" />
 
         <small>Write your biography.</small>
         <textarea class="bio-textarea" name="biography" form="profile" maxlength="255"><?php echo ($userProfile !== null) ? $userProfile['biography'] : '' ?></textarea>
@@ -72,5 +72,5 @@ $userProfile = getOneColumnFromTable($pdo, 'biography, profile_image', 'user_pro
     </form>
 </article>
 
-<?php require __DIR__ . '/views/bottom-bar.php'; ?>
-<?php require __DIR__ . '/views/footer.php'; ?>
+<?php require __DIR__.'/views/bottom-bar.php'; ?>
+<?php require __DIR__.'/views/footer.php'; ?>
